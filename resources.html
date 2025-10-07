@@ -1,0 +1,696 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Resources - MST (Mama Said This)</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            background: #f8fafc;
+            color: #1e293b;
+            line-height: 1.6;
+        }
+
+        /* Main Navigation */
+        .main-nav {
+            background: white;
+            padding: 1rem 2rem;
+            box-shadow: 0 2px 4px rgba(0,0,0,0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            display: flex;
+            gap: 2rem;
+            align-items: center;
+        }
+
+        .main-nav a {
+            text-decoration: none;
+            color: #1e293b;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .main-nav a:first-child {
+            font-weight: bold;
+            font-size: 1.2rem;
+            color: #e85d75;
+        }
+
+        .main-nav a:hover {
+            color: #e85d75;
+        }
+
+        /* Emergency Banner */
+        .emergency-banner {
+            background: linear-gradient(135deg, #dc2626 0%, #991b1b 100%);
+            color: white;
+            padding: 1.5rem 2rem;
+            text-align: center;
+        }
+
+        .emergency-banner h2 {
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .emergency-info {
+            display: flex;
+            gap: 2rem;
+            justify-content: center;
+            flex-wrap: wrap;
+            font-size: 0.95rem;
+        }
+
+        .emergency-info strong {
+            font-weight: 600;
+        }
+
+        /* Jump Navigation */
+        .jump-nav {
+            background: #6366f1;
+            padding: 1rem 2rem;
+            position: sticky;
+            top: 73px;
+            z-index: 999;
+            overflow-x: auto;
+            white-space: nowrap;
+        }
+
+        .jump-nav a {
+            color: white;
+            text-decoration: none;
+            padding: 0.5rem 1rem;
+            display: inline-block;
+            transition: background 0.3s;
+            border-radius: 4px;
+        }
+
+        .jump-nav a:hover {
+            background: rgba(255,255,255,0.2);
+        }
+
+        /* Container */
+        .container {
+            max-width: 1200px;
+            margin: 2rem auto;
+            padding: 0 2rem;
+        }
+
+        /* Section */
+        .section {
+            margin-bottom: 3rem;
+            scroll-margin-top: 150px;
+        }
+
+        .section h2 {
+            color: #e85d75;
+            font-size: 2rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 0.5rem;
+            border-bottom: 3px solid #e85d75;
+        }
+
+        /* Resource Cards Grid */
+        .resources-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+            margin-top: 1.5rem;
+        }
+
+        /* Resource Card Template - COPY THIS TO ADD NEW RESOURCES */
+        .resource-card {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+        }
+
+        .resource-card:hover {
+            transform: translateY(-4px);
+            box-shadow: 0 4px 16px rgba(0,0,0,0.15);
+        }
+
+        .resource-card h3 {
+            color: #1e293b;
+            font-size: 1.2rem;
+            margin-bottom: 0.75rem;
+        }
+
+        .resource-card p {
+            color: #64748b;
+            font-size: 0.95rem;
+            margin-bottom: 1rem;
+        }
+
+        .resource-card a {
+            display: inline-block;
+            color: #6366f1;
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .resource-card a:hover {
+            color: #e85d75;
+        }
+
+        /* Special styling for Little Pantries */
+        .pantry-list {
+            background: white;
+            padding: 1.5rem;
+            border-radius: 8px;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+            margin-top: 1.5rem;
+        }
+
+        .pantry-list h3 {
+            color: #6366f1;
+            margin-bottom: 1rem;
+        }
+
+        .pantry-item {
+            padding: 0.75rem;
+            border-bottom: 1px solid #e2e8f0;
+        }
+
+        .pantry-item:last-child {
+            border-bottom: none;
+        }
+
+        .pantry-item strong {
+            color: #1e293b;
+        }
+
+        /* Footer */
+        footer {
+            background: #1e293b;
+            color: white;
+            padding: 2rem;
+            text-align: center;
+            margin-top: 4rem;
+        }
+
+        .footer-logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #e85d75;
+            margin-bottom: 1rem;
+        }
+
+        .footer-tagline {
+            margin: 1rem 0;
+            font-style: italic;
+            color: #94a3b8;
+        }
+
+        .footer-links {
+            display: flex;
+            gap: 1.5rem;
+            justify-content: center;
+            margin-top: 1rem;
+        }
+
+        .footer-links a {
+            color: white;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-links a:hover {
+            color: #e85d75;
+        }
+
+        /* Mobile Responsive */
+        @media (max-width: 768px) {
+            .main-nav {
+                padding: 1rem;
+                gap: 1rem;
+                font-size: 0.9rem;
+            }
+
+            .jump-nav {
+                top: 60px;
+                padding: 0.75rem 1rem;
+            }
+
+            .emergency-info {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+
+            .container {
+                padding: 0 1rem;
+            }
+
+            .section h2 {
+                font-size: 1.5rem;
+            }
+
+            .resources-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .footer-links {
+                flex-direction: column;
+                gap: 0.5rem;
+            }
+        }
+
+        /* Smooth scrolling */
+        html {
+            scroll-behavior: smooth;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Navigation -->
+    <nav class="main-nav">
+        <a href="/">MST</a>
+        <a href="/">Home</a>
+        <a href="/#tools">Tools</a>
+        <a href="/resources.html">Resources</a>
+    </nav>
+
+    <!-- Emergency Banner -->
+    <div class="emergency-banner">
+        <h2>🚨 Emergency Resources</h2>
+        <div class="emergency-info">
+            <span><strong>National DV Hotline:</strong> 1-800-799-7233</span>
+            <span><strong>Crisis Text:</strong> HOME to 741741</span>
+            <span><strong>Suicide Prevention:</strong> 988</span>
+        </div>
+    </div>
+
+    <!-- Jump Navigation -->
+    <nav class="jump-nav">
+        <a href="#crisis">Crisis</a> |
+        <a href="#food">Food</a> |
+        <a href="#pregnancy">Pregnancy</a> |
+        <a href="#education">Education</a> |
+        <a href="#health">Health</a> |
+        <a href="#housing">Housing</a> |
+        <a href="#financial">Financial</a> |
+        <a href="#animals">Animals</a> |
+        <a href="#tech">Tech</a> |
+        <a href="#fun">Fun</a>
+    </nav>
+
+    <!-- Main Container -->
+    <div class="container">
+
+        <!-- CRISIS SECTION -->
+        <section id="crisis" class="section">
+            <h2>Crisis Resources</h2>
+            <div class="resources-grid">
+                
+                <div class="resource-card">
+                    <h3>Guerrilla Mail</h3>
+                    <p>Anonymous, disposable email service for privacy and security.</p>
+                    <a href="https://www.guerrillamail.com/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Free Mental Health Texas</h3>
+                    <p>Access to mental health services and support in Texas.</p>
+                    <a href="https://ntbha.org/" target="_blank">Visit Site →</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FOOD & PANTRIES SECTION -->
+        <section id="food" class="section">
+            <h2>Food & Pantries</h2>
+            <div class="resources-grid">
+                
+                <div class="resource-card">
+                    <h3>Your Texas Benefits</h3>
+                    <p>Apply for SNAP, TANF, Medicaid, and other Texas assistance programs.</p>
+                    <a href="https://www.yourtexasbenefits.com/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Central Texas Food Bank</h3>
+                    <p>Find food assistance and resources in Central Texas.</p>
+                    <a href="https://www.centraltexasfoodbank.org/get-help" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>North Texas Food Bank Finder</h3>
+                    <p>Locate food pantries and assistance in North Texas.</p>
+                    <a href="https://ntfb.org/food-assistance/find-a-food-pantry/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>SuperCook</h3>
+                    <p>Find recipes based on ingredients you already have at home.</p>
+                    <a href="https://www.supercook.com/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Freecycle</h3>
+                    <p>Give and receive free items in your local community.</p>
+                    <a href="https://www.freecycle.org/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Waxahachie Care</h3>
+                    <p>Local assistance including food, clothing, and support services.</p>
+                    <a href="https://waxahachiecare.org/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Brown Street Church Care Center</h3>
+                    <p>Open Tuesdays & Thursdays, 9-11am at 2471 Brown St, Waxahachie.</p>
+                    <a href="https://www.cocbrownstreet.org/care-center" target="_blank">Visit Site →</a>
+                </div>
+
+            </div>
+
+            <!-- Ellis County Little Pantries -->
+            <div class="pantry-list">
+                <h3>📍 Ellis County Little Pantries (24/7 Access)</h3>
+                <p style="color: #64748b; margin-bottom: 1rem;">These community pantries are always open. Take what you need, leave what you can.</p>
+                
+                <div class="pantry-item">
+                    <strong>Victory Baptist Church</strong> - 1410 W Jefferson St, Waxahachie
+                </div>
+                <div class="pantry-item">
+                    <strong>Waxahachie Sun Newspaper</strong> - 200 N Rogers St, Waxahachie
+                </div>
+                <div class="pantry-item">
+                    <strong>Waxahachie Bible Church</strong> - 621 N Grand Ave, Waxahachie
+                </div>
+                <div class="pantry-item">
+                    <strong>Duncan's</strong> - 232 N Patrick St, Waxahachie
+                </div>
+                <div class="pantry-item">
+                    <strong>Ferris Heights Methodist</strong> - 108 Center St, Ferris
+                </div>
+                <div class="pantry-item">
+                    <strong>Oaks Garden Church</strong> - 301 E Criddle St, Waxahachie
+                </div>
+                <div class="pantry-item">
+                    <strong>Waxahachie Care</strong> - 1208 Ferris Ave, Waxahachie
+                </div>
+                <div class="pantry-item">
+                    <strong>St Joseph Catholic</strong> - 609 Kaufman St, Waxahachie
+                </div>
+                <div class="pantry-item">
+                    <strong>Jessica Hoffman's House</strong> - 217 Equestrian Dr, Waxahachie
+                </div>
+                <div class="pantry-item">
+                    <strong>Forreston Baptist</strong> - 211 7th St, Forreston
+                </div>
+            </div>
+        </section>
+
+        <!-- PREGNANCY SECTION -->
+        <section id="pregnancy" class="section">
+            <h2>Pregnancy Resources</h2>
+            <div class="resources-grid">
+                
+                <div class="resource-card">
+                    <h3>BabyCenter</h3>
+                    <p>Pregnancy tracking, baby development info, and parenting advice.</p>
+                    <a href="https://www.babycenter.com/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Pregnant Chicken</h3>
+                    <p>Honest, funny, and helpful pregnancy and parenting content.</p>
+                    <a href="https://pregnantchicken.com/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Texas Pregnancy Help</h3>
+                    <p>Find pregnancy centers and resources throughout Texas.</p>
+                    <a href="https://texaspregnancy.org/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Fathercraft</h3>
+                    <p>Resources and support specifically for new and expecting dads.</p>
+                    <a href="https://fathercraft.com/" target="_blank">Visit Site →</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- EDUCATION SECTION -->
+        <section id="education" class="section">
+            <h2>Education Resources</h2>
+            <div class="resources-grid">
+                
+                <div class="resource-card">
+                    <h3>Wolfram Alpha</h3>
+                    <p>Computational knowledge engine for math, science, and more.</p>
+                    <a href="https://www.wolframalpha.com/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>SparkNotes</h3>
+                    <p>Study guides, literature summaries, and academic help.</p>
+                    <a href="https://www.sparknotes.com/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Calculator.net</h3>
+                    <p>Free calculators for math, finance, health, and more.</p>
+                    <a href="https://www.calculator.net/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>QuillBot Citation Generator</h3>
+                    <p>Generate APA, MLA, and Chicago style citations easily.</p>
+                    <a href="https://quillbot.com/citation-generator/apa" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Harvard Free Courses</h3>
+                    <p>Access hundreds of free online courses from Harvard University.</p>
+                    <a href="https://pll.harvard.edu/catalog/free" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Google Certificates</h3>
+                    <p>Professional certificates in IT, data, design, and more.</p>
+                    <a href="https://grow.google/enroll-certificates/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Coursera</h3>
+                    <p>Online courses from top universities and companies worldwide.</p>
+                    <a href="https://www.coursera.org/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Google Scholar</h3>
+                    <p>Search scholarly literature across many disciplines.</p>
+                    <a href="https://scholar.google.com/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>iFixit</h3>
+                    <p>Free repair guides for everything from phones to appliances.</p>
+                    <a href="https://www.ifixit.com/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>NVIDIA Free AI Courses</h3>
+                    <p>Learn AI, data science, and accelerated computing for free.</p>
+                    <a href="https://resources.nvidia.com/en-us-nvidia-training/free-courses" target="_blank">Visit Site →</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- HEALTH SECTION -->
+        <section id="health" class="section">
+            <h2>Health Resources</h2>
+            <div class="resources-grid">
+                
+                <div class="resource-card">
+                    <h3>RxList</h3>
+                    <p>Comprehensive medication and drug information database.</p>
+                    <a href="https://www.rxlist.com/" target="_blank">Visit Site →</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- HOUSING SECTION -->
+        <section id="housing" class="section">
+            <h2>Housing Resources</h2>
+            <div class="resources-grid">
+                
+                <div class="resource-card">
+                    <h3>HOPE Single Parent Help</h3>
+                    <p>Housing assistance and support for single parents.</p>
+                    <a href="https://hopbe.org/our-program/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Texas SDC</h3>
+                    <p>Self-sufficiency programs and housing resources in Texas.</p>
+                    <a href="https://www.texassdc.org/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Ellis Habitat for Humanity</h3>
+                    <p>Affordable housing solutions in Ellis County.</p>
+                    <a href="https://www.ellishabitat.org/festival.htm" target="_blank">Visit Site →</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FINANCIAL SECTION -->
+        <section id="financial" class="section">
+            <h2>Financial Resources</h2>
+            <div class="resources-grid">
+                
+                <div class="resource-card">
+                    <h3>Texan Credit Loans</h3>
+                    <p>Financial assistance and loan programs for Texans.</p>
+                    <a href="https://texancredit.com/loan-programs/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Grants.gov</h3>
+                    <p>Find and apply for federal government grants.</p>
+                    <a href="https://grants.gov/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>SAM.gov</h3>
+                    <p>System for Award Management - government contracts and grants.</p>
+                    <a href="https://sam.gov/" target="_blank">Visit Site →</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- ANIMALS SECTION -->
+        <section id="animals" class="section">
+            <h2>Animal Resources</h2>
+            <div class="resources-grid">
+                
+                <div class="resource-card">
+                    <h3>Flying B Rescue SNIPIT</h3>
+                    <p>Low-cost spay and neuter services for pets.</p>
+                    <a href="https://www.flyingbrescue.org/snipit" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Humane Society NT Clinic</h3>
+                    <p>Affordable veterinary care and spay/neuter services.</p>
+                    <a href="https://www.hsnt.org/clinic" target="_blank">Visit Site →</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- TECH SECTION -->
+        <section id="tech" class="section">
+            <h2>Tech Resources</h2>
+            <div class="resources-grid">
+                
+                <div class="resource-card">
+                    <h3>Stack Overflow</h3>
+                    <p>Programming Q&A community for developers.</p>
+                    <a href="https://stackoverflow.com/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Web.dev Privacy</h3>
+                    <p>Learn about web privacy and security best practices.</p>
+                    <a href="https://web.dev/learn/privacy/welcome" target="_blank">Visit Site →</a>
+                </div>
+
+            </div>
+        </section>
+
+        <!-- FUN SECTION -->
+        <section id="fun" class="section">
+            <h2>Fun & Wellness</h2>
+            <div class="resources-grid">
+                
+                <div class="resource-card">
+                    <h3>Astrocartography Map</h3>
+                    <p>Explore how different locations affect your astrological energy.</p>
+                    <a href="https://www.thenowwithnat.com/blog/astrocartography-map" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Astro.com Charts</h3>
+                    <p>Free astrology charts and interpretations.</p>
+                    <a href="https://www.astro.com/cgi/aclch.cgi" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>The Tarot Guide</h3>
+                    <p>Complete tarot card meanings and interpretations.</p>
+                    <a href="https://www.thetarotguide.com/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Biddy Tarot</h3>
+                    <p>Learn tarot reading with comprehensive guides and courses.</p>
+                    <a href="https://biddytarot.com/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Mix</h3>
+                    <p>Discover and share content based on your interests.</p>
+                    <a href="https://mix.com/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Poetry Foundation</h3>
+                    <p>Thousands of poems to read, enjoy, and explore.</p>
+                    <a href="https://www.poetryfoundation.org/poems" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>WordPress</h3>
+                    <p>Free platform to create your own website or blog.</p>
+                    <a href="https://wordpress.org/" target="_blank">Visit Site →</a>
+                </div>
+
+                <div class="resource-card">
+                    <h3>Be Internet Awesome Game</h3>
+                    <p>Fun game teaching kids internet safety and digital citizenship.</p>
+                    <a href="https://beinternetawesome.withgoogle.com/en_us/interland" target="_blank">Visit Site →</a>
+                </div>
+
+            </div>
+        </section>
+
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-logo">MST</div>
+        <div class="footer-tagline">Built with ☕ and spite by a mom who got tired of paying for basic shit</div>
+        <div class="footer-links">
+            <a href="/">Home</a>
+            <a href="/#tools">Tools</a>
+            <a href="/resources.html">Resources</a>
+            <a href="/contact.html">Contact</a>
+        </div>
+    </footer>
+
+</body>
+</html>
