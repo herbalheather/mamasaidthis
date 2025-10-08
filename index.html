@@ -412,7 +412,30 @@
         
         .success-msg.show { display: block; animation: slideIn 0.3s; }
         
+        .error-msg {
+            background: #ef4444;
+            color: white;
+            padding: 1rem;
+            border-radius: 8px;
+            display: none;
+            margin-top: 1rem;
+            text-align: center;
+        }
+        
+        .error-msg.show { display: block; animation: slideIn 0.3s; }
+        
+        .loading {
+            opacity: 0.7;
+            pointer-events: none;
+        }
+        
+        .loading .btn-full::after {
+            content: ' ...';
+            animation: dots 1.5s steps(4, end) infinite;
+        }
+        
         @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
+        @keyframes dots { 0%, 20% { content: ' .'; } 40% { content: ' ..'; } 60% { content: ' ...'; } }
         
         /* Footer - Updated for Theme */
         footer {
@@ -536,7 +559,7 @@
             <div class="tool-emoji">📊</div>
             <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">Budget Tracker</h3>
             <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">Charts your cash flow. Auto-saves. (P.S. Still tweaking—basic for now.)</p>
-            <a href="https://mamasaidthis.pages.dev/budget-tracker" target="_blank" class="tool-link">Jump In →</a>
+            <a href="/budget-tracker.html" class="tool-link">Jump In →</a>
         </div>
         
         <div class="tool-card scroll-reveal">
@@ -557,7 +580,7 @@
             <div class="tool-emoji">🆘</div>
             <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">Crisis Resources</h3>
             <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">Hotlines, benefits checker. Sorted by "oh shit" moments.</p>
-            <a href="/resources.html" target="_blank" class="tool-link">Find Help →</a>
+            <a href="/resources.html" class="tool-link">Find Help →</a>
         </div>
         
         <div class="tool-card scroll-reveal coming-soon">
@@ -628,6 +651,7 @@
         <button type="submit" class="btn btn-primary btn-full">Sign Me Up</button>
         <p style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem;">Bail anytime. Promise.</p>
         <div id="waitlistSuccess" class="success-msg">You're in! Poke your inbox. 🎉</div>
+        <div id="waitlistError" class="error-msg"></div>
     </form>
 </section>
 
@@ -652,6 +676,7 @@
         <p style="text-align: right; color: var(--text-secondary); font-size: 0.8rem;"><span id="charCount">0</span>/300</p>
         <button type="submit" class="btn btn-primary btn-full">Send It</button>
         <div id="suggestSuccess" class="success-msg">Caught it! Might build. Thanks! 🙌</div>
+        <div id="suggestError" class="error-msg"></div>
     </form>
 </section>
 
@@ -670,7 +695,7 @@
             <h4>Tools</h4>
             <ul>
                 <li><a href="https://calculator-ea5.pages.dev/" target="_blank">Pay Stubs</a></li>
-                <li><a href="https://mamasaidthis.pages.dev/budget-tracker" target="_blank">Budget Tracker</a></li>
+                <li><a href="/budget-tracker.html">Budget Tracker</a></li>
                 <li><a href="https://edusheet-chooser.pages.dev/" target="_blank">Worksheets</a></li>
                 <li><span class="coming-soon">Grade Calc</span></li>
                 <li><a href="/resources.html">Crisis Help</a></li>
@@ -694,6 +719,9 @@
 </footer>
 
 <script>
+    // Formspark Config - Replace 'rybK8' with your exact form ID if different
+    const FORMSPARK_URL = 'https://submit-form.com/rybK8';
+
     // Dark Mode Toggle Function
     function toggleTheme() {
         const body = document.body;
@@ -721,41 +749,63 @@
         toolIdea.addEventListener('input', () => charCount.textContent = toolIdea.value.length);
     }
     
-    // Waitlist
+    // Generic Form Submit Helper
+    function submitToFormspark(formId, data, successEl, errorEl) {
+        const form = document.getElementById(formId);
+        form.classList.add('loading');
+        fetch(FORMSPARK_URL, {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(data)
+        })
+        .then(res => {
+            if (res.ok) {
+                successEl.classList.add('show');
+                form.reset();
+                if (charCount) charCount.textContent = '0';
+                setTimeout(() => successEl.classList.remove('show'), 4000);
+            } else {
+                throw new Error('Submission failed—try again?');
+            }
+        })
+        .catch(err => {
+            errorEl.textContent = err.message;
+            errorEl.classList.add('show');
+            setTimeout(() => errorEl.classList.remove('show'), 4000);
+        })
+        .finally(() => form.classList.remove('loading'));
+    }
+    
+    // Waitlist Form
     const waitlistForm = document.getElementById('waitlistForm');
     if (waitlistForm) {
         waitlistForm.addEventListener('submit', (e) => {
             e.preventDefault();
-            const email = document.getElementById('email').value;
-            if (!email) return alert('Email, please?');
-            
-            const subject = encodeURIComponent('MST Waitlist');
-            const body = encodeURIComponent(`Name: ${document.getElementById('name').value || 'Anon'}\nEmail: ${email}\nDate: ${new Date().toLocaleString()}`);
-            window.location.href = `mailto:heather@herbalhomeschool.work.gd?subject=${subject}&body=${body}`;
-            
-            document.getElementById('waitlistSuccess').classList.add('show');
-            waitlistForm.reset();
-            setTimeout(() => document.getElementById('waitlistSuccess').classList.remove('show'), 4000);
+            const email = document.getElementById('email').value.trim();
+            const name = document.getElementById('name').value.trim();
+            if (!email) {
+                alert('Email, please?');
+                return;
+            }
+            submitToFormspark('waitlistForm', { name: name || 'Anon', email, source: 'MST Waitlist' }, 
+                              document.getElementById('waitlistSuccess'), document.getElementById('waitlistError'));
         });
     }
     
-    // Suggest
+    // Suggest Form
     const suggestForm = document.getElementById('suggestForm');
     if (suggestForm) {
         suggestForm.addEventListener('submit', (e) => {
             e.preventDefault();
             const toolType = document.getElementById('toolType').value;
-            const idea = document.getElementById('toolIdea').value;
-            if (!toolType || !idea) return alert('Type + idea, go!');
-            
-            const subject = encodeURIComponent(`MST Idea: ${toolType}`);
-            const body = encodeURIComponent(`From: ${document.getElementById('suggestName').value || 'Anon'}\nType: ${toolType}\nIdea: ${idea}\nDate: ${new Date().toLocaleString()}`);
-            window.location.href = `mailto:heather@herbalhomeschool.work.gd?subject=${subject}&body=${body}`;
-            
-            document.getElementById('suggestSuccess').classList.add('show');
-            suggestForm.reset();
-            if (charCount) charCount.textContent = '0';
-            setTimeout(() => document.getElementById('suggestSuccess').classList.remove('show'), 4000);
+            const idea = document.getElementById('toolIdea').value.trim();
+            const name = document.getElementById('suggestName').value.trim();
+            if (!toolType || !idea) {
+                alert('Type + idea, go!');
+                return;
+            }
+            submitToFormspark('suggestForm', { name: name || 'Anon', type: toolType, idea, source: 'MST Suggest' }, 
+                              document.getElementById('suggestSuccess'), document.getElementById('suggestError'));
         });
     }
     
