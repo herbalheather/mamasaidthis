@@ -10,6 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     
     <style>
+        /* CSS Variables for Light and Dark Modes */
         :root {
             --primary: #e85d75;
             --primary-dark: #d14361;
@@ -17,6 +18,25 @@
             --accent: #fbbf24;
             --dark: #1e293b;
             --light: #f8fafc;
+            --bg: #f8fafc;
+            --card-bg: white;
+            --text-primary: #1e293b;
+            --text-secondary: #64748b;
+            --border: #e2e8f0;
+            --shadow-light: 0 4px 20px rgba(0,0,0,0.08);
+            --shadow-hover: 0 15px 40px rgba(0,0,0,0.12);
+            --hero-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+        }
+        
+        [data-theme="dark"] {
+            --bg: #0f172a;
+            --card-bg: #1e293b;
+            --text-primary: #f1f5f9;
+            --text-secondary: #94a3b8;
+            --border: #334155;
+            --shadow-light: 0 4px 20px rgba(0,0,0,0.3);
+            --shadow-hover: 0 15px 40px rgba(0,0,0,0.5);
+            --hero-bg: linear-gradient(135deg, #1e293b 0%, #334155 100%);
         }
         
         * {
@@ -27,23 +47,37 @@
         
         body {
             font-family: 'Inter', sans-serif;
-            color: var(--dark);
-            background: var(--light);
+            color: var(--text-primary);
+            background: var(--bg);
             line-height: 1.6;
             overflow-x: hidden;
+            transition: background-color 0.3s ease, color 0.3s ease;
         }
         
         h1, h2, h3 { font-family: 'Poppins', sans-serif; }
         
-        /* Mobile-first responsiveness */
-        @media (max-width: 768px) {
+        /* Enhanced Mobile-First Responsiveness */
+        @media (max-width: 480px) {
+            body { font-size: 0.9rem; }
+            section { padding: 2rem 0.5rem !important; }
+            .hero { grid-template-columns: 1fr !important; text-align: center; min-height: 60vh; padding: 1rem; }
+            .hero-image { padding: 0.5rem; order: -1; }
+            .hero-card { max-width: none; transform: none; padding: 1rem; }
+            .tool-grid { grid-template-columns: 1fr !important; gap: 1rem; }
+            nav .nav-links { display: none; } /* Hamburger later if needed */
+            .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
+            footer .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 1rem; }
+            .btn { padding: 0.7rem 1.5rem; font-size: 0.9rem; }
+        }
+        
+        @media (min-width: 481px) and (max-width: 768px) {
             body { font-size: 0.95rem; }
             section { padding: 3rem 1rem !important; }
             .hero { grid-template-columns: 1fr !important; text-align: center; min-height: 70vh; }
             .hero-image { padding: 1rem; order: -1; }
             .hero-card { max-width: none; transform: none; }
             .tool-grid { grid-template-columns: 1fr !important; gap: 1.5rem; }
-            nav .nav-links { display: none; } /* Hamburger later if needed */
+            nav .nav-links { display: none; }
             .about-grid { grid-template-columns: 1fr; gap: 2rem; }
             footer .footer-grid { grid-template-columns: 1fr; text-align: center; }
         }
@@ -53,16 +87,18 @@
             .tool-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
             .about-grid { grid-template-columns: 1fr 1fr; }
             footer .footer-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
+            nav .nav-links { display: flex; }
         }
         
-        /* NAV - Sticky, collapses on mobile */
+        /* NAV - Sticky, with Dark Mode Toggle */
         nav {
-            background: white;
+            background: var(--card-bg);
             position: sticky;
             top: 0;
             z-index: 1000;
-            box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+            box-shadow: var(--shadow-light);
             padding: 1rem 1.5rem;
+            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
         
         .nav-container {
@@ -80,7 +116,7 @@
             font-weight: 900;
         }
         
-        .logo span:first-child { font-size: 2rem; color: var(--primary); }
+        .logo span:first-child { font-size: clamp(1.5rem, 4vw, 2rem); color: var(--primary); }
         .logo span:last-child { font-size: 0.7rem; font-weight: 700; color: var(--secondary); text-transform: uppercase; }
         
         .nav-links {
@@ -90,22 +126,40 @@
         }
         
         .nav-links a {
-            color: var(--dark);
+            color: var(--text-primary);
             text-decoration: none;
             transition: color 0.3s;
         }
         
         .nav-links a:hover { color: var(--primary); }
         
-        /* HERO */
+        /* Dark Mode Toggle Button */
+        .theme-toggle {
+            background: none;
+            border: 2px solid var(--border);
+            border-radius: 50px;
+            padding: 0.5rem;
+            cursor: pointer;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
+        }
+        
+        .theme-toggle:hover {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+        
+        /* HERO - Updated for Theme */
         .hero {
-            min-height: 90vh;
+            min-height: clamp(70vh, 90vh, 90vh);
             display: grid;
             align-items: center;
             position: relative;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: var(--hero-bg);
             overflow: hidden;
-            padding: 2rem;
+            padding: clamp(1rem, 2rem, 2rem);
         }
         
         .hero-content {
@@ -152,56 +206,57 @@
         }
         
         .hero-card {
-            background: white;
+            background: var(--card-bg);
             padding: 2rem;
             border-radius: 20px;
-            box-shadow: 0 20px 60px rgba(0,0,0,0.3);
+            box-shadow: var(--shadow-light);
             max-width: 350px;
             transform: rotate(-1deg);
-            transition: transform 0.3s;
+            transition: all 0.3s ease;
+            color: var(--text-primary);
         }
         
         .hero-card:hover { transform: rotate(0deg) scale(1.02); }
         
         .doodle { font-size: 4rem; margin-bottom: 1rem; } /* Mom emoji */
         
-        /* Buttons */
+        /* Buttons - Enhanced */
         .btn {
-            padding: 0.8rem 2rem;
+            padding: clamp(0.7rem, 0.8rem, 0.8rem) clamp(1.5rem, 2rem, 2rem);
             border-radius: 50px;
             font-weight: 700;
             text-decoration: none;
-            transition: all 0.3s;
+            transition: all 0.3s ease;
             cursor: pointer;
             border: none;
-            font-size: 1rem;
+            font-size: clamp(0.9rem, 1rem, 1rem);
             display: inline-block;
         }
         
         .btn-primary {
             background: var(--primary);
             color: white;
-            box-shadow: 0 4px 15px rgba(232, 93, 117, 0.4);
+            box-shadow: var(--shadow-light);
         }
         
         .btn-primary:hover {
             background: var(--primary-dark);
             transform: translateY(-2px);
-            box-shadow: 0 8px 25px rgba(232, 93, 117, 0.6);
+            box-shadow: var(--shadow-hover);
         }
         
         .btn-secondary {
-            background: white;
+            background: var(--card-bg);
             color: var(--secondary);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+            box-shadow: var(--shadow-light);
         }
         
-        .btn-secondary:hover { transform: translateY(-2px); box-shadow: 0 6px 25px rgba(0,0,0,0.15); }
+        .btn-secondary:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
         
-        /* Tools Section */
+        /* Tools Section - Updated for Theme */
         #tools {
-            background: white;
-            padding: 4rem 1.5rem;
+            background: var(--card-bg);
+            padding: clamp(2rem, 4rem, 4rem) 1.5rem;
         }
         
         .section-title {
@@ -209,12 +264,13 @@
             font-weight: 800;
             margin-bottom: 0.5rem;
             text-align: center;
+            color: var(--text-primary);
         }
         
         .section-subtitle {
             text-align: center;
             font-size: 1.1rem;
-            color: #64748b;
+            color: var(--text-secondary);
             max-width: 600px;
             margin: 0 auto 2.5rem;
         }
@@ -231,25 +287,26 @@
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            gap: 2rem;
+            gap: clamp(1rem, 2rem, 2rem);
         }
         
         .tool-card {
-            background: white;
+            background: var(--card-bg);
             border-radius: 16px;
-            padding: 1.5rem;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
-            transition: all 0.4s;
+            padding: clamp(1rem, 1.5rem, 1.5rem);
+            box-shadow: var(--shadow-light);
+            transition: all 0.4s ease;
             border: 2px solid transparent;
             position: relative;
             overflow: hidden;
+            color: var(--text-primary);
         }
         
-        .tool-card:nth-child(even) { padding: 2rem; } /* Asymmetry */
+        .tool-card:nth-child(even) { padding: clamp(1.5rem, 2rem, 2rem); } /* Asymmetry */
         
         .tool-card:hover {
             transform: translateY(-8px);
-            box-shadow: 0 15px 40px rgba(0,0,0,0.12);
+            box-shadow: var(--shadow-hover);
             border-color: var(--primary);
         }
         
@@ -277,13 +334,13 @@
             text-align: center;
         }
         
-        /* About */
+        /* About - Updated for Theme */
         #about {
-            background: var(--light);
-            padding: 4rem 1.5rem;
+            background: var(--bg);
+            padding: clamp(2rem, 4rem, 4rem) 1.5rem;
         }
         
-        .about-grid { max-width: 1200px; margin: 0 auto; gap: 3rem; }
+        .about-grid { max-width: 1200px; margin: 0 auto; gap: clamp(2rem, 3rem, 3rem); }
         
         .quote-card {
             background: linear-gradient(135deg, var(--secondary), #8b5cf6);
@@ -297,40 +354,48 @@
         }
         
         .promise-box {
-            background: white;
+            background: var(--card-bg);
             padding: 1.5rem;
             border-radius: 12px;
-            box-shadow: 0 4px 20px rgba(0,0,0,0.08);
+            box-shadow: var(--shadow-light);
             border-left: 4px solid var(--primary);
             margin-top: 1.5rem;
+            color: var(--text-primary);
         }
         
-        .promise-box ul { list-style: none; padding: 0; color: #64748b; }
+        .promise-box ul { list-style: none; padding: 0; color: var(--text-secondary); }
         .promise-box li { margin-bottom: 0.5rem; } /* Uneven list */
         
-        /* Forms */
+        /* Forms - Enhanced */
         form {
             max-width: 500px;
             margin: 0 auto;
-            background: var(--light);
-            padding: 2rem;
+            background: var(--bg);
+            padding: clamp(1.5rem, 2rem, 2rem);
             border-radius: 20px;
             box-shadow: 0 10px 30px rgba(0,0,0,0.1);
+            border: 1px solid var(--border);
         }
         
         input, select, textarea {
             width: 100%;
             padding: 0.8rem;
-            border: 2px solid #e2e8f0;
+            border: 2px solid var(--border);
             border-radius: 8px;
             margin-bottom: 1rem;
             font-family: inherit;
-            transition: border-color 0.3s;
+            transition: border-color 0.3s ease;
+            background: var(--card-bg);
+            color: var(--text-primary);
         }
         
         input:focus, select:focus, textarea:focus {
             border-color: var(--primary);
             outline: none;
+        }
+        
+        input::placeholder, textarea::placeholder {
+            color: var(--text-secondary);
         }
         
         .btn-full { width: 100%; padding: 1rem; }
@@ -349,14 +414,14 @@
         
         @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
         
-        /* Footer */
+        /* Footer - Updated for Theme */
         footer {
             background: var(--dark);
             color: white;
-            padding: 3rem 1.5rem 2rem;
+            padding: clamp(2rem, 3rem, 3rem) 1.5rem 2rem;
         }
         
-        .footer-grid { max-width: 1200px; margin: 0 auto 2rem; gap: 2rem; }
+        .footer-grid { max-width: 1200px; margin: 0 auto 2rem; gap: clamp(1rem, 2rem, 2rem); }
         
         .footer-grid h3, .footer-grid h4 { margin-bottom: 1rem; color: var(--primary); }
         
@@ -387,7 +452,7 @@
         
         .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
         
-        /* Blobs */
+        /* Blobs - Theme Aware */
         .hero::before, .hero::after {
             content: '';
             position: absolute;
@@ -407,9 +472,9 @@
         }
     </style>
 </head>
-<body>
+<body data-theme="light">
 
-<!-- NAV -->
+<!-- NAV - Added Toggle -->
 <nav>
     <div class="nav-container">
         <div class="logo">
@@ -422,6 +487,7 @@
             <a href="#about">About</a>
             <a href="#waitlist">Join</a>
         </div>
+        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Dark Mode">🌙</button>
     </div>
 </nav>
 
@@ -443,9 +509,9 @@
     <div class="hero-image fade-in">
         <div class="hero-card">
             <div class="doodle">☕👩‍💻</div> <!-- Simple doodle -->
-            <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: var(--dark);">Heather Here</h3>
-            <p style="color: #64748b; margin-bottom: 1rem;">Mom of 4 • Master's • Code Noob Turned Builder</p>
-            <div style="background: var(--light); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary); font-style: italic;">
+            <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: var(--text-primary);">Heather Here</h3>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Mom of 4 • Master's • Code Noob Turned Builder</p>
+            <div style="background: var(--bg); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary); font-style: italic;">
                 "Couldn't find free stuff that worked. So... yeah, I coded it. Errors and all."
             </div>
         </div>
@@ -462,48 +528,48 @@
         <div class="tool-card scroll-reveal">
             <div class="tool-emoji">💰</div>
             <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">Pay Stub Generator</h3>
-            <p style="color: #64748b; margin-bottom: 1rem; line-height: 1.5;">Quick stubs for apartments or jobs. Texas tweaks. PDF or Word out.</p>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">Quick stubs for apartments or jobs. Texas tweaks. PDF or Word out.</p>
             <a href="https://calculator-ea5.pages.dev/" target="_blank" class="tool-link">Jump In →</a>
         </div>
         
         <div class="tool-card scroll-reveal">
             <div class="tool-emoji">📊</div>
             <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">Budget Tracker</h3>
-            <p style="color: #64748b; margin-bottom: 1rem; line-height: 1.5;">Charts your cash flow. Auto-saves. (P.S. Still tweaking—basic for now.)</p>
-            <a href="#budget" class="tool-link coming-soon">Soon-ish →</a>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">Charts your cash flow. Auto-saves. (P.S. Still tweaking—basic for now.)</p>
+            <a href="https://mamasaidthis.pages.dev/budget-tracker" target="_blank" class="tool-link">Jump In →</a>
         </div>
         
         <div class="tool-card scroll-reveal">
             <div class="tool-emoji">📝</div>
             <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">Educational Worksheet Generator</h3>
-            <p style="color: #64748b; margin-bottom: 1rem; line-height: 1.5;">K-6 custom sheets for math/reading. Homeschool heroes rejoice. PDF magic.</p>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">K-6 custom sheets for math/reading. Homeschool heroes rejoice. PDF magic.</p>
             <a href="https://edusheet-chooser.pages.dev/" target="_blank" class="tool-link">Start Generating →</a>
         </div>
         
         <div class="tool-card scroll-reveal coming-soon">
             <div class="tool-emoji">📚</div>
             <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">Grade Calculator</h3>
-            <p style="color: #64748b; margin-bottom: 1rem; line-height: 1.5;">GPA cruncher + transcripts. For those college app marathons.</p>
-            <span style="color: #94a3b8; font-weight: 600;">Week 3 Drop →</span>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">GPA cruncher + transcripts. For those college app marathons.</p>
+            <span style="color: var(--text-secondary); font-weight: 600;">Week 3 Drop →</span>
         </div>
         
         <div class="tool-card scroll-reveal">
             <div class="tool-emoji">🆘</div>
             <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">Crisis Resources</h3>
-            <p style="color: #64748b; margin-bottom: 1rem; line-height: 1.5;">Hotlines, benefits checker. Sorted by "oh shit" moments.</p>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">Hotlines, benefits checker. Sorted by "oh shit" moments.</p>
             <a href="/resources.html" target="_blank" class="tool-link">Find Help →</a>
         </div>
         
         <div class="tool-card scroll-reveal coming-soon">
             <div class="tool-emoji">📄</div>
             <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">Invoice Maker</h3>
-            <p style="color: #64748b; margin-bottom: 1rem; line-height: 1.5;">Side hustle bills. Logo slap-on, payment chase.</p>
-            <span style="color: #94a3b8; font-weight: 600;">Month 2 Vibes →</span>
+            <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">Side hustle bills. Logo slap-on, payment chase.</p>
+            <span style="color: var(--text-secondary); font-weight: 600;">Month 2 Vibes →</span>
         </div>
         
         <div class="tool-card idea-card scroll-reveal">
             <div class="tool-emoji">💡</div>
-            <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--dark);">Your Wild Idea?</h3>
+            <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Your Wild Idea?</h3>
             <p style="color: #78350f; margin-bottom: 1rem; font-weight: 500;">What tool would save your ass? Spill—I might hack it together. No promises. 😉</p>
             <a href="#suggest" class="tool-link">Throw It At Me →</a>
         </div>
@@ -517,18 +583,18 @@
     
     <div class="about-grid">
         <div class="scroll-reveal">
-            <h3 style="font-size: 1.8rem; font-weight: 700; margin-bottom: 1rem;">Mom. Coder. Been There.</h3>
-            <p style="font-size: 1.1rem; color: #64748b; margin-bottom: 1.5rem; line-height: 1.7;">
+            <h3 style="font-size: clamp(1.5rem, 1.8rem, 1.8rem); font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">Mom. Coder. Been There.</h3>
+            <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7;">
                 Started with pay stubs—every site hit me for cash I didn't have. Broke AF, so 2am coding it was. Kids? Asleep. Coffee? Black.
             </p>
-            <p style="color: #64748b; margin-bottom: 1rem; line-height: 1.7;">
+            <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.7;">
                 Kept going. Budgets when mine imploded. Worksheets for homeschool hell. Resources 'cause I've called those hotlines myself.
             </p>
-            <p style="color: #64748b; line-height: 1.7;">
+            <p style="color: var(--text-secondary); line-height: 1.7;">
                 Sharing 'em free. 'Cause gatekeeping sucks. You got this—tools or not.
             </p>
             <div class="promise-box">
-                <p style="font-weight: 700; color: var(--dark); margin-bottom: 1rem;">My No-BS Oath:</p>
+                <p style="font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">My No-BS Oath:</p>
                 <ul>
                     <li>✓ Free forever (duh)</li>
                     <li>✓ No signups, ever</li>
@@ -560,7 +626,7 @@
         <input type="text" id="name" placeholder="Name? (Eh, optional)">
         <input type="email" id="email" placeholder="Email" required>
         <button type="submit" class="btn btn-primary btn-full">Sign Me Up</button>
-        <p style="text-align: center; color: #94a3b8; font-size: 0.85rem; margin-top: 1rem;">Bail anytime. Promise.</p>
+        <p style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem;">Bail anytime. Promise.</p>
         <div id="waitlistSuccess" class="success-msg">You're in! Poke your inbox. 🎉</div>
     </form>
 </section>
@@ -583,7 +649,7 @@
             <option value="Other">Wild Card</option>
         </select>
         <textarea id="toolIdea" placeholder="Idea dump (300 chars max)" maxlength="300" required rows="3"></textarea>
-        <p style="text-align: right; color: #94a3b8; font-size: 0.8rem;"><span id="charCount">0</span>/300</p>
+        <p style="text-align: right; color: var(--text-secondary); font-size: 0.8rem;"><span id="charCount">0</span>/300</p>
         <button type="submit" class="btn btn-primary btn-full">Send It</button>
         <div id="suggestSuccess" class="success-msg">Caught it! Might build. Thanks! 🙌</div>
     </form>
@@ -604,8 +670,8 @@
             <h4>Tools</h4>
             <ul>
                 <li><a href="https://calculator-ea5.pages.dev/" target="_blank">Pay Stubs</a></li>
+                <li><a href="https://mamasaidthis.pages.dev/budget-tracker" target="_blank">Budget Tracker</a></li>
                 <li><a href="https://edusheet-chooser.pages.dev/" target="_blank">Worksheets</a></li>
-                <li><span class="coming-soon">Budget Tracker</span></li>
                 <li><span class="coming-soon">Grade Calc</span></li>
                 <li><a href="/resources.html">Crisis Help</a></li>
             </ul>
@@ -628,6 +694,26 @@
 </footer>
 
 <script>
+    // Dark Mode Toggle Function
+    function toggleTheme() {
+        const body = document.body;
+        const currentTheme = body.getAttribute('data-theme');
+        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+        body.setAttribute('data-theme', newTheme);
+        localStorage.setItem('theme', newTheme);
+        // Update toggle button emoji
+        const toggleBtn = document.querySelector('.theme-toggle');
+        toggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+    }
+    
+    // Load Saved Theme on Page Load
+    document.addEventListener('DOMContentLoaded', () => {
+        const savedTheme = localStorage.getItem('theme') || 'light';
+        document.body.setAttribute('data-theme', savedTheme);
+        const toggleBtn = document.querySelector('.theme-toggle');
+        toggleBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+    });
+    
     // Char counter
     const toolIdea = document.getElementById('toolIdea');
     const charCount = document.getElementById('charCount');
