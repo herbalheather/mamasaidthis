@@ -97,7 +97,6 @@
             border: none;
             font-size: 1.5rem;
             cursor: pointer;
-            aria-label: "Toggle theme";
         }
         .hero {
             display: grid;
@@ -209,6 +208,7 @@
             box-shadow: var(--shadow-light);
             transition: all 0.3s ease;
             animation: bounceIn 0.6s ease-out;
+            text-align: center;
         }
         .tool-card:hover {
             transform: scale(1.05);
@@ -216,12 +216,14 @@
             background: linear-gradient(135deg, var(--light) 0%, #9cc69b 100%);
         }
         .tool-card i {
-            font-size: 2.5rem;
-            color: var(--accent);
+            font-size: 3rem;
+            color: #ffb3b3;
             margin-bottom: 1rem;
-            display: inline-block;
-            width: 100%;
-            text-align: center;
+            display: block;
+            background: none !important;
+            border: none !important;
+            box-shadow: none !important;
+            line-height: 1;
         }
         .tool-card h3 {
             color: var(--primary);
@@ -232,6 +234,8 @@
             color: var(--primary);
             text-decoration: none;
             font-weight: 600;
+            display: inline-block;
+            margin-top: 0.5rem;
         }
         .tool-card a:hover { color: var(--primary-dark); }
         .about-section {
@@ -247,6 +251,88 @@
             color: var(--primary);
             margin-bottom: 1rem;
         }
+        .video-section {
+            max-width: 900px;
+            margin: 2rem auto;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+        }
+        .video-section h2 {
+            color: var(--primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
+        }
+        .videos-carousel {
+            position: relative;
+            overflow: hidden;
+            margin-bottom: 1.5rem;
+        }
+        .video-card {
+            position: absolute;
+            opacity: 0;
+            transition: opacity 0.5s ease-in-out;
+            width: 100%;
+        }
+        .video-card.active {
+            position: relative;
+            opacity: 1;
+            z-index: 10;
+        }
+        .video-card a {
+            position: relative;
+            display: block;
+            text-decoration: none;
+            overflow: hidden;
+            border-radius: 12px;
+        }
+        .video-card img {
+            width: 100%;
+            height: auto;
+            display: block;
+        }
+        .play-button {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            background: rgba(255, 179, 179, 0.9);
+            color: white;
+            width: 70px;
+            height: 70px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            transition: all 0.3s ease;
+            z-index: 5;
+        }
+        .video-card a:hover .play-button {
+            background: rgba(255, 179, 179, 1);
+            transform: translate(-50%, -50%) scale(1.2);
+        }
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            gap: 1rem;
+        }
+        .carousel-btn {
+            background: var(--primary);
+            color: white;
+            border: none;
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            cursor: pointer;
+            font-size: 1.5rem;
+            transition: all 0.3s ease;
+        }
+        .carousel-btn:hover {
+            background: var(--primary-dark);
+            transform: scale(1.1);
+        }
         .form-section {
             max-width: 600px;
             margin: 0 auto 2rem;
@@ -258,6 +344,10 @@
         .form-section h2 {
             color: var(--primary);
             margin-bottom: 1rem;
+        }
+        .form-section > p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
         }
         .form-group {
             margin-bottom: 1rem;
@@ -338,27 +428,6 @@
         footer a:hover {
             text-decoration: underline;
         }
-        .journal-section {
-            max-width: 800px;
-            margin: 2rem auto;
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-            text-align: left;
-        }
-        .journal-section h2 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        .journal-entry {
-            margin-bottom: 1.5rem;
-            padding-bottom: 1.5rem;
-            border-bottom: 1px solid var(--border);
-        }
-        .journal-entry:last-child {
-            border-bottom: none;
-        }
         .section-title {
             text-align: center;
             font-size: 2rem;
@@ -397,6 +466,11 @@
             .hero-card h1 {
                 font-size: 2rem;
             }
+            .carousel-btn {
+                width: 40px;
+                height: 40px;
+                font-size: 1.2rem;
+            }
         }
     </style>
 </head>
@@ -425,8 +499,8 @@
                 <p>Tired of paying for basic stuff? Free tools for exhausted parents, moms, and working folks juggling life. Mama said sharing's better than selling. ☕ What tool do you need? Suggest below!</p>
                 <div class="hero-buttons">
                     <a href="#tools" class="btn">Grab the Good Stuff</a>
-                    <a href="https://x.com/intent/tweet?text=Check out free tools at Mama Said This! #MamaSaidTools&url=https://mamasaidthis.pages.dev" class="btn social-btn" target="_blank" rel="noopener noreferrer">Share on X</a>
-                    <a href="https://pinterest.com/pin/create/button/?url=https://mamasaidthis.pages.dev&media=https://www.aarp.org/content/dam/aarp/entertainment/movies-for-grownups/2020/05/1140-forrest-gump.jpg&description=Free tools! #MamaSaidTools" class="btn social-btn" target="_blank" rel="noopener noreferrer">Pin It</a>
+                    <a href="https://x.com/intent/tweet?text=Check%20out%20free%20tools%20at%20Mama%20Said%20This!%20#MamaSaidTools&url=https://mamasaidthis.pages.dev" class="btn social-btn" target="_blank" rel="noopener noreferrer">Share on X</a>
+                    <a href="https://pinterest.com/pin/create/button/?url=https://mamasaidthis.pages.dev&description=Free tools! #MamaSaidTools" class="btn social-btn" target="_blank" rel="noopener noreferrer">Pin It</a>
                 </div>
             </div>
             <div class="hero-image">
@@ -440,16 +514,150 @@
 
         <section id="about" class="about-section scroll-reveal">
             <h2>About Heather</h2>
-            <p>Hey, I'm Heather, a mom building free tools to ease chaos. From budgets to worksheets, I share with parents and workers. Mama said sharing's free. 🌻</p>
+            <p>Hey, I'm Heather—a mom who's been through the fire and come out figuring it out, one chaotic day at a time. At 13 weeks pregnant with my first child, my world shattered when my mom passed suddenly—one night she was making dinner, the next she was gone. That positive test had already shifted everything, but this? It flipped my life upside down. I'd always helped care for my grandma, but now I stepped up as the main caregiver, all while navigating the unknown.</p>
+            <p>There were dark days when I wasn't sure how my kids would eat—I'd be first in line at the food pantry, heart pounding with quiet determination. Growing up, I never realized how good we had it. A year later, I welcomed a baby boy, my second, without ever having held an infant or babysat before. Then, in the thick of 2019's COVID chaos, as my oldest started kindergarten amid lockdowns, I gave birth to twin girls. No car, tight finances, zero clue what I was doing? I figured it out anyway.</p>
+            <p>Now, with four little ones under my wing, I build these free tools so you don't have to call every pantry, scramble in embarrassment, or feel alone in the mess. Mama said sharing's free—and that's the truth. Let's ease the chaos together. 🌻</p>
         </section>
 
-        <section id="journal" class="journal-section scroll-reveal">
-            <h2>Mama's Journal 🌱</h2>
-            <div class="journal-entry">
-                <p><strong>Naptime Hack:</strong> Built the pay stub tool during a 20-min nap. Life's like a box of chocolates—grab the quiet moments! ☕</p>
+        <section id="videos" class="video-section scroll-reveal">
+            <h2>Mama's Quick Tips 🎥</h2>
+            <div class="videos-carousel">
+                <div class="video-card active" id="videoCard1">
+                    <a href="https://www.youtube.com/watch?v=heHrDAR2lXs" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/heHrDAR2lXs/mqdefault.jpg" alt="Mama Tip Video 1" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard2">
+                    <a href="https://www.youtube.com/watch?v=L69hLf4Bk7A" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/L69hLf4Bk7A/mqdefault.jpg" alt="Mama Tip Video 2" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard3">
+                    <a href="https://www.youtube.com/shorts/RlwcR81qPVo" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/RlwcR81qPVo/mqdefault.jpg" alt="Mama Tip Video 3" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard4">
+                    <a href="https://www.youtube.com/watch?v=YIqSupX-d_M" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/YIqSupX-d_M/mqdefault.jpg" alt="Mama Tip Video 4" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard5">
+                    <a href="https://www.youtube.com/watch?v=MX0ugH_Gv-8" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/MX0ugH_Gv-8/mqdefault.jpg" alt="Mama Tip Video 5" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard6">
+                    <a href="https://www.youtube.com/watch?v=1gS7uV6Bj0s" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/1gS7uV6Bj0s/mqdefault.jpg" alt="Mama Tip Video 6" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard7">
+                    <a href="https://www.youtube.com/watch?v=w28HfRQWt2s" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/w28HfRQWt2s/mqdefault.jpg" alt="Mama Tip Video 7" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard8">
+                    <a href="https://www.youtube.com/watch?v=yvo_uCfn0V8" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/yvo_uCfn0V8/mqdefault.jpg" alt="Mama Tip Video 8" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard9">
+                    <a href="https://www.youtube.com/watch?v=VG3arGjg0Hk" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/VG3arGjg0Hk/mqdefault.jpg" alt="Mama Tip Video 9" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard10">
+                    <a href="https://www.youtube.com/watch?v=hGGsB-jBTlo" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/hGGsB-jBTlo/mqdefault.jpg" alt="Mama Tip Video 10" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard11">
+                    <a href="https://www.youtube.com/watch?v=JPpUKw9Gkig" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/JPpUKw9Gkig/mqdefault.jpg" alt="Mama Tip Video 11" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard12">
+                    <a href="https://www.youtube.com/watch?v=2AImrZ6cFG8" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/2AImrZ6cFG8/mqdefault.jpg" alt="Mama Tip Video 12" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard13">
+                    <a href="https://www.youtube.com/watch?v=_o_JUR2KZKw" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/_o_JUR2KZKw/mqdefault.jpg" alt="Mama Tip Video 13" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard14">
+                    <a href="https://www.youtube.com/watch?v=B2zCWJBnfuE" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/B2zCWJBnfuE/mqdefault.jpg" alt="Mama Tip Video 14" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard15">
+                    <a href="https://www.youtube.com/watch?v=9c7zh2MkslY" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/9c7zh2MkslY/mqdefault.jpg" alt="Mama Tip Video 15" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard16">
+                    <a href="https://www.youtube.com/watch?v=APRo-b6eHy8" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/APRo-b6eHy8/mqdefault.jpg" alt="Mama Tip Video 16" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard17">
+                    <a href="https://www.youtube.com/watch?v=s0FdYs8ZqmA" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/s0FdYs8ZqmA/mqdefault.jpg" alt="Mama Tip Video 17" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard18">
+                    <a href="https://www.youtube.com/watch?v=zWjkPXogjzo" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/zWjkPXogjzo/mqdefault.jpg" alt="Mama Tip Video 18" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard19">
+                    <a href="https://www.youtube.com/watch?v=G-hYH5iG5kY" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/G-hYH5iG5kY/mqdefault.jpg" alt="Mama Tip Video 19" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard20">
+                    <a href="https://www.youtube.com/watch?v=GD2T3fghLBc" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/GD2T3fghLBc/mqdefault.jpg" alt="Mama Tip Video 20" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard21">
+                    <a href="https://www.youtube.com/watch?v=xyQY8a-ng6g" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/xyQY8a-ng6g/mqdefault.jpg" alt="Mama Tip Video 21" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
+                <div class="video-card" id="videoCard22">
+                    <a href="https://www.youtube.com/watch?v=BfzMi1EOe4I" target="_blank" rel="noopener noreferrer">
+                        <img src="https://img.youtube.com/vi/BfzMi1EOe4I/mqdefault.jpg" alt="Mama Tip Video 22" loading="lazy">
+                        <div class="play-button">▶</div>
+                    </a>
+                </div>
             </div>
-            <div class="journal-entry">
-                <p><strong>Secret Tip:</strong> Use the budget tracker to hide coffee money from the kids. #MamaSaidTools</p>
+            <div class="carousel-controls">
+                <button class="carousel-btn prev" onclick="moveCarousel(-1)">❮</button>
+                <button class="carousel-btn next" onclick="moveCarousel(1)">❯</button>
             </div>
         </section>
 
@@ -549,7 +757,9 @@
     </footer>
 
     <script>
-        const ZAPIER_URL = 'https://hooks.zapier.com/hooks/catch/18202844/IXDD7cliS';
+        // Formspark configuration
+        const FORMSPARK_FORM_ID = 'IXDD7cliS';
+        let currentSlideIndex = 1;
 
         function toggleTheme() {
             const body = document.body;
@@ -557,6 +767,25 @@
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             body.setAttribute('data-theme', newTheme);
             document.querySelector('.theme-toggle').textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        }
+
+        function moveCarousel(n) {
+            currentSlideIndex += n;
+            const cards = document.querySelectorAll('.video-card');
+            if (currentSlideIndex > cards.length) currentSlideIndex = 1;
+            if (currentSlideIndex < 1) currentSlideIndex = cards.length;
+            showSlide(currentSlideIndex);
+        }
+
+        function currentSlide(n) {
+            currentSlideIndex = n;
+            showSlide(currentSlideIndex);
+        }
+
+        function showSlide(n) {
+            const cards = document.querySelectorAll('.video-card');
+            cards.forEach(card => card.classList.remove('active'));
+            cards[n - 1].classList.add('active');
         }
 
         // Track page view in Google Analytics
@@ -586,7 +815,7 @@
                 });
             }
 
-            async function submitToZapier(formId, formData) {
+            async function submitToFormspark(formId, formData) {
                 const form = document.getElementById(formId);
                 
                 if (!form.checkValidity()) {
@@ -603,19 +832,19 @@
                     submitBtn.disabled = true;
                     errorDiv.classList.remove('show');
 
-                    const response = await fetch(ZAPIER_URL, {
+                    // POST to Formspark API endpoint
+                    const response = await fetch(`https://api.formspark.io/v1/forms/${FORMSPARK_FORM_ID}/submissions`, {
                         method: 'POST',
                         headers: { 
                             'Content-Type': 'application/json'
                         },
                         body: JSON.stringify({
                             ...formData,
-                            timestamp: new Date().toISOString(),
-                            userAgent: navigator.userAgent
+                            timestamp: new Date().toISOString()
                         })
                     });
 
-                    if (response.ok) {
+                    if (response.ok || response.status === 201) {
                         successDiv.classList.add('show');
                         form.reset();
                         if (charCount) charCount.textContent = '0';
@@ -627,7 +856,7 @@
                             });
                         }
                         
-                        // Try to trigger confetti
+                        // Trigger confetti
                         try {
                             if (typeof confetti !== 'undefined') {
                                 confetti({ 
@@ -644,11 +873,11 @@
                             successDiv.classList.remove('show');
                         }, 4000);
                     } else {
-                        throw new Error('Form submission failed. Please try again.');
+                        throw new Error(`Server returned status ${response.status}`);
                     }
                 } catch (err) {
                     console.error('Form submission error:', err);
-                    errorDiv.textContent = err.message || 'Something went wrong. Please try again later.';
+                    errorDiv.textContent = 'Something went wrong. Please try again later.';
                     errorDiv.classList.add('show');
                     
                     // Track error in Google Analytics
@@ -675,7 +904,7 @@
                     e.preventDefault();
                     const email = document.getElementById('waitlist-email').value.trim();
                     const name = document.getElementById('waitlist-name').value.trim();
-                    submitToZapier('waitlistForm', { 
+                    submitToFormspark('waitlistForm', { 
                         name: name || 'Anonymous', 
                         email,
                         formType: 'Waitlist Signup'
@@ -691,7 +920,7 @@
                     const toolType = document.getElementById('toolType').value;
                     const idea = document.getElementById('toolIdea').value.trim();
                     const name = document.getElementById('suggest-name').value.trim();
-                    submitToZapier('suggestForm', { 
+                    submitToFormspark('suggestForm', { 
                         name: name || 'Anonymous', 
                         toolType,
                         idea,
