@@ -269,567 +269,461 @@
         
         .section-subtitle {
             text-align: center;
-            font-size: 1.1rem;
             color: var(--text-secondary);
-            max-width: 600px;
-            margin: 0 auto 2.5rem;
-        }
-        
-        .accent-line {
-            width: 80px;
-            height: 4px;
-            background: linear-gradient(90deg, var(--primary), var(--secondary));
-            margin: 0 auto 2rem;
-            border-radius: 10px;
+            margin-bottom: 3rem;
+            font-size: clamp(1rem, 1.2rem, 1.2rem);
         }
         
         .tool-grid {
             max-width: 1200px;
             margin: 0 auto;
             display: grid;
-            gap: clamp(1rem, 2rem, 2rem);
+            gap: 2rem;
         }
         
         .tool-card {
             background: var(--card-bg);
-            border-radius: 16px;
-            padding: clamp(1rem, 1.5rem, 1.5rem);
+            padding: 2rem;
+            border-radius: 20px;
             box-shadow: var(--shadow-light);
-            transition: all 0.4s ease;
-            border: 2px solid transparent;
-            position: relative;
-            overflow: hidden;
-            color: var(--text-primary);
+            transition: all 0.3s ease;
+            display: flex;
+            align-items: center;
+            gap: 1rem;
         }
         
-        .tool-card:nth-child(even) { padding: clamp(1.5rem, 2rem, 2rem); } /* Asymmetry */
+        .tool-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
         
-        .tool-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-hover);
-            border-color: var(--primary);
+        .tool-card i { font-size: 2rem; color: var(--primary); }
+        
+        .tool-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
+        
+        .tool-card p { color: var(--text-secondary); margin-bottom: 1rem; }
+        
+        .tool-card a { color: var(--secondary); font-weight: 600; }
+        
+        .tool-card a:hover { color: var(--primary); }
+        
+        /* About Section */
+        #about {
+            padding: clamp(2rem, 4rem, 4rem) 1.5rem;
+            background: var(--bg);
         }
         
-        .tool-emoji { font-size: 3rem; display: block; margin-bottom: 0.5rem; transition: transform 0.3s; }
-        
-        .tool-card:hover .tool-emoji { transform: scale(1.1) rotate(3deg); }
-        
-        .tool-link {
-            color: var(--primary);
-            font-weight: 700;
-            text-decoration: none;
-            display: inline-block;
-            margin-top: 1rem;
+        .about-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            gap: 2rem;
+            align-items: start;
         }
         
-        .coming-soon {
-            opacity: 0.6;
-            text-decoration: line-through;
+        .about-text p { margin-bottom: 1.5rem; }
+        
+        .about-text ul { list-style: none; padding: 0; }
+        
+        .about-text li { margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
+        
+        .quote-card {
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 20px;
+            box-shadow: var(--shadow-light);
             font-style: italic;
-        }
-        
-        .idea-card {
-            background: linear-gradient(135deg, #fef3c7, #fde68a);
-            border: 2px dashed var(--accent);
+            color: var(--text-secondary);
+            line-height: 1.4;
+            white-space: pre-line;
             text-align: center;
         }
         
-        /* About - Updated for Theme */
-        #about {
-            background: var(--bg);
+        /* Waitlist and Suggest Sections */
+        #waitlist, #suggest {
             padding: clamp(2rem, 4rem, 4rem) 1.5rem;
-        }
-        
-        .about-grid { max-width: 1200px; margin: 0 auto; gap: clamp(2rem, 3rem, 3rem); }
-        
-        .quote-card {
-            background: linear-gradient(135deg, var(--secondary), #8b5cf6);
-            color: white;
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: 0 20px 40px rgba(99, 102, 241, 0.3);
-            font-family: 'Dancing Script', cursive; /* Handwritten feel */
-            font-size: 1.3rem;
-            line-height: 1.4;
-        }
-        
-        .promise-box {
             background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-            border-left: 4px solid var(--primary);
-            margin-top: 1.5rem;
-            color: var(--text-primary);
         }
         
-        .promise-box ul { list-style: none; padding: 0; color: var(--text-secondary); }
-        .promise-box li { margin-bottom: 0.5rem; } /* Uneven list */
+        .accent-line {
+            width: 100px;
+            height: 4px;
+            background: var(--accent);
+            margin: 1rem auto;
+        }
         
-        /* Forms - Enhanced */
         form {
             max-width: 500px;
             margin: 0 auto;
-            background: var(--bg);
-            padding: clamp(1.5rem, 2rem, 2rem);
-            border-radius: 20px;
-            box-shadow: 0 10px 30px rgba(0,0,0,0.1);
-            border: 1px solid var(--border);
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
         }
         
         input, select, textarea {
-            width: 100%;
-            padding: 0.8rem;
-            border: 2px solid var(--border);
-            border-radius: 8px;
-            margin-bottom: 1rem;
-            font-family: inherit;
-            transition: border-color 0.3s ease;
-            background: var(--card-bg);
+            padding: 1rem;
+            border: 1px solid var(--border);
+            border-radius: 10px;
+            background: var(--bg);
             color: var(--text-primary);
+            font-size: 1rem;
         }
         
-        input:focus, select:focus, textarea:focus {
-            border-color: var(--primary);
-            outline: none;
-        }
+        textarea { resize: vertical; min-height: 100px; }
         
-        input::placeholder, textarea::placeholder {
-            color: var(--text-secondary);
-        }
+        .btn-full { width: 100%; }
         
-        .btn-full { width: 100%; padding: 1rem; }
-        
-        .success-msg {
-            background: #10b981;
-            color: white;
-            padding: 1rem;
-            border-radius: 8px;
-            display: none;
-            margin-top: 1rem;
+        .success-msg, .error-msg {
             text-align: center;
-        }
-        
-        .success-msg.show { display: block; animation: slideIn 0.3s; }
-        
-        .error-msg {
-            background: #ef4444;
-            color: white;
             padding: 1rem;
-            border-radius: 8px;
+            border-radius: 10px;
             display: none;
-            margin-top: 1rem;
-            text-align: center;
         }
         
-        .error-msg.show { display: block; animation: slideIn 0.3s; }
+        .success-msg { background: #d1fae5; color: #065f46; }
         
-        .loading {
-            opacity: 0.7;
-            pointer-events: none;
-        }
+        .error-msg { background: #fee2e2; color: #991b1b; }
         
-        .loading .btn-full::after {
-            content: ' ...';
-            animation: dots 1.5s steps(4, end) infinite;
-        }
+        .show { display: block; }
         
-        @keyframes slideIn { from { opacity: 0; transform: translateY(-10px); } to { opacity: 1; transform: translateY(0); } }
-        @keyframes dots { 0%, 20% { content: ' .'; } 40% { content: ' ..'; } 60% { content: ' ...'; } }
+        .loading { opacity: 0.7; pointer-events: none; }
         
-        /* Footer - Updated for Theme */
+        /* Footer */
         footer {
             background: var(--dark);
             color: white;
-            padding: clamp(2rem, 3rem, 3rem) 1.5rem 2rem;
-        }
-        
-        .footer-grid { max-width: 1200px; margin: 0 auto 2rem; gap: clamp(1rem, 2rem, 2rem); }
-        
-        .footer-grid h3, .footer-grid h4 { margin-bottom: 1rem; color: var(--primary); }
-        
-        .footer-grid ul { list-style: none; padding: 0; }
-        .footer-grid li { margin-bottom: 0.5rem; }
-        
-        .footer-grid a { color: rgba(255,255,255,0.8); text-decoration: none; }
-        .footer-grid a:hover { color: var(--primary); }
-        
-        .footer-bottom {
-            border-top: 1px solid rgba(255,255,255,0.1);
-            padding-top: 2rem;
+            padding: 3rem 1.5rem;
             text-align: center;
-            color: rgba(255,255,255,0.7);
         }
         
-        .thanks-wall { font-size: 0.9rem; margin-top: 1rem; opacity: 0.8; } /* Personal touch */
-        
-        /* Animations */
-        .fade-in { animation: fadeIn 0.8s ease-out; }
-        @keyframes fadeIn { from { opacity: 0; transform: translateY(20px); } to { opacity: 1; transform: translateY(0); } }
-        
-        .scroll-reveal {
-            opacity: 0;
-            transform: translateY(30px);
-            transition: all 0.6s ease-out;
+        .footer-grid {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            gap: 2rem;
         }
         
-        .scroll-reveal.revealed { opacity: 1; transform: translateY(0); }
+        footer h3 { color: white; font-size: 1.5rem; }
         
-        /* Blobs - Theme Aware */
-        .hero::before, .hero::after {
-            content: '';
-            position: absolute;
-            border-radius: 50%;
-            filter: blur(60px);
-            opacity: 0.3;
-            animation: float 20s infinite ease-in-out;
-        }
+        footer h4 { color: var(--accent); margin-bottom: 1rem; }
         
-        .hero::before { width: 400px; height: 400px; background: var(--primary); top: -50px; right: -50px; }
-        .hero::after { width: 300px; height: 300px; background: var(--accent); bottom: -50px; left: -50px; animation-delay: 5s; }
+        footer ul { list-style: none; padding: 0; }
         
-        @keyframes float {
-            0%, 100% { transform: translate(0, 0) rotate(0deg); }
-            33% { transform: translate(20px, -20px) rotate(120deg); }
-            66% { transform: translate(-15px, 15px) rotate(240deg); }
-        }
+        footer li { margin-bottom: 0.5rem; }
+        
+        footer a { color: white; opacity: 0.9; }
+        
+        footer a:hover { opacity: 1; }
+        
+        .coming-soon { color: var(--accent); font-style: italic; }
+        
+        .footer-bottom { margin-top: 2rem; opacity: 0.8; }
+        
+        .thanks-wall { font-style: italic; }
+        
+        /* Scroll Reveal */
+        .scroll-reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
+        
+        .revealed { opacity: 1; transform: translateY(0); }
     </style>
 </head>
 <body data-theme="light">
-
-<!-- NAV - Added Toggle -->
-<nav>
-    <div class="nav-container">
-        <div class="logo">
-            <span>MST</span>
-            <span>Mama Said This</span>
+    <nav>
+        <div class="nav-container">
+            <div class="logo">
+                <span>MST</span>
+                <span>Mama Said This</span>
+            </div>
+            <div class="nav-links">
+                <a href="#tools">Tools</a>
+                <a href="#about">About</a>
+                <a href="#waitlist">Waitlist</a>
+                <a href="#suggest">Suggest</a>
+            </div>
+            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
-        <div class="nav-links">
-            <a href="#tools">Tools</a>
-            <a href="/resources.html">Resources</a>
-            <a href="#about">About</a>
-            <a href="#waitlist">Join</a>
-        </div>
-        <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle Dark Mode">🌙</button>
-    </div>
-</nav>
-
-<!-- HERO -->
-<section class="hero">
-    <div class="hero-content">
-        <h1 class="hero-title fade-in">
-            I Got Tired of<br>
-            Paying for<br>
-            <span class="highlight">Basic Shit</span>
-        </h1>
-        <p class="hero-subtitle fade-in">So I taught myself code—messy, late-night sessions while the kids snored. Built these tools. Now they're yours. Free. No strings. P.S. I built this at 3am after wrangling toddlers. 😴</p>
-        <div class="hero-buttons fade-in">
-            <a href="#tools" class="btn btn-primary">Grab a Tool</a>
-            <a href="#about" class="btn btn-secondary">My Messy Story</a>
-        </div>
-    </div>
+    </nav>
     
-    <div class="hero-image fade-in">
-        <div class="hero-card">
-            <div class="doodle">☕👩‍💻</div> <!-- Simple doodle -->
-            <h3 style="font-size: 1.4rem; margin-bottom: 0.5rem; color: var(--text-primary);">Heather Here</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 1rem;">Mom of 4 • Master's • Code Noob Turned Builder</p>
-            <div style="background: var(--bg); padding: 1rem; border-radius: 8px; border-left: 4px solid var(--primary); font-style: italic;">
-                "Couldn't find free stuff that worked. So... yeah, I coded it. Errors and all."
+    <section class="hero">
+        <div class="hero-content">
+            <h1 class="hero-title">Mama Said This: <span class="highlight">Free Tools</span> for Broke Folks</h1>
+            <p class="hero-subtitle">Built by a mom who got tired of paying for basic shit. No BS, no paywalls—just help when you need it.</p>
+            <div class="hero-buttons">
+                <a href="#tools" class="btn btn-primary">Grab the Tools</a>
+                <a href="#suggest" class="btn btn-secondary">Suggest One</a>
             </div>
         </div>
-    </div>
-</section>
+        <div class="hero-image">
+            <div class="hero-card scroll-reveal">
+                <div class="doodle">🤱</div>
+                <p style="font-style: italic; color: var(--text-secondary);">Heather, Master's Code Noob</p>
+                <p>Learned this at 3AM between diapers. Built for real life. Free. Forever.</p>
+            </div>
+        </div>
+    </section>
 
-<!-- TOOLS -->
-<section id="tools">
-    <h2 class="section-title">Free Tools That Actually Work (Finally)</h2>
-    <div class="accent-line"></div>
-    <p class="section-subtitle">No logins. No ads sneaking in. Just me, sharing what got me through tough weeks. Test 'em out—tell me if they suck.</p>
-    
-    <div class="tool-grid">
-        <div class="tool-card scroll-reveal">
-            <div class="tool-emoji">💰</div>
-            <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">Pay Stub Generator</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">Quick stubs for apartments or jobs. Texas tweaks. PDF or Word out.</p>
-            <a href="https://calculator-ea5.pages.dev/" target="_blank" class="tool-link">Jump In →</a>
-        </div>
+    <section id="tools">
+        <h2 class="section-title">The Goods</h2>
+        <div class="accent-line"></div>
+        <p class="section-subtitle">Free. Fast. No signups. Works on phone or laptop. Coming: more stuff (grade calc, crisis links).</p>
         
-        <div class="tool-card scroll-reveal">
-            <div class="tool-emoji">📊</div>
-            <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">Budget Tracker</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">Charts your cash flow. Auto-saves. (P.S. Still tweaking—basic for now.)</p>
-            <a href="/budget-tracker.html" class="tool-link">Jump In →</a>
+        <div class="tool-grid scroll-reveal">
+            <div class="tool-card">
+                <i class="fas fa-calculator"></i>
+                <div>
+                    <h3>Pay Stub Maker</h3>
+                    <p>Pro stubs in seconds. For budgeting, loans, or "proving" income. Zero watermarks.</p>
+                    <a href="https://calculator-ea5.pages.dev/" target="_blank">Make One</a>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <i class="fas fa-piggy-bank"></i>
+                <div>
+                    <h3>Budget Tracker</h3>
+                    <p>Track cash, cut waste. Simple sheet that actually helps. No ads.</p>
+                    <a href="/budget-tracker.html">Track It</a>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <i class="fas fa-book"></i>
+                <div>
+                    <h3>Worksheet Gen</h3>
+                    <p>Custom K-6 sheets—math, reading. PDF ready. Homeschool win.</p>
+                    <a href="https://edusheet-chooser.pages.dev/" target="_blank">Generate</a>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <i class="fas fa-chart-line"></i>
+                <div>
+                    <h3>Grade Calc</h3>
+                    <p>Averages, weights, insights. For homeschool or school. (Coming soon—waitlist for early access.)</p>
+                    <a href="#waitlist" class="coming-soon">Coming</a>
+                </div>
+            </div>
+            
+            <div class="tool-card">
+                <i class="fas fa-life-ring"></i>
+                <div>
+                    <h3>Crisis Resources</h3>
+                    <p>Rent help, food banks, job tips. Texas-focused but expanding. (Coming—suggest if you need.)</p>
+                    <a href="/resources.html" class="coming-soon">View</a>
+                </div>
+            </div>
         </div>
-        
-        <div class="tool-card scroll-reveal">
-            <div class="tool-emoji">📝</div>
-            <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">Educational Worksheet Generator</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">K-6 custom sheets for math/reading. Homeschool heroes rejoice. PDF magic.</p>
-            <a href="https://edusheet-chooser.pages.dev/" target="_blank" class="tool-link">Start Generating →</a>
-        </div>
-        
-        <div class="tool-card scroll-reveal coming-soon">
-            <div class="tool-emoji">📚</div>
-            <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">Grade Calculator</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">GPA cruncher + transcripts. For those college app marathons.</p>
-            <span style="color: var(--text-secondary); font-weight: 600;">Week 3 Drop →</span>
-        </div>
-        
-        <div class="tool-card scroll-reveal">
-            <div class="tool-emoji">🆘</div>
-            <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">Crisis Resources</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">Hotlines, benefits checker. Sorted by "oh shit" moments.</p>
-            <a href="/resources.html" class="tool-link">Find Help →</a>
-        </div>
-        
-        <div class="tool-card scroll-reveal coming-soon">
-            <div class="tool-emoji">📄</div>
-            <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem;">Invoice Maker</h3>
-            <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.5;">Side hustle bills. Logo slap-on, payment chase.</p>
-            <span style="color: var(--text-secondary); font-weight: 600;">Month 2 Vibes →</span>
-        </div>
-        
-        <div class="tool-card idea-card scroll-reveal">
-            <div class="tool-emoji">💡</div>
-            <h3 style="font-size: 1.4rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">Your Wild Idea?</h3>
-            <p style="color: #78350f; margin-bottom: 1rem; font-weight: 500;">What tool would save your ass? Spill—I might hack it together. No promises. 😉</p>
-            <a href="#suggest" class="tool-link">Throw It At Me →</a>
-        </div>
-    </div>
-</section>
+    </section>
 
-<!-- ABOUT -->
-<section id="about">
-    <h2 class="section-title">Hey, I'm Heather (The Tired One)</h2>
-    <div class="accent-line"></div>
-    
-    <div class="about-grid">
-        <div class="scroll-reveal">
-            <h3 style="font-size: clamp(1.5rem, 1.8rem, 1.8rem); font-weight: 700; margin-bottom: 1rem; color: var(--text-primary);">Mom. Coder. Been There.</h3>
-            <p style="font-size: 1.1rem; color: var(--text-secondary); margin-bottom: 1.5rem; line-height: 1.7;">
-                Started with pay stubs—every site hit me for cash I didn't have. Broke AF, so 2am coding it was. Kids? Asleep. Coffee? Black.
-            </p>
-            <p style="color: var(--text-secondary); margin-bottom: 1rem; line-height: 1.7;">
-                Kept going. Budgets when mine imploded. Worksheets for homeschool hell. Resources 'cause I've called those hotlines myself.
-            </p>
-            <p style="color: var(--text-secondary); line-height: 1.7;">
-                Sharing 'em free. 'Cause gatekeeping sucks. You got this—tools or not.
-            </p>
-            <div class="promise-box">
-                <p style="font-weight: 700; color: var(--text-primary); margin-bottom: 1rem;">My No-BS Oath:</p>
+    <section id="about">
+        <h2 class="section-title">The Messy Truth</h2>
+        <div class="accent-line"></div>
+        <p class="section-subtitle">No fancy team. Just me, Heather, coding through chaos. Here's the scoop.</p>
+        
+        <div class="about-grid scroll-reveal">
+            <div class="about-text">
+                <p>Paid too much for basic crap. Taught myself code in the chaos of four kids and endless laundry. Built these tools messy, late at night, fueled by cold black coffee and stubborn love. Free. For you. No strings.</p>
+                <p style="font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">My No-BS Oath:</p>
                 <ul>
                     <li>✓ Free forever (duh)</li>
                     <li>✓ No signups, ever</li>
                     <li>✓ Zero watermarks</li>
-                    <li style="margin-left: 1rem;">✓ Built 'cause I needed it</li> <!-- Indent for irregularity -->
+                    <li style="margin-left: 1rem;">✓ Built 'cause I needed it</li>
                     <li>✓ Code on <a href="https://github.com/heatherhilliard" target="_blank" style="color: var(--primary);">GitHub</a>—fork away</li>
                 </ul>
             </div>
         </div>
         
         <div class="quote-card scroll-reveal">
-            <p>Why bother?<br>
-            Not genius. Not funded.<br>
-            <span style="text-decoration: line-through;">Not sane.</span><br><br>
-            But I've scraped bottom.<br>
-            I get the hustle.<br>
-            So here's help. Take it.</p>
+            <p>Built between diapers, dishes, and dreams. No team, no time, no help. just one mom, cold coffee, and real heart.</p>
         </div>
-    </div>
-</section>
+    </section>
 
-<!-- WAITLIST -->
-<section id="waitlist">
-    <h2 class="section-title">Sneak Peeks on New Stuff</h2>
-    <div class="accent-line"></div>
-    <p class="section-subtitle">New tools, tips, my rants. Rare emails—I forget my own phone half the time.</p>
-    
-    <form id="waitlistForm" class="scroll-reveal">
-        <input type="text" id="name" placeholder="Name? (Eh, optional)">
-        <input type="email" id="email" placeholder="Email" required>
-        <button type="submit" class="btn btn-primary btn-full">Sign Me Up</button>
-        <p style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem;">Bail anytime. Promise.</p>
-        <div id="waitlistSuccess" class="success-msg">You're in! Poke your inbox. 🎉</div>
-        <div id="waitlistError" class="error-msg"></div>
-    </form>
-</section>
+    <section id="waitlist">
+        <h2 class="section-title">Sneak Peeks on New Stuff</h2>
+        <div class="accent-line"></div>
+        <p class="section-subtitle">New tools, tips, my rants. Rare emails—I forget my own phone half the time.</p>
+        
+        <form id="waitlistForm" class="scroll-reveal">
+            <input type="text" id="name" placeholder="Name? (Eh, optional)">
+            <input type="email" id="email" placeholder="Email" required>
+            <button type="submit" class="btn btn-primary btn-full">Sign Me Up</button>
+            <p style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem;">Bail anytime. Promise.</p>
+            <div id="waitlistSuccess" class="success-msg">You're in! Poke your inbox. 🎉</div>
+            <div id="waitlistError" class="error-msg"></div>
+        </form>
+    </section>
 
-<!-- SUGGEST -->
-<section id="suggest">
-    <h2 class="section-title">Build Request Line</h2>
-    <div class="accent-line"></div>
-    <p class="section-subtitle">Tool wish? Hit me. If it vibes and I can code it sans sleep deprivation... done.</p>
-    
-    <form id="suggestForm" class="scroll-reveal">
-        <input type="text" id="suggestName" placeholder="You? (Anonymous cool)">
-        <select id="toolType" required>
-            <option value="">Tool Flavor?</option>
-            <option value="Financial">Money Messes</option>
-            <option value="Education">School/Homeschool</option>
-            <option value="Crisis">Emergency Kit</option>
-            <option value="Life Admin">Adulting Hacks</option>
-            <option value="Health">Wellness Wins</option>
-            <option value="Other">Wild Card</option>
-        </select>
-        <textarea id="toolIdea" placeholder="Idea dump (300 chars max)" maxlength="300" required rows="3"></textarea>
-        <p style="text-align: right; color: var(--text-secondary); font-size: 0.8rem;"><span id="charCount">0</span>/300</p>
-        <button type="submit" class="btn btn-primary btn-full">Send It</button>
-        <div id="suggestSuccess" class="success-msg">Caught it! Might build. Thanks! 🙌</div>
-        <div id="suggestError" class="error-msg"></div>
-    </form>
-</section>
+    <section id="suggest">
+        <h2 class="section-title">Build Request Line</h2>
+        <div class="accent-line"></div>
+        <p class="section-subtitle">Tool wish? Hit me. If it vibes and I can code it sans sleep deprivation... done.</p>
+        
+        <form id="suggestForm" class="scroll-reveal">
+            <input type="text" id="suggestName" placeholder="You? (Anonymous cool)">
+            <select id="toolType" required>
+                <option value="">Tool Flavor?</option>
+                <option value="Financial">Money Messes</option>
+                <option value="Education">School/Homeschool</option>
+                <option value="Crisis">Emergency Kit</option>
+                <option value="Life Admin">Adulting Hacks</option>
+                <option value="Health">Wellness Wins</option>
+                <option value="Other">Wild Card</option>
+            </select>
+            <textarea id="toolIdea" placeholder="Idea dump (300 chars max)" maxlength="300" required rows="3"></textarea>
+            <p style="text-align: right; color: var(--text-secondary); font-size: 0.8rem;"><span id="charCount">0</span>/300</p>
+            <button type="submit" class="btn btn-primary btn-full">Send It</button>
+            <div id="suggestSuccess" class="success-msg">Caught it! Might build. Thanks! 🙌</div>
+            <div id="suggestError" class="error-msg"></div>
+        </form>
+    </section>
 
-<!-- FOOTER -->
-<footer>
-    <div class="footer-grid">
-        <div>
-            <h3>MST</h3>
-            <p style="line-height: 1.6; opacity: 0.9;">
-                Mama Said This<br>
-                Tools from the trenches.<br>
-                Heather, building for us broke folks.
+    <footer>
+        <div class="footer-grid">
+            <div>
+                <h3>MST</h3>
+                <p style="line-height: 1.6; opacity: 0.9;">
+                    Mama Said This<br>
+                    Tools from the trenches.<br>
+                    Heather, building for us broke folks.
+                </p>
+            </div>
+            <div>
+                <h4>Tools</h4>
+                <ul>
+                    <li><a href="https://calculator-ea5.pages.dev/" target="_blank">Pay Stubs</a></li>
+                    <li><a href="/budget-tracker.html">Budget Tracker</a></li>
+                    <li><a href="https://edusheet-chooser.pages.dev/" target="_blank">Worksheets</a></li>
+                    <li><span class="coming-soon">Grade Calc</span></li>
+                    <li><a href="/resources.html">Crisis Help</a></li>
+                </ul>
+            </div>
+            <div>
+                <h4>Hit Me Up</h4>
+                <ul>
+                    <li><a href="https://github.com/heatherhilliard" target="_blank">GitHub (Code Nerds)</a></li>
+                    <li><a href="#waitlist">Waitlist</a></li>
+                    <li><a href="mailto:heather@herbalhomeschool.work.gd">Email Me</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p style="font-size: 1rem; margin-bottom: 0.5rem;">
+                Brewed with endless coffee & a dash of spite. By a mom over it.
             </p>
+            <p style="font-size: 0.85rem;">© 2025 MST. Free forever. <span class="thanks-wall">Shouts to Sarah (first tester) & Mike (bug hunter). You rock.</span></p>
         </div>
-        <div>
-            <h4>Tools</h4>
-            <ul>
-                <li><a href="https://calculator-ea5.pages.dev/" target="_blank">Pay Stubs</a></li>
-                <li><a href="/budget-tracker.html">Budget Tracker</a></li>
-                <li><a href="https://edusheet-chooser.pages.dev/" target="_blank">Worksheets</a></li>
-                <li><span class="coming-soon">Grade Calc</span></li>
-                <li><a href="/resources.html">Crisis Help</a></li>
-            </ul>
-        </div>
-        <div>
-            <h4>Hit Me Up</h4>
-            <ul>
-                <li><a href="https://github.com/heatherhilliard" target="_blank">GitHub (Code Nerds)</a></li>
-                <li><a href="#waitlist">Waitlist</a></li>
-                <li><a href="mailto:heather@herbalhomeschool.work.gd">Email Me</a></li>
-            </ul>
-        </div>
-    </div>
-    <div class="footer-bottom">
-        <p style="font-size: 1rem; margin-bottom: 0.5rem;">
-            Brewed with endless coffee & a dash of spite. By a mom over it.
-        </p>
-        <p style="font-size: 0.85rem;">© 2025 MST. Free forever. <span class="thanks-wall">Shouts to Sarah (first tester) & Mike (bug hunter). You rock.</span></p>
-    </div>
-</footer>
+    </footer>
 
-<script>
-    // Formspark Config - Replace 'rybK8' with your exact form ID if different
-    const FORMSPARK_URL = 'https://submit-form.com/rybK8';
+    <script>
+        // Formspark Config - Updated to your new form ID
+        const FORMSPARK_URL = 'https://submit-form.com/IXDD7cliS';
 
-    // Dark Mode Toggle Function
-    function toggleTheme() {
-        const body = document.body;
-        const currentTheme = body.getAttribute('data-theme');
-        const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-        body.setAttribute('data-theme', newTheme);
-        localStorage.setItem('theme', newTheme);
-        // Update toggle button emoji
-        const toggleBtn = document.querySelector('.theme-toggle');
-        toggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-    }
-    
-    // Load Saved Theme on Page Load
-    document.addEventListener('DOMContentLoaded', () => {
-        const savedTheme = localStorage.getItem('theme') || 'light';
-        document.body.setAttribute('data-theme', savedTheme);
-        const toggleBtn = document.querySelector('.theme-toggle');
-        toggleBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-    });
-    
-    // Char counter
-    const toolIdea = document.getElementById('toolIdea');
-    const charCount = document.getElementById('charCount');
-    if (toolIdea && charCount) {
-        toolIdea.addEventListener('input', () => charCount.textContent = toolIdea.value.length);
-    }
-    
-    // Generic Form Submit Helper
-    function submitToFormspark(formId, data, successEl, errorEl) {
-        const form = document.getElementById(formId);
-        form.classList.add('loading');
-        fetch(FORMSPARK_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(data)
-        })
-        .then(res => {
-            if (res.ok) {
-                successEl.classList.add('show');
-                form.reset();
-                if (charCount) charCount.textContent = '0';
-                setTimeout(() => successEl.classList.remove('show'), 4000);
-            } else {
-                throw new Error('Submission failed—try again?');
-            }
-        })
-        .catch(err => {
-            errorEl.textContent = err.message;
-            errorEl.classList.add('show');
-            setTimeout(() => errorEl.classList.remove('show'), 4000);
-        })
-        .finally(() => form.classList.remove('loading'));
-    }
-    
-    // Waitlist Form
-    const waitlistForm = document.getElementById('waitlistForm');
-    if (waitlistForm) {
-        waitlistForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const email = document.getElementById('email').value.trim();
-            const name = document.getElementById('name').value.trim();
-            if (!email) {
-                alert('Email, please?');
-                return;
-            }
-            submitToFormspark('waitlistForm', { name: name || 'Anon', email, source: 'MST Waitlist' }, 
-                              document.getElementById('waitlistSuccess'), document.getElementById('waitlistError'));
+        // Dark Mode Toggle Function
+        function toggleTheme() {
+            const body = document.body;
+            const currentTheme = body.getAttribute('data-theme');
+            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
+            body.setAttribute('data-theme', newTheme);
+            localStorage.setItem('theme', newTheme);
+            // Update toggle button emoji
+            const toggleBtn = document.querySelector('.theme-toggle');
+            toggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+        }
+        
+        // Load Saved Theme on Page Load
+        document.addEventListener('DOMContentLoaded', () => {
+            const savedTheme = localStorage.getItem('theme') || 'light';
+            document.body.setAttribute('data-theme', savedTheme);
+            const toggleBtn = document.querySelector('.theme-toggle');
+            toggleBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
         });
-    }
-    
-    // Suggest Form
-    const suggestForm = document.getElementById('suggestForm');
-    if (suggestForm) {
-        suggestForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const toolType = document.getElementById('toolType').value;
-            const idea = document.getElementById('toolIdea').value.trim();
-            const name = document.getElementById('suggestName').value.trim();
-            if (!toolType || !idea) {
-                alert('Type + idea, go!');
-                return;
-            }
-            submitToFormspark('suggestForm', { name: name || 'Anon', type: toolType, idea, source: 'MST Suggest' }, 
-                              document.getElementById('suggestSuccess'), document.getElementById('suggestError'));
+        
+        // Char counter
+        const toolIdea = document.getElementById('toolIdea');
+        const charCount = document.getElementById('charCount');
+        if (toolIdea && charCount) {
+            toolIdea.addEventListener('input', () => charCount.textContent = toolIdea.value.length);
+        }
+        
+        // Generic Form Submit Helper (added _gotcha honeypot for anti-spam protection)
+        function submitToFormspark(formId, data, successEl, errorEl) {
+            const form = document.getElementById(formId);
+            form.classList.add('loading');
+            fetch(FORMSPARK_URL, {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({...data, _gotcha: ''}) // Honeypot field for bot protection
+            })
+            .then(res => {
+                if (res.ok) {
+                    successEl.classList.add('show');
+                    form.reset();
+                    if (charCount) charCount.textContent = '0';
+                    setTimeout(() => successEl.classList.remove('show'), 4000);
+                } else {
+                    throw new Error('Submission failed—try again?');
+                }
+            })
+            .catch(err => {
+                errorEl.textContent = err.message;
+                errorEl.classList.add('show');
+                setTimeout(() => errorEl.classList.remove('show'), 4000);
+            })
+            .finally(() => form.classList.remove('loading'));
+        }
+        
+        // Waitlist Form
+        const waitlistForm = document.getElementById('waitlistForm');
+        if (waitlistForm) {
+            waitlistForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const email = document.getElementById('email').value.trim();
+                const name = document.getElementById('name').value.trim();
+                if (!email) {
+                    alert('Email, please?');
+                    return;
+                }
+                submitToFormspark('waitlistForm', { name: name || 'Anon', email, source: 'MST Waitlist' }, 
+                                  document.getElementById('waitlistSuccess'), document.getElementById('waitlistError'));
+            });
+        }
+        
+        // Suggest Form
+        const suggestForm = document.getElementById('suggestForm');
+        if (suggestForm) {
+            suggestForm.addEventListener('submit', (e) => {
+                e.preventDefault();
+                const toolType = document.getElementById('toolType').value;
+                const idea = document.getElementById('toolIdea').value.trim();
+                const name = document.getElementById('suggestName').value.trim();
+                if (!toolType || !idea) {
+                    alert('Type + idea, go!');
+                    return;
+                }
+                submitToFormspark('suggestForm', { name: name || 'Anon', type: toolType, idea, source: 'MST Suggest' }, 
+                                  document.getElementById('suggestSuccess'), document.getElementById('suggestError'));
+            });
+        }
+        
+        // Smooth scroll
+        document.querySelectorAll('a[href^="#"]').forEach(a => {
+            a.addEventListener('click', (e) => {
+                e.preventDefault();
+                const target = document.querySelector(a.getAttribute('href'));
+                if (target) target.scrollIntoView({ behavior: 'smooth' });
+            });
         });
-    }
-    
-    // Smooth scroll
-    document.querySelectorAll('a[href^="#"]').forEach(a => {
-        a.addEventListener('click', (e) => {
-            e.preventDefault();
-            const target = document.querySelector(a.getAttribute('href'));
-            if (target) target.scrollIntoView({ behavior: 'smooth' });
-        });
-    });
-    
-    // Scroll reveal
-    const reveals = document.querySelectorAll('.scroll-reveal');
-    const observer = new IntersectionObserver(entries => {
-        entries.forEach(entry => {
-            if (entry.isIntersecting) {
-                entry.target.classList.add('revealed');
-                observer.unobserve(entry.target);
-            }
-        });
-    }, { threshold: 0.1 });
-    reveals.forEach(el => observer.observe(el));
-</script>
+        
+        // Scroll reveal
+        const reveals = document.querySelectorAll('.scroll-reveal');
+        const observer = new IntersectionObserver(entries => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('revealed');
+                    observer.unobserve(entry.target);
+                }
+            });
+        }, { threshold: 0.1 });
+        reveals.forEach(el => observer.observe(el));
+    </script>
 
 </body>
 </html>
