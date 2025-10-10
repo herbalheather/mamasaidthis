@@ -3,94 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>MST - Mama Said This | Free Tools Built by a Mom Who Got Tired of Paying</title>
-    <meta name="description" content="Free tools built by a mom who got tired of paying for basic shit. Pay stub generator, budget tracker, crisis resources. No BS. No paywalls. Just help.">
-    
-    <!-- Google Fonts -->
+    <title>Mama Said This | Free Tools for Parents & Working Folks</title>
+    <meta name="description" content="Free tools built by a mom who believes in sharing, not selling. Pay stub generator, budget tracker, worksheets, crisis help, and more. No paywalls, just love.">
+    <meta name="keywords" content="free tools, pay stub generator, budget tracker, homeschool worksheets, crisis resources, parent tools, working folks, #MamaSaidTools">
+    <meta name="author" content="Heather, Mama Said This">
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" rel="noopener">
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js" defer></script>
     
+    <!-- Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TEKT43VC4J"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+        gtag('config', 'G-TEKT43VC4J');
+    </script>
+
     <style>
-        /* CSS Variables for Light and Dark Modes */
         :root {
-            --primary: #e85d75;
-            --primary-dark: #d14361;
-            --secondary: #6366f1;
-            --accent: #fbbf24;
-            --dark: #1e293b;
-            --light: #f8fafc;
-            --bg: #f8fafc;
-            --card-bg: white;
-            --text-primary: #1e293b;
-            --text-secondary: #64748b;
-            --border: #e2e8f0;
-            --shadow-light: 0 4px 20px rgba(0,0,0,0.08);
-            --shadow-hover: 0 15px 40px rgba(0,0,0,0.12);
-            --hero-bg: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            --primary: #ffb3b3;
+            --primary-dark: #e85d75;
+            --secondary: #9cc69b;
+            --accent: #ffd54f;
+            --dark: #5c5f77;
+            --light: #f7ede2;
+            --bg: linear-gradient(135deg, #f7ede2 0%, #9cc69b 20%, #ffb3b3 100%);
+            --card-bg: rgba(255, 255, 255, 0.95);
+            --text-primary: #5c5f77;
+            --text-secondary: #6b7280;
+            --border: #e5e7eb;
+            --shadow-light: 0 4px 20px rgba(0,0,0,0.1);
+            --shadow-hover: 0 10px 30px rgba(0,0,0,0.15);
         }
-        
         [data-theme="dark"] {
-            --bg: #0f172a;
-            --card-bg: #1e293b;
-            --text-primary: #f1f5f9;
-            --text-secondary: #94a3b8;
-            --border: #334155;
-            --shadow-light: 0 4px 20px rgba(0,0,0,0.3);
-            --shadow-hover: 0 15px 40px rgba(0,0,0,0.5);
-            --hero-bg: linear-gradient(135deg, #1e293b 0%, #334155 100%);
+            --bg: linear-gradient(135deg, #2d2d44 0%, #5c5f77 100%);
+            --card-bg: #5c5f77;
+            --text-primary: #f7ede2;
+            --text-secondary: #a0aec0;
+            --border: #6b7280;
         }
-        
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-        
+        * { margin: 0; padding: 0; box-sizing: border-box; }
         body {
             font-family: 'Inter', sans-serif;
             color: var(--text-primary);
             background: var(--bg);
             line-height: 1.6;
             overflow-x: hidden;
-            transition: background-color 0.3s ease, color 0.3s ease;
+            transition: all 0.3s ease;
         }
-        
         h1, h2, h3 { font-family: 'Poppins', sans-serif; }
-        
-        /* Enhanced Mobile-First Responsiveness */
-        @media (max-width: 480px) {
-            body { font-size: 0.9rem; }
-            section { padding: 2rem 0.5rem !important; }
-            .hero { grid-template-columns: 1fr !important; text-align: center; min-height: 60vh; padding: 1rem; }
-            .hero-image { padding: 0.5rem; order: -1; }
-            .hero-card { max-width: none; transform: none; padding: 1rem; }
-            .tool-grid { grid-template-columns: 1fr !important; gap: 1rem; }
-            nav .nav-links { display: none; } /* Hamburger later if needed */
-            .about-grid { grid-template-columns: 1fr; gap: 1.5rem; }
-            footer .footer-grid { grid-template-columns: 1fr; text-align: center; gap: 1rem; }
-            .btn { padding: 0.7rem 1.5rem; font-size: 0.9rem; }
+        main {
+            flex: 1;
         }
-        
-        @media (min-width: 481px) and (max-width: 768px) {
-            body { font-size: 0.95rem; }
-            section { padding: 3rem 1rem !important; }
-            .hero { grid-template-columns: 1fr !important; text-align: center; min-height: 70vh; }
-            .hero-image { padding: 1rem; order: -1; }
-            .hero-card { max-width: none; transform: none; }
-            .tool-grid { grid-template-columns: 1fr !important; gap: 1.5rem; }
-            nav .nav-links { display: none; }
-            .about-grid { grid-template-columns: 1fr; gap: 2rem; }
-            footer .footer-grid { grid-template-columns: 1fr; text-align: center; }
-        }
-        
-        @media (min-width: 769px) {
-            .hero { grid-template-columns: 1.2fr 1fr; }
-            .tool-grid { grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); }
-            .about-grid { grid-template-columns: 1fr 1fr; }
-            footer .footer-grid { grid-template-columns: repeat(auto-fit, minmax(250px, 1fr)); }
-            nav .nav-links { display: flex; }
-        }
-        
-        /* NAV - Sticky, with Dark Mode Toggle */
         nav {
             background: var(--card-bg);
             position: sticky;
@@ -98,9 +63,7 @@
             z-index: 1000;
             box-shadow: var(--shadow-light);
             padding: 1rem 1.5rem;
-            transition: background-color 0.3s ease, box-shadow 0.3s ease;
         }
-        
         .nav-container {
             max-width: 1200px;
             margin: 0 auto;
@@ -108,622 +71,675 @@
             justify-content: space-between;
             align-items: center;
         }
-        
-        .logo {
-            display: flex;
-            align-items: center;
-            gap: 0.5rem;
-            font-weight: 900;
+        .nav-logo h2 {
+            font-family: 'Dancing Script', cursive;
+            font-size: 2rem;
+            color: var(--primary);
         }
-        
-        .logo span:first-child { font-size: clamp(1.5rem, 4vw, 2rem); color: var(--primary); }
-        .logo span:last-child { font-size: 0.7rem; font-weight: 700; color: var(--secondary); text-transform: uppercase; }
-        
         .nav-links {
             display: flex;
-            gap: 2rem;
-            font-weight: 600;
+            align-items: center;
         }
-        
-        .nav-links a {
+        .nav-links a, .nav-links button {
             color: var(--text-primary);
             text-decoration: none;
-            transition: color 0.3s;
+            margin-left: 1.5rem;
+            font-weight: 600;
+            background: none;
+            border: none;
+            cursor: pointer;
+            padding: 0;
+            font-size: 1rem;
         }
-        
-        .nav-links a:hover { color: var(--primary); }
-        
-        /* Dark Mode Toggle Button */
+        .nav-links a:hover, .nav-links button:hover { color: var(--primary); }
         .theme-toggle {
             background: none;
-            border: 2px solid var(--border);
-            border-radius: 50px;
-            padding: 0.5rem;
+            border: none;
+            font-size: 1.5rem;
             cursor: pointer;
-            font-size: 1rem;
-            transition: all 0.3s ease;
-            color: var(--text-primary);
+            aria-label: "Toggle theme";
         }
-        
-        .theme-toggle:hover {
-            background: var(--primary);
-            color: white;
-            border-color: var(--primary);
-        }
-        
-        /* HERO - Updated for Theme */
         .hero {
-            min-height: clamp(70vh, 90vh, 90vh);
             display: grid;
+            grid-template-columns: 1.2fr 1fr;
             align-items: center;
-            position: relative;
-            background: var(--hero-bg);
-            overflow: hidden;
-            padding: clamp(1rem, 2rem, 2rem);
+            padding: 4rem 2rem;
+            min-height: 80vh;
+            background: linear-gradient(135deg, rgba(247, 237, 226, 0.8) 0%, rgba(156, 198, 155, 0.8) 20%, rgba(255, 179, 179, 0.8) 100%);
         }
-        
-        .hero-content {
+        .hero-card {
+            background: var(--card-bg);
             padding: 2rem;
-            position: relative;
-            z-index: 10;
-            max-width: 600px;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            animation: fadeInUp 0.8s ease-out;
         }
-        
-        .hero-title {
-            font-size: clamp(2rem, 5vw, 4rem);
-            font-weight: 900;
-            line-height: 1.1;
-            color: white;
+        .hero-card h1 {
+            font-size: 2.8rem;
+            color: var(--primary);
             margin-bottom: 1rem;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.2);
+            font-family: 'Dancing Script', cursive;
         }
-        
-        .hero-title .highlight {
-            color: var(--accent);
-            position: relative;
+        .hero-card p {
+            color: var(--text-secondary);
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
         }
-        
-        .hero-subtitle {
-            font-size: clamp(1rem, 2.5vw, 1.5rem);
-            color: rgba(255,255,255,0.95);
-            margin-bottom: 2rem;
-            font-weight: 500;
-        }
-        
         .hero-buttons {
             display: flex;
-            gap: 1rem;
             flex-wrap: wrap;
+            gap: 1rem;
         }
-        
         .hero-image {
-            position: relative;
-            z-index: 10;
             padding: 2rem;
             display: flex;
             align-items: center;
             justify-content: center;
         }
-        
-        .hero-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 20px;
+        .hero-image-placeholder {
+            width: 100%;
+            height: 400px;
+            border-radius: 12px;
+            background: linear-gradient(135deg, var(--secondary) 0%, var(--primary) 100%);
             box-shadow: var(--shadow-light);
-            max-width: 350px;
-            transform: rotate(-1deg);
-            transition: all 0.3s ease;
-            color: var(--text-primary);
-        }
-        
-        .hero-card:hover { transform: rotate(0deg) scale(1.02); }
-        
-        .doodle { font-size: 4rem; margin-bottom: 1rem; } /* Mom emoji */
-        
-        /* Buttons - Enhanced */
-        .btn {
-            padding: clamp(0.7rem, 0.8rem, 0.8rem) clamp(1.5rem, 2rem, 2rem);
-            border-radius: 50px;
-            font-weight: 700;
-            text-decoration: none;
-            transition: all 0.3s ease;
-            cursor: pointer;
-            border: none;
-            font-size: clamp(0.9rem, 1rem, 1rem);
-            display: inline-block;
-        }
-        
-        .btn-primary {
-            background: var(--primary);
-            color: white;
-            box-shadow: var(--shadow-light);
-        }
-        
-        .btn-primary:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-hover);
-        }
-        
-        .btn-secondary {
-            background: var(--card-bg);
-            color: var(--secondary);
-            box-shadow: var(--shadow-light);
-        }
-        
-        .btn-secondary:hover { transform: translateY(-2px); box-shadow: var(--shadow-hover); }
-        
-        /* Tools Section - Updated for Theme */
-        #tools {
-            background: var(--card-bg);
-            padding: clamp(2rem, 4rem, 4rem) 1.5rem;
-        }
-        
-        .section-title {
-            font-size: clamp(1.8rem, 4vw, 3rem);
-            font-weight: 800;
-            margin-bottom: 0.5rem;
-            text-align: center;
-            color: var(--text-primary);
-        }
-        
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-secondary);
-            margin-bottom: 3rem;
-            font-size: clamp(1rem, 1.2rem, 1.2rem);
-        }
-        
-        .tool-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            gap: 2rem;
-        }
-        
-        .tool-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 20px;
-            box-shadow: var(--shadow-light);
-            transition: all 0.3s ease;
             display: flex;
             align-items: center;
-            gap: 1rem;
+            justify-content: center;
+            flex-direction: column;
+            color: white;
+            text-align: center;
+            padding: 2rem;
         }
-        
-        .tool-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-hover); }
-        
-        .tool-card i { font-size: 2rem; color: var(--primary); }
-        
-        .tool-card h3 { font-size: 1.2rem; margin-bottom: 0.5rem; }
-        
-        .tool-card p { color: var(--text-secondary); margin-bottom: 1rem; }
-        
-        .tool-card a { color: var(--secondary); font-weight: 600; }
-        
-        .tool-card a:hover { color: var(--primary); }
-        
-        /* About Section */
-        #about {
-            padding: clamp(2rem, 4rem, 4rem) 1.5rem;
-            background: var(--bg);
+        .hero-image-placeholder i {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.8;
         }
-        
-        .about-grid {
+        .hero-image-placeholder p {
+            font-size: 1.2rem;
+            font-weight: 600;
+            max-width: 300px;
+        }
+        .btn {
+            background: var(--primary);
+            color: white;
+            padding: 0.8rem 1.5rem;
+            border-radius: 25px;
+            text-decoration: none;
+            font-weight: 600;
+            transition: all 0.3s ease;
+            display: inline-block;
+            border: none;
+            cursor: pointer;
+        }
+        .btn:hover {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        .support-btn {
+            background: var(--accent);
+            color: var(--dark);
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            z-index: 900;
+        }
+        .support-btn:hover {
+            background: #d4a017;
+        }
+        .social-btn {
+            background: var(--secondary);
+            color: var(--dark);
+        }
+        .social-btn:hover {
+            background: #82c6c0;
+        }
+        .tool-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+            padding: 2rem;
             max-width: 1200px;
             margin: 0 auto;
-            display: grid;
-            gap: 2rem;
-            align-items: start;
         }
-        
-        .about-text p { margin-bottom: 1.5rem; }
-        
-        .about-text ul { list-style: none; padding: 0; }
-        
-        .about-text li { margin-bottom: 0.5rem; display: flex; align-items: center; gap: 0.5rem; }
-        
-        .quote-card {
+        .tool-card {
+            background: var(--card-bg);
+            padding: 1.5rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            transition: all 0.3s ease;
+            animation: bounceIn 0.6s ease-out;
+        }
+        .tool-card:hover {
+            transform: scale(1.05);
+            box-shadow: var(--shadow-hover);
+            background: linear-gradient(135deg, var(--light) 0%, #9cc69b 100%);
+        }
+        .tool-card i {
+            font-size: 2.5rem;
+            color: var(--accent);
+            margin-bottom: 1rem;
+            display: inline-block;
+            width: 100%;
+            text-align: center;
+        }
+        .tool-card h3 {
+            color: var(--primary);
+            margin-bottom: 0.5rem;
+        }
+        .tool-card p { color: var(--text-secondary); }
+        .tool-card a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+        .tool-card a:hover { color: var(--primary-dark); }
+        .about-section {
+            max-width: 800px;
+            margin: 2rem auto;
             background: var(--card-bg);
             padding: 2rem;
-            border-radius: 20px;
+            border-radius: 12px;
             box-shadow: var(--shadow-light);
-            font-style: italic;
-            color: var(--text-secondary);
-            line-height: 1.4;
-            white-space: pre-line;
             text-align: center;
         }
-        
-        /* Waitlist and Suggest Sections */
-        #waitlist, #suggest {
-            padding: clamp(2rem, 4rem, 4rem) 1.5rem;
+        .about-section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .form-section {
+            max-width: 600px;
+            margin: 0 auto 2rem;
             background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
         }
-        
-        .accent-line {
-            width: 100px;
-            height: 4px;
-            background: var(--accent);
-            margin: 1rem auto;
+        .form-section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
         }
-        
-        form {
-            max-width: 500px;
-            margin: 0 auto;
-            display: flex;
-            flex-direction: column;
-            gap: 1rem;
+        .form-group {
+            margin-bottom: 1rem;
         }
-        
-        input, select, textarea {
-            padding: 1rem;
-            border: 1px solid var(--border);
-            border-radius: 10px;
-            background: var(--bg);
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
             color: var(--text-primary);
-            font-size: 1rem;
         }
-        
-        textarea { resize: vertical; min-height: 100px; }
-        
-        .btn-full { width: 100%; }
-        
-        .success-msg, .error-msg {
-            text-align: center;
-            padding: 1rem;
-            border-radius: 10px;
-            display: none;
+        .form-group input, .form-group textarea, .form-group select {
+            width: 100%;
+            padding: 0.8rem;
+            border: 1px solid var(--border);
+            border-radius: 8px;
+            font-family: 'Inter', sans-serif;
+            background: var(--card-bg);
+            color: var(--text-primary);
         }
-        
-        .success-msg { background: #d1fae5; color: #065f46; }
-        
-        .error-msg { background: #fee2e2; color: #991b1b; }
-        
-        .show { display: block; }
-        
-        .loading { opacity: 0.7; pointer-events: none; }
-        
-        /* Footer */
-        footer {
-            background: var(--dark);
+        .form-group textarea { 
+            resize: vertical; 
+        }
+        .char-count {
+            font-size: 0.85rem;
+            color: var(--text-secondary);
+            margin-top: 0.25rem;
+        }
+        .submit-btn {
+            background: var(--primary);
             color: white;
-            padding: 3rem 1.5rem;
+            border: none;
+            padding: 1rem 2rem;
+            border-radius: 25px;
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s ease;
+        }
+        .submit-btn:hover:not(:disabled) {
+            background: var(--primary-dark);
+            transform: translateY(-2px);
+        }
+        .submit-btn:disabled { 
+            background: #ccc; 
+            cursor: not-allowed; 
+            opacity: 0.6;
+        }
+        .submit-btn.loading {
+            opacity: 0.6;
+            pointer-events: none;
+        }
+        .success, .error {
+            display: none;
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 8px;
+            animation: slideIn 0.3s ease-out;
+        }
+        .success { 
+            background: #d1fae5; 
+            color: #065f46; 
+        }
+        .error { 
+            background: #fee2e2; 
+            color: #991b1b; 
+        }
+        .success.show, .error.show { display: block; }
+        footer {
+            background: var(--card-bg);
+            padding: 2rem;
             text-align: center;
+            box-shadow: var(--shadow-light);
+            margin-top: 2rem;
         }
-        
-        .footer-grid {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: grid;
-            gap: 2rem;
+        footer a { 
+            color: var(--primary); 
+            text-decoration: none;
         }
-        
-        footer h3 { color: white; font-size: 1.5rem; }
-        
-        footer h4 { color: var(--accent); margin-bottom: 1rem; }
-        
-        footer ul { list-style: none; padding: 0; }
-        
-        footer li { margin-bottom: 0.5rem; }
-        
-        footer a { color: white; opacity: 0.9; }
-        
-        footer a:hover { opacity: 1; }
-        
-        .coming-soon { color: var(--accent); font-style: italic; }
-        
-        .footer-bottom { margin-top: 2rem; opacity: 0.8; }
-        
-        .thanks-wall { font-style: italic; }
-        
-        /* Scroll Reveal */
-        .scroll-reveal { opacity: 0; transform: translateY(20px); transition: all 0.6s ease-out; }
-        
-        .revealed { opacity: 1; transform: translateY(0); }
+        footer a:hover {
+            text-decoration: underline;
+        }
+        .journal-section {
+            max-width: 800px;
+            margin: 2rem auto;
+            background: var(--card-bg);
+            padding: 2rem;
+            border-radius: 12px;
+            box-shadow: var(--shadow-light);
+            text-align: left;
+        }
+        .journal-section h2 {
+            color: var(--primary);
+            margin-bottom: 1rem;
+        }
+        .journal-entry {
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--border);
+        }
+        .journal-entry:last-child {
+            border-bottom: none;
+        }
+        .section-title {
+            text-align: center;
+            font-size: 2rem;
+            color: var(--primary);
+            margin: 2rem 0 1rem 0;
+            font-family: 'Poppins', sans-serif;
+        }
+        .scroll-reveal {
+            animation: fadeInUp 0.8s ease-out;
+        }
+        @keyframes fadeInUp {
+            0% { transform: translateY(20px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        @keyframes bounceIn {
+            0% { transform: scale(0.8); opacity: 0; }
+            60% { transform: scale(1.1); opacity: 1; }
+            100% { transform: scale(1); }
+        }
+        @keyframes slideIn {
+            0% { transform: translateY(-10px); opacity: 0; }
+            100% { transform: translateY(0); opacity: 1; }
+        }
+        @media (max-width: 768px) {
+            .hero { 
+                grid-template-columns: 1fr; 
+                text-align: center; 
+                min-height: auto;
+            }
+            .hero-image { order: -1; padding: 1rem; }
+            .tool-grid { grid-template-columns: 1fr; }
+            .nav-links { flex-wrap: wrap; justify-content: center; gap: 0.5rem; margin-top: 1rem; }
+            .nav-links a, .nav-links button { margin-left: 0; }
+            .hero-buttons { justify-content: center; }
+            .support-btn { position: static; width: 100%; margin-top: 1rem; }
+            .hero-card h1 {
+                font-size: 2rem;
+            }
+        }
     </style>
 </head>
-<body data-theme="light">
+<body data-theme="dark">
     <nav>
         <div class="nav-container">
-            <div class="logo">
-                <span>MST</span>
-                <span>Mama Said This</span>
+            <div class="nav-logo">
+                <h2>Mama Said This 🌻</h2>
             </div>
             <div class="nav-links">
+                <a href="https://mamasaidthis.pages.dev/resources" target="_blank" rel="noopener noreferrer">Crisis</a>
+                <a href="#suggest">Suggest a Tool</a>
+                <a href="#waitlist">Join Waitlist</a>
                 <a href="#tools">Tools</a>
                 <a href="#about">About</a>
-                <a href="#waitlist">Waitlist</a>
-                <a href="#suggest">Suggest</a>
+                <a href="https://heatherherbalhome.pages.dev/" target="_blank" rel="noopener noreferrer">Heather's Herbal Home</a>
+                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">☀️</button>
             </div>
-            <button class="theme-toggle" onclick="toggleTheme()">🌙</button>
         </div>
     </nav>
-    
-    <section class="hero">
-        <div class="hero-content">
-            <h1 class="hero-title">Mama Said This: <span class="highlight">Free Tools</span> for Broke Folks</h1>
-            <p class="hero-subtitle">Built by a mom who got tired of paying for basic shit. No BS, no paywalls—just help when you need it.</p>
-            <div class="hero-buttons">
-                <a href="#tools" class="btn btn-primary">Grab the Tools</a>
-                <a href="#suggest" class="btn btn-secondary">Suggest One</a>
-            </div>
-        </div>
-        <div class="hero-image">
-            <div class="hero-card scroll-reveal">
-                <div class="doodle">🤱</div>
-                <p style="font-style: italic; color: var(--text-secondary);">Heather, Master's Code Noob</p>
-                <p>Learned this at 3AM between diapers. Built for real life. Free. Forever.</p>
-            </div>
-        </div>
-    </section>
 
-    <section id="tools">
-        <h2 class="section-title">The Goods</h2>
-        <div class="accent-line"></div>
-        <p class="section-subtitle">Free. Fast. No signups. Works on phone or laptop. Coming: more stuff (grade calc, crisis links).</p>
-        
-        <div class="tool-grid scroll-reveal">
-            <div class="tool-card">
-                <i class="fas fa-calculator"></i>
-                <div>
-                    <h3>Pay Stub Maker</h3>
-                    <p>Pro stubs in seconds. For budgeting, loans, or "proving" income. Zero watermarks.</p>
-                    <a href="https://calculator-ea5.pages.dev/" target="_blank">Make One</a>
+    <main>
+        <section class="hero">
+            <div class="hero-card">
+                <h1>No Paywalls. No Nonsense.</h1>
+                <p>Tired of paying for basic stuff? Free tools for exhausted parents, moms, and working folks juggling life. Mama said sharing's better than selling. ☕ What tool do you need? Suggest below!</p>
+                <div class="hero-buttons">
+                    <a href="#tools" class="btn">Grab the Good Stuff</a>
+                    <a href="https://x.com/intent/tweet?text=Check out free tools at Mama Said This! #MamaSaidTools&url=https://mamasaidthis.pages.dev" class="btn social-btn" target="_blank" rel="noopener noreferrer">Share on X</a>
+                    <a href="https://pinterest.com/pin/create/button/?url=https://mamasaidthis.pages.dev&media=https://www.aarp.org/content/dam/aarp/entertainment/movies-for-grownups/2020/05/1140-forrest-gump.jpg&description=Free tools! #MamaSaidTools" class="btn social-btn" target="_blank" rel="noopener noreferrer">Pin It</a>
                 </div>
             </div>
-            
-            <div class="tool-card">
-                <i class="fas fa-piggy-bank"></i>
-                <div>
+            <div class="hero-image">
+                <div class="hero-image-placeholder">
+                    <i class="fas fa-heart"></i>
+                    <p>Share your photo here</p>
+                    <p style="font-size: 0.9rem; opacity: 0.9; margin-top: 1rem;">Replace this placeholder with your family image</p>
+                </div>
+            </div>
+        </section>
+
+        <section id="about" class="about-section scroll-reveal">
+            <h2>About Heather</h2>
+            <p>Hey, I'm Heather, a mom building free tools to ease chaos. From budgets to worksheets, I share with parents and workers. Mama said sharing's free. 🌻</p>
+        </section>
+
+        <section id="journal" class="journal-section scroll-reveal">
+            <h2>Mama's Journal 🌱</h2>
+            <div class="journal-entry">
+                <p><strong>Naptime Hack:</strong> Built the pay stub tool during a 20-min nap. Life's like a box of chocolates—grab the quiet moments! ☕</p>
+            </div>
+            <div class="journal-entry">
+                <p><strong>Secret Tip:</strong> Use the budget tracker to hide coffee money from the kids. #MamaSaidTools</p>
+            </div>
+        </section>
+
+        <section id="tools" class="scroll-reveal">
+            <h2 class="section-title">Built with Love. Shared Free.</h2>
+            <div class="tool-grid">
+                <div class="tool-card">
+                    <i class="fas fa-calculator"></i>
+                    <h3>Pay Stub Generator</h3>
+                    <p>Whip up pro pay stubs for budgeting. Mama said keep it simple. ☕</p>
+                    <p><small>Quick Tip: Save as PDF for records!</small></p>
+                    <a href="https://mamasaidthis.pages.dev/calculator-ea5" target="_blank" rel="noopener noreferrer">Use Now</a>
+                </div>
+                <div class="tool-card">
+                    <i class="fas fa-piggy-bank"></i>
                     <h3>Budget Tracker</h3>
-                    <p>Track cash, cut waste. Simple sheet that actually helps. No ads.</p>
-                    <a href="/budget-tracker.html">Track It</a>
+                    <p>Track cash flow, no app needed. Mama said free don't mean cheap. 🌻</p>
+                    <p><small>Quick Tip: Set a coffee fund!</small></p>
+                    <a href="https://mamasaidthis.pages.dev/budget-tracker.html" target="_blank" rel="noopener noreferrer">Track It</a>
                 </div>
-            </div>
-            
-            <div class="tool-card">
-                <i class="fas fa-book"></i>
-                <div>
-                    <h3>Worksheet Gen</h3>
-                    <p>Custom K-6 sheets—math, reading. PDF ready. Homeschool win.</p>
-                    <a href="https://edusheet-chooser.pages.dev/" target="_blank">Generate</a>
+                <div class="tool-card">
+                    <i class="fas fa-book-open"></i>
+                    <h3>EduSheet Chooser</h3>
+                    <p>K-6 worksheets for math/reading. Learning's free. 🌻</p>
+                    <p><small>Quick Tip: Print for offline use!</small></p>
+                    <a href="https://mamasaidthis.pages.dev/edusheet-chooser" target="_blank" rel="noopener noreferrer">Make Worksheets</a>
                 </div>
-            </div>
-            
-            <div class="tool-card">
-                <i class="fas fa-chart-line"></i>
-                <div>
-                    <h3>Grade Calc</h3>
-                    <p>Averages, weights, insights. For homeschool or school. (Coming soon—waitlist for early access.)</p>
-                    <a href="#waitlist" class="coming-soon">Coming</a>
-                </div>
-            </div>
-            
-            <div class="tool-card">
-                <i class="fas fa-life-ring"></i>
-                <div>
+                <div class="tool-card">
+                    <i class="fas fa-heart"></i>
                     <h3>Crisis Resources</h3>
-                    <p>Rent help, food banks, job tips. Texas-focused but expanding. (Coming—suggest if you need.)</p>
-                    <a href="/resources.html" class="coming-soon">View</a>
+                    <p>Links to food banks/shelters. Help's here. ☕</p>
+                    <p><small>Quick Tip: Bookmark for emergencies!</small></p>
+                    <a href="https://mamasaidthis.pages.dev/resources" target="_blank" rel="noopener noreferrer">Get Help</a>
                 </div>
             </div>
-        </div>
-    </section>
+        </section>
 
-    <section id="about">
-        <h2 class="section-title">The Messy Truth</h2>
-        <div class="accent-line"></div>
-        <p class="section-subtitle">No fancy team. Just me, Heather, coding through chaos. Here's the scoop.</p>
-        
-        <div class="about-grid scroll-reveal">
-            <div class="about-text">
-                <p>Paid too much for basic crap. Taught myself code in the chaos of four kids and endless laundry. Built these tools messy, late at night, fueled by cold black coffee and stubborn love. Free. For you. No strings.</p>
-                <p style="font-weight: 600; color: var(--text-primary); margin-bottom: 1rem;">My No-BS Oath:</p>
-                <ul>
-                    <li>✓ Free forever (duh)</li>
-                    <li>✓ No signups, ever</li>
-                    <li>✓ Zero watermarks</li>
-                    <li style="margin-left: 1rem;">✓ Built 'cause I needed it</li>
-                    <li>✓ Code on <a href="https://github.com/heatherhilliard" target="_blank" style="color: var(--primary);">GitHub</a>—fork away</li>
-                </ul>
-            </div>
-        </div>
-        
-        <div class="quote-card scroll-reveal">
-            <p>Built between diapers, dishes, and dreams. No team, no time, no help. just one mom, cold coffee, and real heart.</p>
-        </div>
-    </section>
+        <section id="donate" class="form-section scroll-reveal">
+            <h2>Support the Cause</h2>
+            <p>Mama said free don't mean cheap. If these tools help you, consider buying me a coffee. Every bit keeps me building. 🌻</p>
+            <a href="https://ko-fi.com/mamasaidherbalhomeschool" class="btn" target="_blank" rel="noopener noreferrer">Donate via Ko-Fi</a>
+        </section>
 
-    <section id="waitlist">
-        <h2 class="section-title">Sneak Peeks on New Stuff</h2>
-        <div class="accent-line"></div>
-        <p class="section-subtitle">New tools, tips, my rants. Rare emails—I forget my own phone half the time.</p>
-        
-        <form id="waitlistForm" class="scroll-reveal">
-            <input type="text" id="name" placeholder="Name? (Eh, optional)">
-            <input type="email" id="email" placeholder="Email" required>
-            <button type="submit" class="btn btn-primary btn-full">Sign Me Up</button>
-            <p style="text-align: center; color: var(--text-secondary); font-size: 0.85rem; margin-top: 1rem;">Bail anytime. Promise.</p>
-            <div id="waitlistSuccess" class="success-msg">You're in! Poke your inbox. 🎉</div>
-            <div id="waitlistError" class="error-msg"></div>
-        </form>
-    </section>
+        <section id="waitlist" class="form-section scroll-reveal">
+            <h2>Join the Waitlist</h2>
+            <p>Get updates on new tools. Best things are free. 🌻 We won't spam or share your info—unsubscribe anytime.</p>
+            <form id="waitlistForm">
+                <div class="form-group">
+                    <label for="waitlist-name">Your Name (or 'Mom')</label>
+                    <input type="text" id="waitlist-name" name="name" placeholder="Cool Mom" aria-label="Your name">
+                </div>
+                <div class="form-group">
+                    <label for="waitlist-email">Email</label>
+                    <input type="email" id="waitlist-email" name="email" required placeholder="you@awesome.com" aria-label="Your email">
+                </div>
+                <button type="submit" class="submit-btn" aria-label="Join waitlist">Join</button>
+            </form>
+            <div id="waitlistSuccess" class="success">You're in! Check email. ☕</div>
+            <div id="waitlistError" class="error"></div>
+        </section>
 
-    <section id="suggest">
-        <h2 class="section-title">Build Request Line</h2>
-        <div class="accent-line"></div>
-        <p class="section-subtitle">Tool wish? Hit me. If it vibes and I can code it sans sleep deprivation... done.</p>
-        
-        <form id="suggestForm" class="scroll-reveal">
-            <input type="text" id="suggestName" placeholder="You? (Anonymous cool)">
-            <select id="toolType" required>
-                <option value="">Tool Flavor?</option>
-                <option value="Financial">Money Messes</option>
-                <option value="Education">School/Homeschool</option>
-                <option value="Crisis">Emergency Kit</option>
-                <option value="Life Admin">Adulting Hacks</option>
-                <option value="Health">Wellness Wins</option>
-                <option value="Other">Wild Card</option>
-            </select>
-            <textarea id="toolIdea" placeholder="Idea dump (300 chars max)" maxlength="300" required rows="3"></textarea>
-            <p style="text-align: right; color: var(--text-secondary); font-size: 0.8rem;"><span id="charCount">0</span>/300</p>
-            <button type="submit" class="btn btn-primary btn-full">Send It</button>
-            <div id="suggestSuccess" class="success-msg">Caught it! Might build. Thanks! 🙌</div>
-            <div id="suggestError" class="error-msg"></div>
-        </form>
-    </section>
+        <section id="suggest" class="form-section scroll-reveal">
+            <h2>Suggest a Tool</h2>
+            <p>Got an idea? Share it! Mama said smarts are free. 🌻 Tag a friend who'd love this!</p>
+            <form id="suggestForm">
+                <div class="form-group">
+                    <label for="suggest-name">Your Name (optional)</label>
+                    <input type="text" id="suggest-name" name="name" placeholder="Super Mom" aria-label="Your name">
+                </div>
+                <div class="form-group">
+                    <label for="toolType">Tool Type</label>
+                    <select id="toolType" name="type" required aria-label="Tool type">
+                        <option value="" disabled selected>Pick one</option>
+                        <option value="Finance">Finance</option>
+                        <option value="Education">Education</option>
+                        <option value="Lifestyle">Lifestyle</option>
+                        <option value="Other">Other</option>
+                    </select>
+                </div>
+                <div class="form-group">
+                    <label for="toolIdea">Your Idea</label>
+                    <textarea id="toolIdea" name="idea" rows="4" maxlength="500" required placeholder="E.g., Meal planner for kids." aria-label="Your idea"></textarea>
+                    <div class="char-count"><span id="charCount">0</span>/500</div>
+                </div>
+                <button type="submit" class="submit-btn" aria-label="Submit suggestion">Send</button>
+            </form>
+            <div id="suggestSuccess" class="success">Idea sent! You're a co-creator. 🌻</div>
+            <div id="suggestError" class="error"></div>
+        </section>
+    </main>
+
+    <a href="https://ko-fi.com/mamasaidherbalhomeschool" class="support-btn" target="_blank" rel="noopener noreferrer">Buy Mama a Coffee ☕</a>
 
     <footer>
-        <div class="footer-grid">
-            <div>
-                <h3>MST</h3>
-                <p style="line-height: 1.6; opacity: 0.9;">
-                    Mama Said This<br>
-                    Tools from the trenches.<br>
-                    Heather, building for us broke folks.
-                </p>
-            </div>
-            <div>
-                <h4>Tools</h4>
-                <ul>
-                    <li><a href="https://calculator-ea5.pages.dev/" target="_blank">Pay Stubs</a></li>
-                    <li><a href="/budget-tracker.html">Budget Tracker</a></li>
-                    <li><a href="https://edusheet-chooser.pages.dev/" target="_blank">Worksheets</a></li>
-                    <li><span class="coming-soon">Grade Calc</span></li>
-                    <li><a href="/resources.html">Crisis Help</a></li>
-                </ul>
-            </div>
-            <div>
-                <h4>Hit Me Up</h4>
-                <ul>
-                    <li><a href="https://github.com/heatherhilliard" target="_blank">GitHub (Code Nerds)</a></li>
-                    <li><a href="#waitlist">Waitlist</a></li>
-                    <li><a href="mailto:heather@herbalhomeschool.work.gd">Email Me</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <p style="font-size: 1rem; margin-bottom: 0.5rem;">
-                Brewed with endless coffee & a dash of spite. By a mom over it.
-            </p>
-            <p style="font-size: 0.85rem;">© 2025 MST. Free forever. <span class="thanks-wall">Shouts to Sarah (first tester) & Mike (bug hunter). You rock.</span></p>
-        </div>
+        <p>&copy; 2025 Mama Said This. | <a href="https://heatherherbalhome.pages.dev/" target="_blank" rel="noopener noreferrer">Heather's Herbal Home</a> | <a href="mailto:heather@herbalhomeschool.work.gd">Contact</a></p>
+        <p>Built with ❤️ for exhausted folks. Latest Tool: EduSheet Chooser (Oct 10, 2025)</p>
     </footer>
 
     <script>
-        // Formspark Config - Updated to your new form ID
-        const FORMSPARK_URL = 'https://submit-form.com/IXDD7cliS';
+        const ZAPIER_URL = 'https://hooks.zapier.com/hooks/catch/18202844/IXDD7cliS';
 
-        // Dark Mode Toggle Function
         function toggleTheme() {
             const body = document.body;
             const currentTheme = body.getAttribute('data-theme');
             const newTheme = currentTheme === 'light' ? 'dark' : 'light';
             body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            // Update toggle button emoji
-            const toggleBtn = document.querySelector('.theme-toggle');
-            toggleBtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
+            document.querySelector('.theme-toggle').textContent = newTheme === 'dark' ? '☀️' : '🌙';
         }
-        
-        // Load Saved Theme on Page Load
+
+        // Track page view in Google Analytics
+        if (typeof gtag !== 'undefined') {
+            gtag('event', 'page_view', {
+                page_path: window.location.pathname,
+                page_title: document.title
+            });
+        }
+
         document.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme') || 'light';
-            document.body.setAttribute('data-theme', savedTheme);
-            const toggleBtn = document.querySelector('.theme-toggle');
-            toggleBtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-        });
-        
-        // Char counter
-        const toolIdea = document.getElementById('toolIdea');
-        const charCount = document.getElementById('charCount');
-        if (toolIdea && charCount) {
-            toolIdea.addEventListener('input', () => charCount.textContent = toolIdea.value.length);
-        }
-        
-        // Generic Form Submit Helper (added _gotcha honeypot for anti-spam protection)
-        function submitToFormspark(formId, data, successEl, errorEl) {
-            const form = document.getElementById(formId);
-            form.classList.add('loading');
-            fetch(FORMSPARK_URL, {
-                method: 'POST',
-                headers: { 'Content-Type': 'application/json' },
-                body: JSON.stringify({...data, _gotcha: ''}) // Honeypot field for bot protection
-            })
-            .then(res => {
-                if (res.ok) {
-                    successEl.classList.add('show');
-                    form.reset();
-                    if (charCount) charCount.textContent = '0';
-                    setTimeout(() => successEl.classList.remove('show'), 4000);
-                } else {
-                    throw new Error('Submission failed—try again?');
-                }
-            })
-            .catch(err => {
-                errorEl.textContent = err.message;
-                errorEl.classList.add('show');
-                setTimeout(() => errorEl.classList.remove('show'), 4000);
-            })
-            .finally(() => form.classList.remove('loading'));
-        }
-        
-        // Waitlist Form
-        const waitlistForm = document.getElementById('waitlistForm');
-        if (waitlistForm) {
-            waitlistForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const email = document.getElementById('email').value.trim();
-                const name = document.getElementById('name').value.trim();
-                if (!email) {
-                    alert('Email, please?');
+            // Initialize theme
+            const savedTheme = document.body.getAttribute('data-theme') || 'dark';
+            document.querySelector('.theme-toggle').textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+
+            // Character counter for suggestion form
+            const toolIdea = document.getElementById('toolIdea');
+            const charCount = document.getElementById('charCount');
+            if (toolIdea && charCount) {
+                toolIdea.addEventListener('input', () => {
+                    const length = toolIdea.value.length;
+                    charCount.textContent = length;
+                    if (length > 500) {
+                        toolIdea.value = toolIdea.value.substring(0, 500);
+                        charCount.textContent = '500';
+                    }
+                });
+            }
+
+            async function submitToZapier(formId, formData) {
+                const form = document.getElementById(formId);
+                
+                if (!form.checkValidity()) {
+                    form.reportValidity();
                     return;
                 }
-                submitToFormspark('waitlistForm', { name: name || 'Anon', email, source: 'MST Waitlist' }, 
-                                  document.getElementById('waitlistSuccess'), document.getElementById('waitlistError'));
-            });
-        }
-        
-        // Suggest Form
-        const suggestForm = document.getElementById('suggestForm');
-        if (suggestForm) {
-            suggestForm.addEventListener('submit', (e) => {
-                e.preventDefault();
-                const toolType = document.getElementById('toolType').value;
-                const idea = document.getElementById('toolIdea').value.trim();
-                const name = document.getElementById('suggestName').value.trim();
-                if (!toolType || !idea) {
-                    alert('Type + idea, go!');
-                    return;
+
+                const submitBtn = form.querySelector('.submit-btn');
+                const successDiv = document.getElementById(`${formId}Success`);
+                const errorDiv = document.getElementById(`${formId}Error`);
+
+                try {
+                    submitBtn.classList.add('loading');
+                    submitBtn.disabled = true;
+                    errorDiv.classList.remove('show');
+
+                    const response = await fetch(ZAPIER_URL, {
+                        method: 'POST',
+                        headers: { 
+                            'Content-Type': 'application/json'
+                        },
+                        body: JSON.stringify({
+                            ...formData,
+                            timestamp: new Date().toISOString(),
+                            userAgent: navigator.userAgent
+                        })
+                    });
+
+                    if (response.ok) {
+                        successDiv.classList.add('show');
+                        form.reset();
+                        if (charCount) charCount.textContent = '0';
+                        
+                        // Track conversion in Google Analytics
+                        if (typeof gtag !== 'undefined') {
+                            gtag('event', 'form_submission', {
+                                form_type: formId === 'suggestForm' ? 'tool_suggestion' : 'waitlist_signup'
+                            });
+                        }
+                        
+                        // Try to trigger confetti
+                        try {
+                            if (typeof confetti !== 'undefined') {
+                                confetti({ 
+                                    particleCount: 100, 
+                                    spread: 70, 
+                                    origin: { y: 0.6 } 
+                                });
+                            }
+                        } catch (e) {
+                            console.log('Confetti effect skipped');
+                        }
+
+                        setTimeout(() => {
+                            successDiv.classList.remove('show');
+                        }, 4000);
+                    } else {
+                        throw new Error('Form submission failed. Please try again.');
+                    }
+                } catch (err) {
+                    console.error('Form submission error:', err);
+                    errorDiv.textContent = err.message || 'Something went wrong. Please try again later.';
+                    errorDiv.classList.add('show');
+                    
+                    // Track error in Google Analytics
+                    if (typeof gtag !== 'undefined') {
+                        gtag('event', 'exception', {
+                            description: `Form ${formId} submission failed: ${err.message}`,
+                            fatal: false
+                        });
+                    }
+                    
+                    setTimeout(() => {
+                        errorDiv.classList.remove('show');
+                    }, 6000);
+                } finally {
+                    submitBtn.classList.remove('loading');
+                    submitBtn.disabled = false;
                 }
-                submitToFormspark('suggestForm', { name: name || 'Anon', type: toolType, idea, source: 'MST Suggest' }, 
-                                  document.getElementById('suggestSuccess'), document.getElementById('suggestError'));
+            }
+
+            // Waitlist form
+            const waitlistForm = document.getElementById('waitlistForm');
+            if (waitlistForm) {
+                waitlistForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const email = document.getElementById('waitlist-email').value.trim();
+                    const name = document.getElementById('waitlist-name').value.trim();
+                    submitToZapier('waitlistForm', { 
+                        name: name || 'Anonymous', 
+                        email,
+                        formType: 'Waitlist Signup'
+                    });
+                });
+            }
+
+            // Suggestion form
+            const suggestForm = document.getElementById('suggestForm');
+            if (suggestForm) {
+                suggestForm.addEventListener('submit', (e) => {
+                    e.preventDefault();
+                    const toolType = document.getElementById('toolType').value;
+                    const idea = document.getElementById('toolIdea').value.trim();
+                    const name = document.getElementById('suggest-name').value.trim();
+                    submitToZapier('suggestForm', { 
+                        name: name || 'Anonymous', 
+                        toolType,
+                        idea,
+                        formType: 'Tool Suggestion'
+                    });
+                });
+            }
+
+            // Smooth scrolling for anchor links
+            document.querySelectorAll('a[href^="#"]').forEach(a => {
+                a.addEventListener('click', (e) => {
+                    const href = a.getAttribute('href');
+                    if (href !== '#' && document.querySelector(href)) {
+                        e.preventDefault();
+                        document.querySelector(href).scrollIntoView({
+                            behavior: 'smooth'
+                        });
+                    }
+                });
             });
-        }
-        
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', (e) => {
-                e.preventDefault();
-                const target = document.querySelector(a.getAttribute('href'));
-                if (target) target.scrollIntoView({ behavior: 'smooth' });
+
+            // Intersection observer for scroll animations
+            const reveals = document.querySelectorAll('.scroll-reveal');
+            const observer = new IntersectionObserver(entries => {
+                entries.forEach(entry => {
+                    if (entry.isIntersecting) {
+                        entry.target.style.opacity = '1';
+                        observer.unobserve(entry.target);
+                    }
+                });
+            }, { threshold: 0.1 });
+            reveals.forEach(el => {
+                el.style.opacity = '0';
+                observer.observe(el);
             });
         });
-        
-        // Scroll reveal
-        const reveals = document.querySelectorAll('.scroll-reveal');
-        const observer = new IntersectionObserver(entries => {
-            entries.forEach(entry => {
-                if (entry.isIntersecting) {
-                    entry.target.classList.add('revealed');
-                    observer.unobserve(entry.target);
-                }
-            });
-        }, { threshold: 0.1 });
-        reveals.forEach(el => observer.observe(el));
     </script>
 
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "WebSite",
+        "name": "Mama Said This",
+        "url": "https://mamasaidthis.pages.dev",
+        "description": "Free tools for parents: pay stub generator, budget tracker, worksheets, and crisis resources. Built with love.",
+        "publisher": { "@type": "Person", "name": "Heather" },
+        "sameAs": ["https://heatherherbalhome.pages.dev/", "https://x.com/mamasaidthis"]
+    }
+    </script>
 </body>
 </html>
