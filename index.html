@@ -4,6 +4,7 @@
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
 <title>Mama Said This</title>
+
 <style>
 :root {
   --bg-dark:#121212;
@@ -17,39 +18,171 @@
   --hover-glow:0 0 12px rgba(255,180,71,0.6);
 }
 
-body{margin:0;padding:0;font-family:'Helvetica',sans-serif;line-height:1.6;background:var(--bg-dark);color:var(--text-dark);transition:0.3s;}
-body.light{background:var(--bg-light);color:var(--text-light);}
+body {
+  margin:0;
+  padding:0;
+  font-family:'Helvetica',sans-serif;
+  line-height:1.6;
+  background:var(--bg-dark);
+  color:var(--text-dark);
+  transition:0.3s;
+}
+body.light{
+  background:var(--bg-light);
+  color:var(--text-light);
+}
 
-header{background:var(--accent);padding:1rem 2rem;position:sticky;top:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;box-shadow:0 3px 8px rgba(0,0,0,0.2);}
+header{
+  background:var(--accent);
+  padding:1rem 2rem;
+  position:sticky;
+  top:0;
+  z-index:1000;
+  display:flex;
+  justify-content:space-between;
+  align-items:center;
+  flex-wrap:wrap;
+  box-shadow:0 3px 8px rgba(0,0,0,0.2);
+}
 header h1{margin:0;font-size:2rem;}
-nav a{margin:0 1rem;text-decoration:none;color:inherit;font-weight:bold;transition: transform 0.2s, box-shadow 0.2s;}
-nav a:hover{transform:scale(1.05);box-shadow:var(--hover-glow);}
-#theme-toggle{background:none;border:none;font-size:1.5rem;cursor:pointer;margin-left:1rem;}
+nav a{
+  margin:0 1rem;
+  text-decoration:none;
+  color:inherit;
+  font-weight:bold;
+  transition: transform 0.2s, box-shadow 0.2s;
+}
+nav a:hover{
+  transform:scale(1.05);
+  box-shadow:var(--hover-glow);
+}
+#theme-toggle{
+  background:none;
+  border:none;
+  font-size:1.5rem;
+  cursor:pointer;
+  margin-left:1rem;
+}
 
 /* Main layout */
-main{max-width:1200px;margin:auto;padding:2rem 1rem;display:flex;flex-direction:column;gap:2rem;}
-section{background:var(--card-dark);padding:2rem;border-radius:12px;box-shadow:0 1px 8px rgba(0,0,0,0.2);transition: transform 0.2s, background 0.3s;}
-body.light section{background:var(--card-light);}
+main{
+  max-width:1200px;
+  margin:auto;
+  padding:2rem 1rem;
+  display:flex;
+  flex-direction:column;
+  gap:2rem;
+}
+section{
+  background:var(--card-dark);
+  padding:2rem;
+  border-radius:12px;
+  box-shadow:0 1px 8px rgba(0,0,0,0.2);
+  transition: transform 0.2s, background 0.3s;
+}
+body.light section{
+  background:var(--card-light);
+}
 section:hover{transform:translateY(-3px);}
 section h2{margin-top:0;margin-bottom:1rem;font-size:1.8rem;}
-button{background:var(--accent);border:none;padding:0.5rem 1rem;border-radius:8px;cursor:pointer;font-weight:bold;transition:0.2s;box-shadow:0 0 0 rgba(255,180,71,0);}
-button:hover{background:var(--accent-dark);transform:scale(1.05);box-shadow:var(--hover-glow);}
-input,textarea{width:100%;padding:0.5rem;margin-top:0.5rem;margin-bottom:1rem;border-radius:8px;border:1px solid #ccc;font-size:1rem;}
+button{
+  background:var(--accent);
+  border:none;
+  padding:0.5rem 1rem;
+  border-radius:8px;
+  cursor:pointer;
+  font-weight:bold;
+  transition:0.2s;
+  box-shadow:0 0 0 rgba(255,180,71,0);
+}
+button:hover{
+  background:var(--accent-dark);
+  transform:scale(1.05);
+  box-shadow:var(--hover-glow);
+}
+input,textarea{
+  width:100%;
+  padding:0.5rem;
+  margin-top:0.5rem;
+  margin-bottom:1rem;
+  border-radius:8px;
+  border:1px solid #ccc;
+  font-size:1rem;
+}
 
 /* Good Stuff Drawer */
-#good-stuff-btn{position:fixed;bottom:20px;right:20px;background:var(--accent);border-radius:50%;width:60px;height:60px;font-size:2rem;text-align:center;line-height:60px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.3);z-index:1001;transition:0.2s;}
-#good-stuff-btn:hover{transform:scale(1.1);box-shadow:var(--hover-glow);}
-#good-stuff-drawer{position:fixed;bottom:90px;right:20px;width:300px;max-height:400px;background:var(--card-light);color:var(--text-light);border-radius:12px;padding:1rem;box-shadow:0 3px 12px rgba(0,0,0,0.3);overflow-y:auto;display:none;z-index:1000;opacity:0;transition:opacity 0.3s;}
-#good-stuff-drawer.show{display:block;opacity:1;}
-.quote{font-style:italic;font-size:1.2rem;margin-bottom:1rem;text-align:center;}
+#good-stuff-btn{
+  position:fixed;
+  bottom:20px;
+  right:20px;
+  background:var(--accent);
+  border-radius:50%;
+  width:60px;
+  height:60px;
+  font-size:2rem;
+  text-align:center;
+  line-height:60px;
+  cursor:pointer;
+  box-shadow:0 2px 10px rgba(0,0,0,0.3);
+  z-index:1001;
+  transition:0.2s;
+}
+#good-stuff-btn:hover{
+  transform:scale(1.1);
+  box-shadow:var(--hover-glow);
+}
+#good-stuff-drawer{
+  position:fixed;
+  bottom:90px;
+  right:20px;
+  width:300px;
+  max-height:400px;
+  background:var(--card-light);
+  color:var(--text-light);
+  border-radius:12px;
+  padding:1rem;
+  box-shadow:0 3px 12px rgba(0,0,0,0.3);
+  overflow-y:auto;
+  display:none;
+  z-index:1000;
+  opacity:0;
+  transition:opacity 0.3s;
+}
+#good-stuff-drawer.show{
+  display:block;
+  opacity:1;
+}
+.quote{
+  font-style:italic;
+  font-size:1.2rem;
+  margin-bottom:1rem;
+  text-align:center;
+}
 
 /* Carousel */
-.carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:1rem;padding-bottom:1rem;}
-.carousel img,.carousel iframe,.carousel video{scroll-snap-align:center;max-width:100%;border-radius:12px;flex-shrink:0;transition:transform 0.3s;}
-.carousel img:hover,.carousel iframe:hover,.carousel video:hover{transform:scale(1.05);}
+.carousel{
+  display:flex;
+  overflow-x:auto;
+  scroll-snap-type:x mandatory;
+  gap:1rem;
+  padding-bottom:1rem;
+}
+.carousel img,.carousel iframe,.carousel video{
+  scroll-snap-align:center;
+  max-width:100%;
+  border-radius:12px;
+  flex-shrink:0;
+  transition:transform 0.3s;
+}
+.carousel img:hover,.carousel iframe:hover,.carousel video:hover{
+  transform:scale(1.05);
+}
 
 /* Responsive */
-@media(max-width:768px){main{padding:1rem}#good-stuff-drawer{width:90%;right:5%;}}
+@media(max-width:768px){
+  main{padding:1rem}
+  #good-stuff-drawer{width:90%;right:5%;}
+}
 </style>
 </head>
 <body>
@@ -105,15 +238,15 @@ input,textarea{width:100%;padding:0.5rem;margin-top:0.5rem;margin-bottom:1rem;bo
 <!-- YouTube embeds -->
 <iframe width="320" height="180" src="https://www.youtube.com/embed/example1" frameborder="0" allowfullscreen title="YouTube video 1"></iframe>
 <iframe width="320" height="180" src="https://www.youtube.com/embed/example2" frameborder="0" allowfullscreen title="YouTube video 2"></iframe>
-<!-- 🖼️ CLOUDINARY IMAGE SLOT 1 -->
-<img loading="lazy" src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509834/5_ujxicv.jpg" alt="Cloudinary image">
+<!-- Cloudinary media -->
+<img loading="lazy" src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509834/5_ujxicv.jpg" alt="Sample Cloudinary image">
 </div>
 </section>
 
 <!-- Suggest a Tool -->
 <section id="suggest">
 <h2>💡 Suggest a Tool</h2>
-<form action="https://submit.formspark.io/kMchZbtBb" method="POST">
+<form action="https://submit.formspark.io/IXDD7cliS" method="POST">
 <label for="suggestion">Your idea:</label><br>
 <input type="text" id="suggestion" name="suggestion" required placeholder="Send the spark ✨"><br>
 <button type="submit">Share</button>
@@ -146,7 +279,6 @@ input,textarea{width:100%;padding:0.5rem;margin-top:0.5rem;margin-bottom:1rem;bo
 <!-- About Me -->
 <section id="about">
 <h2>Who’s Behind the Chaos</h2>
-<!-- 🖼️ CLOUDINARY IMAGE SLOT 2 -->
 <img loading="lazy" src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760511594/QVZoU0loZ2RKeUlFX21hckRHVUlPVmFt_vkysti.jpg" alt="Heather with kids" style="width:100%;max-width:400px;border-radius:12px;display:block;margin:auto;">
 <p>Heather, coding between diapers and coffee. Free tools built for real life. Helping mamas survive, laugh, and breathe easier.</p>
 </section>
@@ -165,7 +297,7 @@ input,textarea{width:100%;padding:0.5rem;margin-top:0.5rem;margin-bottom:1rem;bo
 </div>
 
 <script>
-// Theme toggle
+// Theme toggle with persistence
 const themeToggle=document.getElementById('theme-toggle');
 if(localStorage.getItem('theme')==='light') document.body.classList.add('light');
 themeToggle.textContent=document.body.classList.contains('light')?'🌙':'☀️';
@@ -215,5 +347,6 @@ function autoScroll(){
 }
 requestAnimationFrame(autoScroll);
 </script>
+
 </body>
 </html>
