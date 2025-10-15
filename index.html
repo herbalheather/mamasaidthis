@@ -1,751 +1,248 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mama Said This | Free Tools for Parents & Working Folks</title>
-    <meta name="description" content="Free tools built by a mom who believes in sharing, not selling. Pay stub generator, budget tracker, worksheets, crisis help, and more. No paywalls, just love.">
-    <meta name="keywords" content="free tools, pay stub generator, budget tracker, homeschool worksheets, crisis resources, parent tools, working folks, #MamaSaidTools">
-    <meta name="author" content="Heather, Mama Said This">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js" defer></script>
-    
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TEKT43VC4J"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-TEKT43VC4J');
-    </script>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Mama Said This</title>
 
-    <style>
-        :root {
-            --primary: #ff69b4;
-            --primary-dark: #e85d75;
-            --secondary: #9cc69b;
-            --accent: #ffd54f;
-            --neon-blue: #00ffff;
-            --dark: #5c5f77;
-            --light: #f7ede2;
-            --bg: linear-gradient(135deg, #f7ede2 0%, #9cc69b 20%, #ff69b4 100%);
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --text-primary: #5c5f77;
-            --text-secondary: #6b7280;
-            --border: #e5e7eb;
-            --shadow-light: 0 4px 20px rgba(0,0,0,0.1);
-            --shadow-hover: 0 10px 30px rgba(0,0,0,0.15);
-        }
-        [data-theme="dark"] {
-            --bg: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
-            --card-bg: #1e1e2e;
-            --text-primary: #f8f8f8;
-            --text-secondary: #b8b8b8;
-            --border: #333344;
-        }
-        [data-theme="dark"] .hero {
-            background: linear-gradient(135deg, rgba(10,10,15,0.9) 0%, rgba(26,26,46,0.9) 20%, rgba(255,105,180,0.2) 100%);
-        }
-        [data-theme="dark"] .tool-card:hover {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(156,198,155,0.1) 100%);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            background: var(--bg);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: all 0.3s ease;
-        }
-        h1, h2, h3 { font-family: 'Poppins', sans-serif; }
-        main { flex: 1; }
-        nav {
-            background: var(--card-bg);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: var(--shadow-light);
-            padding: 1rem 1.5rem;
-        }
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .nav-logo img { height: 2rem; width: auto; }
-        .nav-links {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .nav-links a, .nav-links button {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            font-size: 1rem;
-        }
-        .nav-links a:hover, .nav-links button:hover { color: var(--primary); }
-        .theme-toggle {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        .hero {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            align-items: center;
-            padding: 4rem 2rem;
-            min-height: 80vh;
-            background: linear-gradient(135deg, rgba(247, 237, 226, 0.8) 0%, rgba(156, 198, 155, 0.8) 20%, rgba(255, 105, 180, 0.8) 100%);
-        }
-        .hero-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-            animation: fadeInUp 0.8s ease-out;
-        }
-        .hero-card h1 {
-            font-size: 2.8rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-family: 'Dancing Script', cursive;
-        }
-        .hero-card p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .hero-image {
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .hero-carousel {
-            position: relative;
-            width: 100%;
-            height: 400px;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow-light);
-        }
-        .hero-carousel img {
-            position: absolute;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-        }
-        .hero-carousel img.active { opacity: 1; }
-        .btn {
-            background: var(--primary);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-        .support-btn {
-            background: var(--accent);
-            color: var(--dark);
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 900;
-        }
-        .support-btn:hover { background: #d4a017; }
-        .social-btn {
-            background: var(--secondary);
-            color: var(--dark);
-        }
-        .social-btn:hover { background: #82c6c0; }
-        .tool-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .tool-card {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-            transition: all 0.3s ease;
-            animation: bounceIn 0.6s ease-out;
-            text-align: center;
-        }
-        .tool-card:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-hover);
-            background: linear-gradient(135deg, var(--light) 0%, #9cc69b 100%);
-        }
-        .tool-card i {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            display: block;
-        }
-        .tool-card h3 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        .tool-card p { color: var(--text-secondary); margin-bottom: 1rem; }
-        .tool-card .btn {
-            width: auto;
-            margin-top: 0.5rem;
-            margin-right: 0.3rem;
-        }
-        .about-section {
-            max-width: 900px;
-            margin: 2rem auto;
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-        }
-        .about-section h2 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .about-grid p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        .about-section .dedication {
-            font-size: 0.9rem;
-            font-style: italic;
-            color: var(--text-secondary);
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-        .form-section {
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-        }
-        .form-section h2 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        .form-section > p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            background: var(--card-bg);
-            color: var(--text-primary);
-        }
-        .form-group textarea { resize: vertical; }
-        .char-count {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-top: 0.25rem;
-        }
-        .submit-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        .submit-btn:hover:not(:disabled) {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-        .submit-btn:disabled { 
-            background: #ccc; 
-            cursor: not-allowed; 
-            opacity: 0.6;
-        }
-        .success, .error {
-            display: none;
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 8px;
-            animation: slideIn 0.3s ease-out;
-        }
-        .success { 
-            background: #d1fae5; 
-            color: #065f46; 
-        }
-        .error { 
-            background: #fee2e2; 
-            color: #991b1b; 
-        }
-        .success.show, .error.show { display: block; }
-        footer {
-            background: var(--card-bg);
-            padding: 2rem;
-            text-align: center;
-            box-shadow: var(--shadow-light);
-            margin-top: 2rem;
-        }
-        footer a { color: var(--primary); text-decoration: none; }
-        footer a:hover { text-decoration: underline; }
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            color: var(--primary);
-            margin: 2rem 0 1rem 0;
-            font-family: 'Poppins', sans-serif;
-        }
-        .scroll-reveal { animation: fadeInUp 0.8s ease-out; }
-        @keyframes fadeInUp {
-            0% { transform: translateY(20px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes bounceIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            60% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); }
-        }
-        @keyframes slideIn {
-            0% { transform: translateY(-10px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-        @media (max-width: 768px) {
-            .hero { grid-template-columns: 1fr; text-align: center; min-height: auto; }
-            .hero-image { order: -1; padding: 1rem; }
-            .hero-carousel { height: 300px; }
-            .tool-grid { grid-template-columns: 1fr; }
-            .nav-links { justify-content: center; }
-            .hero-buttons { justify-content: center; }
-            .support-btn { position: static; width: 100%; margin-top: 1rem; }
-            .hero-card h1 { font-size: 2rem; }
-            .about-grid { grid-template-columns: 1fr; }
-        }
+<style>
+:root {
+  --bg-dark:#121212;
+  --text-dark:#f0f0f0;
+  --bg-light:#fffaf0;
+  --text-light:#333;
+  --accent:#ffb347;
+  --accent-dark:#ffa500;
+  --card-dark:rgba(255,255,255,0.05);
+  --card-light:rgba(255,255,255,0.9);
+}
 
-        /* Video carousel styles (kept from your fixed section) */
-        .video-section{background:var(--card-bg);border-radius:12px;padding:2rem;margin:2rem auto;max-width:900px;box-shadow:var(--shadow-light);text-align:center}
-        .videos-carousel{position:relative;overflow:hidden}
-        .video-track{display:flex;transition:transform .5s ease}
-        .video-card{flex:0 0 100%;max-width:100%;opacity:0;transition:opacity .4s ease-in-out;position:relative}
-        .video-card.active{opacity:1}
-        .video-card img{width:100%;border-radius:10px;box-shadow:var(--shadow-light)}
-        .play-button{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:3rem;color:white;text-shadow:0 2px 8px rgba(0,0,0,.7);pointer-events:none}
-        .carousel-btn{background:var(--primary);border:none;color:white;font-size:2rem;cursor:pointer;position:absolute;top:50%;transform:translateY(-50%);padding:.3rem .8rem;border-radius:50%;box-shadow:var(--shadow-light);transition:background .3s;z-index:10}
-        .carousel-btn:hover{background:var(--primary-dark)}
-        .carousel-btn.prev{left:10px}
-        .carousel-btn.next{right:10px}
-        .video-card p{margin-top:.5rem;color:var(--text-secondary)}
-        @media(max-width:768px){.carousel-btn{font-size:1.5rem}}
-    </style>
+body { margin:0;padding:0;font-family:'Helvetica',sans-serif;line-height:1.6;
+       background:var(--bg-dark);color:var(--text-dark);transition:0.3s;}
+body.light{background:var(--bg-light);color:var(--text-light);}
+
+header{background:var(--accent);padding:1rem 2rem;
+       position:sticky;top:0;z-index:1000;display:flex;justify-content:space-between;align-items:center;flex-wrap:wrap;
+       box-shadow:0 3px 8px rgba(0,0,0,0.2);}
+header h1{margin:0;font-size:2rem;}
+nav a{margin:0 1rem;text-decoration:none;color:inherit;font-weight:bold;transition: transform 0.2s;}
+nav a:hover{transform:scale(1.05);}
+#theme-toggle{background:none;border:none;font-size:1.5rem;cursor:pointer;margin-left:1rem;}
+
+main{max-width:1200px;margin:auto;padding:2rem 1rem;display:flex;flex-direction:column;gap:2rem;}
+section{background:var(--card-dark);padding:2rem;border-radius:12px;box-shadow:0 1px 8px rgba(0,0,0,0.2);transition:transform 0.2s, background 0.3s;}
+body.light section{background:var(--card-light);}
+section:hover{transform:translateY(-5px);}
+section h2{margin-top:0;margin-bottom:1rem;font-size:1.8rem;}
+button{background:var(--accent);border:none;padding:0.5rem 1rem;border-radius:8px;cursor:pointer;font-weight:bold;transition:0.2s;box-shadow:0 0 0 rgba(255,180,71,0);}
+button:hover{background:var(--accent-dark);transform:scale(1.05);box-shadow:0 0 15px rgba(255,180,71,0.6);}
+
+/* Floating Good Stuff Drawer */
+#good-stuff-btn{position:fixed;bottom:20px;right:20px;background:var(--accent);border-radius:50%;width:60px;height:60px;font-size:2rem;text-align:center;line-height:60px;cursor:pointer;box-shadow:0 2px 10px rgba(0,0,0,0.3);z-index:1001;transition:0.2s;}
+#good-stuff-btn:hover{transform:scale(1.1);}
+#good-stuff-drawer{position:fixed;bottom:90px;right:20px;width:300px;max-height:400px;background:var(--card-light);color:var(--text-light);border-radius:12px;padding:1rem;box-shadow:0 3px 12px rgba(0,0,0,0.3);overflow-y:auto;display:none;z-index:1000;transition:opacity 0.3s;}
+.quote{font-style:italic;font-size:1.2rem;margin-bottom:1rem;text-align:center;}
+
+/* Carousel */
+.carousel{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:1rem;padding-bottom:1rem;}
+.carousel img,.carousel video{scroll-snap-align:center;max-width:100%;border-radius:12px;flex-shrink:0;transition: transform 0.3s;}
+.carousel img:hover,.carousel video:hover{transform:scale(1.05);}
+
+/* Confetti */
+canvas#confetti{position:fixed;top:0;left:0;width:100%;height:100%;pointer-events:none;z-index:2000;}
+
+/* Responsive */
+@media(max-width:768px){main{padding:1rem}#good-stuff-drawer{width:90%;right:5%;}}
+</style>
 </head>
-<body data-theme="dark">
+<body>
+
+<header>
+  <h1>Mama Said This</h1>
+  <div>
     <nav>
-        <div class="nav-container">
-            <div class="nav-logo">
-                <img src="https://i.imgur.com/3T0Mf1R.png" alt="Mama Said This Logo">
-            </div>
-            <div class="nav-links">
-                <a href="https://mamasaidthis.pages.dev/resources" target="_blank" rel="noopener noreferrer">Crisis</a>
-                <a href="#suggest">Suggest a Tool</a>
-                <a href="#waitlist">Join Waitlist</a>
-                <a href="#tools">Tools</a>
-                <a href="#about">About</a>
-                <a href="https://heatherherbalhome.pages.dev/" target="_blank" rel="noopener noreferrer">Herbal Home</a>
-                <a href="https://ko-fi.com/mamasaidherbalhomeschool" class="btn" target="_blank" rel="noopener noreferrer">Buy Coffee</a>
-                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">☀️</button>
-            </div>
-        </div>
+      <a href="#daily-quote">Quote</a>
+      <a href="#tools">Tools</a>
+      <a href="#recent-tools">Popular</a>
+      <a href="#videos">Videos</a>
+      <a href="#suggest">Suggest</a>
+      <a href="#waitlist">Join Waitlist</a>
+      <a href="#calculator">Paystub</a>
+      <a href="#about">About</a>
+      <a href="https://ko-fi.com/yourusername" target="_blank">☕ Kofi</a>
+      <a href="#crisis">Crisis</a>
     </nav>
+    <button id="theme-toggle">🌙</button>
+  </div>
+</header>
 
-    <main>
-        <section class="hero">
-            <div class="hero-card">
-                <h1>No Paywalls. No Nonsense.</h1>
-                <p>Tired of paying for basic stuff? Free tools for exhausted parents, moms, and working folks juggling life. Mama said sharing's better than selling.</p>
-                <div class="hero-buttons">
-                    <a href="#tools" class="btn">Grab the Good Stuff</a>
-                    <a href="https://x.com/intent/tweet?text=Check%20out%20free%20tools%20at%20Mama%20Said%20This!%20%23MamaSaidTools&url=https://mamasaidthis.pages.dev" class="btn social-btn" target="_blank" rel="noopener noreferrer">Share on X</a>
-                </div>
-            </div>
-            <div class="hero-image">
-                <div class="hero-carousel">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwwUAxMTAxMTAxMTAxMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMT/2wBDAQICAgMDAwYDAwYMCAcIDAwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgID/wAARCACAAIADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWm5ybnJ2eoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWm5ydn6KjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9/KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==" alt="Baby sleeping" class="active">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwwUAxMTAxMTAxMTAxMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMT/2wBDAQICAgMDAwYDAwYMCAcIDAwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgID/wAARCACAAIADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWm5ybnJ2eoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWm5ydn6KjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9/KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==" alt="Family with newborn">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwwUAxMTAxMTAxMTAxMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMT/2wBDAQICAgMDAwYDAwYMCAcIDAwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgID/wAARCACAAIADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWm5ybnJ2eoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWm5ydn6KjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9/KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==" alt="Kids playing">
-                </div>
-            </div>
-        </section>
+<main>
+  <!-- Daily Quote -->
+  <section id="daily-quote">
+    <h2>🌻 Mama Said Today</h2>
+    <p class="quote" id="quote">Loading wisdom...</p>
+  </section>
 
-        <section id="donate" class="form-section scroll-reveal">
-            <h2>Support the Cause</h2>
-            <p>If these tools help you, buy me a coffee. Every bit keeps me building.</p>
-            <a href="https://ko-fi.com/mamasaidherbalhomeschool" class="btn" target="_blank" rel="noopener noreferrer">Donate</a>
-        </section>
+  <!-- Tools -->
+  <section id="tools">
+    <h2>🛠 Tools</h2>
+    <ul id="tools-list">
+      <li><button onclick="trackTool('Paystub Maker')">Paystub Maker</button></li>
+      <li><button onclick="trackTool('Budget Tracker')">Budget Tracker</button></li>
+      <li><button onclick="trackTool('Worksheet Generator')">Worksheet Generator</button></li>
+      <li><button onclick="trackTool('Grade Calculator')">Grade Calculator</button></li>
+      <li><button onclick="trackTool('Crisis Resources')">Crisis Resources</button></li>
+    </ul>
+  </section>
 
-        <section id="about" class="about-section scroll-reveal">
-            <h2>Hey, I'm Heather</h2>
-            <div class="about-grid">
-                <div>
-                    <p>I make free tools because I've been the one who needed them. From coding to herbalism, these tools are things I wish I could have found when I needed them most.</p>
-                    <p>It's bad enough going through tough times without hitting paywalls for basic information. Mama said hell no to that.</p>
-                </div>
-                <div>
-                    <p>My mom died when I was 19, just as I learned I was pregnant with my first. Food banks, emergency C-sections, multiple cash cars, and a pandemic with newborn twins taught me everything.</p>
-                    <p>So I built this—pantry finders, budget help, resources that don't judge or gatekeep.</p>
-                </div>
-            </div>
-            <p class="dedication">For Carrie Hilliard, Donna Chambers, and Elva McConnell, who ran a free clothing store in Italy, Texas for years and gave without asking why.</p>
-        </section>
+  <!-- Recently Loved Tools -->
+  <section id="recent-tools">
+    <h2>💖 Recently Loved Tools</h2>
+    <ul id="recent-list"><li>No tools clicked yet!</li></ul>
+  </section>
 
-        <section id="tools" class="scroll-reveal">
-            <h2 class="section-title">Built with Love. Shared Free.</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; color: var(--text-secondary);">Free tools for real moms. No fluff. No judgment. Just honest resources.</p>
-            <div class="tool-grid">
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">💸</div>
-                    <h3>Texas Pay Stub Generator</h3>
-                    <p>Pro pay stubs for budgeting. Save as PDF for records!</p>
-                    <a href="https://calculator-ea5.pages.dev/" target="_blank" rel="noopener noreferrer" class="btn">Use Now</a>
-                </div>
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">💰</div>
-                    <h3>Budget Tracker</h3>
-                    <p>Track cash flow, no app needed. Free and simple.</p>
-                    <a href="https://mamasaidthis.pages.dev/budget-tracker" target="_blank" rel="noopener noreferrer" class="btn">Track It</a>
-                </div>
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">📚</div>
-                    <h3>Worksheet Generators</h3>
-                    <p>K-6 math & reading worksheets. Learning's free!</p>
-                    <a href="https://edusheet-chooser.pages.dev/" target="_blank" rel="noopener noreferrer" class="btn">Chooser</a>
-                    <a href="https://k6-worksheet-generator.pages.dev/" target="_blank" rel="noopener noreferrer" class="btn">K-6 Gen</a>
-                    <a href="https://edusheet-generator.pages.dev/" target="_blank" rel="noopener noreferrer" class="btn">EduSheet</a>
-                </div>
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">❤️</div>
-                    <h3>Crisis Resources</h3>
-                    <p>Food banks, shelters & emergency help. Bookmark it!</p>
-                    <a href="https://mamasaidthis.pages.dev/resources" target="_blank" rel="noopener noreferrer" class="btn">Get Help</a>
-                </div>
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">🧮</div>
-                    <h3>Debt Payoff Calculator</h3>
-                    <p>See your debt-free date in months. You're closer than you think!</p>
-                    <a href="#" class="btn">Coming Soon</a>
-                </div>
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">📈</div>
-                    <h3>Income vs. Time Tracker</h3>
-                    <p>Know if your gig is worth the hustle. No time-wasters!</p>
-                    <a href="#" class="btn">Coming Soon</a>
-                </div>
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
-                    <h3>Hidden Money Audit</h3>
-                    <p>Find your money leaks and turn oops into oh yeah!</p>
-                    <a href="#" class="btn">Coming Soon</a>
-                </div>
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">⏰</div>
-                    <h3>Childcare Cost Check</h3>
-                    <p>Is work worth the juggle? Get the real numbers.</p>
-                    <a href="#" class="btn">Coming Soon</a>
-                </div>
-            </div>
-        </section>
+  <!-- Videos / YouTube Carousel -->
+  <section id="videos">
+    <h2>🎥 Videos & Highlights</h2>
+    <div class="carousel" id="video-carousel">
+      <!-- Keep original YouTube embeds -->
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/example1" frameborder="0" allowfullscreen></iframe>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/example2" frameborder="0" allowfullscreen></iframe>
+      <iframe width="320" height="180" src="https://www.youtube.com/embed/example3" frameborder="0" allowfullscreen></iframe>
+    </div>
+  </section>
 
-        <section id="waitlist" class="form-section scroll-reveal">
-            <h2>Join the Waitlist</h2>
-            <p>Get updates on new tools. No spam. No sharing. Unsubscribe anytime.</p>
-            <form id="waitlistForm">
-                <div class="form-group">
-                    <label for="waitlist-name">Your Name (or 'Mom')</label>
-                    <input type="text" id="waitlist-name" name="name" placeholder="Cool Mom">
-                </div>
-                <div class="form-group">
-                    <label for="waitlist-email">Email</label>
-                    <input type="email" id="waitlist-email" name="email" required placeholder="you@awesome.com">
-                </div>
-                <button type="submit" class="submit-btn">Join</button>
-            </form>
-            <div id="waitlistSuccess" class="success">You're in! Check email.</div>
-            <div id="waitlistError" class="error"></div>
-        </section>
+  <!-- Suggest a Tool -->
+  <section id="suggest">
+    <h2>💡 Suggest a Tool</h2>
+    <form action="https://submit.formspark.io/IXDD7cliS" method="POST">
+      <label for="suggestion">Your idea:</label><br>
+      <input type="text" id="suggestion" name="suggestion" required placeholder="Send the spark ✨"><br><br>
+      <button type="submit">Share</button>
+    </form>
+  </section>
 
-        <!-- START: Cleaned - AFTER WAITLIST show ONLY Mama's Quick Tips (videos), then Suggest form, then footer -->
-        <!-- Mama's Quick Tips (YouTube carousel) -->
-        <section id="videos" class="video-section scroll-reveal">
-          <h2>Mama's Quick Tips 🎥</h2>
-          <div class="videos-carousel">
-            <button class="carousel-btn prev">❮</button>
-            <div class="video-track">
-              <!-- keep the list you provided (trimmed to a manageable set, originals retained) -->
-              <div class="video-card"><a href="https://www.youtube.com/watch?v=heHrDAR2lXs" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/heHrDAR2lXs/mqdefault.jpg" alt="Quick tip on organizing family schedules efficiently."><div class="play-button">▶</div></a><p>Quick tip on organizing family schedules efficiently.</p></div>
-              <div class="video-card"><a href="https://www.youtube.com/watch?v=L69hLf4Bk7A" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/L69hLf4Bk7A/mqdefault.jpg" alt="Easy meal prep ideas for busy parents."><div class="play-button">▶</div></a><p>Easy meal prep ideas for busy parents.</p></div>
-              <div class="video-card"><a href="https://www.youtube.com/watch?v=RlwcR81qPVo" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/RlwcR81qPVo/mqdefault.jpg" alt="Fun activities to keep kids engaged at home."><div class="play-button">▶</div></a><p>Fun activities to keep kids engaged at home.</p></div>
-              <div class="video-card"><a href="https://www.youtube.com/watch?v=YIqSupX-d_M" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/YIqSupX-d_M/mqdefault.jpg" alt="Budgeting hacks for family finances."><div class="play-button">▶</div></a><p>Budgeting hacks for family finances.</p></div>
-              <div class="video-card"><a href="https://www.youtube.com/watch?v=MX0ugH_Gv-8" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/MX0ugH_Gv-8/mqdefault.jpg" alt="Simple self-care routines for moms."><div class="play-button">▶</div></a><p>Simple self-care routines for moms.</p></div>
-              <!-- add more entries if you want — original list kept in your backup -->
-            </div>
-            <button class="carousel-btn next">❯</button>
-          </div>
-        </section>
+  <!-- Waitlist -->
+  <section id="waitlist">
+    <h2>✉️ Join the Waitlist</h2>
+    <form action="https://submit.formspark.io/IXDD7cliS" method="POST">
+      <label for="email">Email:</label><br>
+      <input type="email" id="email" name="email" required placeholder="you@example.com"><br><br>
+      <button type="submit">Join</button>
+    </form>
+  </section>
 
-        <!-- Suggest a Tool (keeps original form below videos) -->
-        <section id="suggest" class="form-section scroll-reveal">
-            <h2>Suggest a Tool</h2>
-            <p>Got an idea? Share it! Smarts are free. Tag a friend who'd love this!</p>
-            <form id="suggestForm">
-                <div class="form-group">
-                    <label for="suggest-name">Your Name (optional)</label>
-                    <input type="text" id="suggest-name" name="name" placeholder="Super Mom">
-                </div>
-                <div class="form-group">
-                    <label for="toolType">Tool Type</label>
-                    <select id="toolType" name="type" required>
-                        <option value="" disabled selected>Pick one</option>
-                        <option value="Finance">Finance</option>
-                        <option value="Education">Education</option>
-                        <option value="Lifestyle">Lifestyle</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="toolIdea">Your Idea</label>
-                    <textarea id="toolIdea" name="idea" rows="4" maxlength="500" required placeholder="E.g., Meal planner for kids."></textarea>
-                    <div class="char-count"><span id="charCount">0</span>/500</div>
-                </div>
-                <button type="submit" class="submit-btn">Send</button>
-            </form>
-            <div id="suggestSuccess" class="success">Idea sent! You're a co-creator.</div>
-            <div id="suggestError" class="error"></div>
-        </section>
-        <!-- END: Cleaned section -->
+  <!-- Paystub Calculator -->
+  <section id="calculator">
+    <h2>💰 Paystub Calculator</h2>
+    <iframe src="https://calculator-ea5.pages.dev/" width="100%" height="500" frameborder="0"></iframe>
+  </section>
 
-    </main>
+  <!-- Crisis Resources -->
+  <section id="crisis">
+    <h2>🆘 Crisis Resources</h2>
+    <p>Rent help, food banks, job tips. Texas-focused.</p>
+    <a href="https://mamasaidthis.pages.dev/crisis" target="_blank"><button>View</button></a>
+  </section>
 
-    <a href="https://ko-fi.com/mamasaidherbalhomeschool" class="support-btn" target="_blank" rel="noopener noreferrer">Buy Me Coffee</a>
+  <!-- About -->
+  <section id="about">
+    <h2>Who’s Behind the Chaos</h2>
+    <!-- PLACEHOLDER: Insert Cloudinary URL here -->
+    <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760511594/QVZoU0loZ2RKeUlFX21hckRHVUlPVmFt_vkysti.jpg" 
+         alt="Heather with kids" style="width:100%; max-width:400px; border-radius:12px; display:block; margin:auto;">
+    <p>Heather, coding between diapers and coffee. Free tools built for real life. Helping mamas survive, laugh, and breathe easier.</p>
+  </section>
+</main>
 
-    <footer>
-        <p>&copy; 2025 Mama Said This. | <a href="https://heatherherbalhome.pages.dev/">Herbal Home</a> | <a href="mailto:heather@herbalhomeschool.work.gd">Contact</a> | <a href="https://github.com/herbalheather">GitHub</a></p>
-        <p><a href="https://ko-fi.com/mamasaidherbalhomeschool">Buy Mama Coffee – Free Tools Don't Grow on Trees!</a></p>
-    </footer>
+<!-- Floating Good Stuff -->
+<div id="good-stuff-btn">☀️</div>
+<div id="good-stuff-drawer">
+  <h3>Mini Good Stuff</h3>
+  <ul id="good-stuff-list">
+    <li>Take 3 deep breaths 🫁</li>
+    <li>Smile at yourself 😄</li>
+    <li>Stretch for 1 minute 🧘‍♀️</li>
+    <li>Drink a glass of water 💧</li>
+  </ul>
+</div>
 
-    <!-- SCRIPTS (kept and consolidated) -->
-    <script>
-        const FORMSPARK_FORM_ID = 'IXDD7cliS';
-        let currentHeroImg = 0;
+<!-- Confetti -->
+<canvas id="confetti"></canvas>
 
-        function toggleTheme() {
-            const body = document.body;
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            const tbtn = document.querySelector('.theme-toggle');
-            if (tbtn) tbtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-        }
+<script>
+  // Dark/Light Theme
+  const themeToggle=document.getElementById('theme-toggle');
+  if(localStorage.getItem('theme')==='light') document.body.classList.add('light');
+  themeToggle.textContent=document.body.classList.contains('light')?'🌙':'☀️';
+  themeToggle.addEventListener('click',()=>{
+    document.body.classList.toggle('light');
+    let mode=document.body.classList.contains('light')?'light':'dark';
+    localStorage.setItem('theme',mode);
+    themeToggle.textContent=mode==='light'?'🌙':'☀️';
+  });
 
-        function nextHeroImg() {
-            const imgs = document.querySelectorAll('.hero-carousel img');
-            if (imgs.length === 0) return;
-            imgs[currentHeroImg].classList.remove('active');
-            currentHeroImg = (currentHeroImg + 1) % imgs.length;
-            imgs[currentHeroImg].classList.add('active');
-        }
+  // Daily Quote
+  const quotes=["Breathe in, mama. Breathe out, mama.","You got this, even today.","Small wins count.","One step at a time."];
+  document.getElementById('quote').textContent=quotes[Math.floor(Math.random()*quotes.length)];
 
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'page_view', {
-                page_path: window.location.pathname,
-                page_title: document.title
-            });
-        }
+  // Good Stuff Drawer
+  const drawerBtn=document.getElementById('good-stuff-btn');
+  const drawer=document.getElementById('good-stuff-drawer');
+  drawerBtn.addEventListener('click',()=>{drawer.style.display=drawer.style.display==='block'?'none':'block';});
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            document.body.setAttribute('data-theme', savedTheme);
-            const tbtn = document.querySelector('.theme-toggle');
-            if (tbtn) tbtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
+  // Recently Loved Tools
+  function trackTool(name){
+    let recent=JSON.parse(localStorage.getItem('recentTools')||"[]");
+    recent=recent.filter(t=>t!==name);
+    recent.unshift(name);
+    if(recent.length>5) recent.pop();
+    localStorage.setItem('recentTools',JSON.stringify(recent));
+    renderRecent();
+  }
+  function renderRecent(){
+    const recentList=document.getElementById('recent-list');
+    let recent=JSON.parse(localStorage.getItem('recentTools')||"[]");
+    recentList.innerHTML=recent.length?recent.map(t=>`<li>${t}</li>`).join(''):'<li>No tools clicked yet!</li>';
+  }
+  renderRecent();
 
-            const heroCarouselImgs = document.querySelectorAll('.hero-carousel img');
-            if (heroCarouselImgs.length > 0) {
-                heroCarouselImgs[0].classList.add('active');
-                setInterval(nextHeroImg, 5000);
-            }
+  // Carousel auto-scroll
+  const carousel=document.getElementById('video-carousel');
+  let scrollAmount=0;
+  function autoScroll(){ scrollAmount+=1;
+    if(scrollAmount>=carousel.scrollWidth-carousel.clientWidth) scrollAmount=0;
+    carousel.scrollTo({left:scrollAmount,behavior:'smooth'}); requestAnimationFrame(autoScroll);
+  }
+  requestAnimationFrame(autoScroll);
 
-            const toolIdea = document.getElementById('toolIdea');
-            const charCount = document.getElementById('charCount');
-            if (toolIdea && charCount) {
-                toolIdea.addEventListener('input', () => {
-                    charCount.textContent = toolIdea.value.length;
-                });
-            }
+  // Confetti
+  const confettiCanvas=document.getElementById('confetti');
+  const ctx=confettiCanvas.getContext('2d');
+  confettiCanvas.width=window.innerWidth;
+  confettiCanvas.height=window.innerHeight;
+  const confettiParticles=[];
+  for(let i=0;i<150;i++){
+    confettiParticles.push({x:Math.random()*confettiCanvas.width,y:Math.random()*confettiCanvas.height-confettiCanvas.height,r:Math.random()*6+4,d:Math.random()*50,color:`hsl(${Math.random()*360},100%,50%)`,tilt:Math.random()*10-10});
+  }
+  function drawConfetti(){
+    ctx.clearRect(0,0,confettiCanvas.width,confettiCanvas.height);
+    confettiParticles.forEach(p=>{
+      ctx.beginPath();
+      ctx.moveTo(p.x+p.tilt,p.y);
+      ctx.lineTo(p.x+p.tilt+p.r/2,p.y+p.r);
+      ctx.strokeStyle=p.color;
+      ctx.lineWidth=p.r/2;
+      ctx.stroke();
+      p.y+=Math.cos(p.d)+1+p.r/2;
+      p.x+=Math.sin(p.d);
+      if(p.y>confettiCanvas.height){p.x=Math.random()*confettiCanvas.width;p.y=-10;}
+    });
+    requestAnimationFrame(drawConfetti);
+  }
+  drawConfetti();
+  window.addEventListener('resize',()=>{confettiCanvas.width=window.innerWidth;confettiCanvas.height=window.innerHeight;});
+</script>
 
-            async function submitToFormspark(formId, formData) {
-                const form = document.getElementById(formId);
-                const submitBtn = form ? form.querySelector('.submit-btn') : null;
-                const successDiv = document.getElementById(`${formId}Success`);
-                const errorDiv = document.getElementById(`${formId}Error`);
-
-                try {
-                    if (submitBtn) submitBtn.disabled = true;
-                    if (errorDiv) errorDiv.classList.remove('show');
-
-                    const response = await fetch(`https://api.formspark.io/v1/forms/${FORMSPARK_FORM_ID}/submissions`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({...formData, timestamp: new Date().toISOString()})
-                    });
-
-                    if (response.ok || response.status === 201) {
-                        if (successDiv) {
-                            successDiv.classList.add('show');
-                        }
-                        if (form) form.reset();
-                        if (charCount) charCount.textContent = '0';
-                        setTimeout(() => { if (successDiv) successDiv.classList.remove('show'); }, 4000);
-                    } else {
-                        throw new Error('Submission failed');
-                    }
-                } catch (err) {
-                    console.error('Error:', err);
-                    if (errorDiv) {
-                        errorDiv.textContent = 'Something went wrong. Try again later.';
-                        errorDiv.classList.add('show');
-                        setTimeout(() => errorDiv.classList.remove('show'), 6000);
-                    }
-                } finally {
-                    if (submitBtn) submitBtn.disabled = false;
-                }
-            }
-
-            const waitlistForm = document.getElementById('waitlistForm');
-            if (waitlistForm) {
-                waitlistForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const email = document.getElementById('waitlist-email').value.trim();
-                    const name = document.getElementById('waitlist-name').value.trim();
-                    submitToFormspark('waitlistForm', { 
-                        name: name || 'Anonymous', 
-                        email,
-                        formType: 'Waitlist Signup'
-                    });
-                });
-            }
-
-            const suggestForm = document.getElementById('suggestForm');
-            if (suggestForm) {
-                suggestForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const toolType = document.getElementById('toolType').value;
-                    const idea = document.getElementById('toolIdea').value.trim();
-                    const name = document.getElementById('suggest-name').value.trim();
-                    submitToFormspark('suggestForm', { 
-                        name: name || 'Anonymous', 
-                        toolType,
-                        idea,
-                        formType: 'Tool Suggestion'
-                    });
-                });
-            }
-
-            document.querySelectorAll('a[href^="#"]').forEach(a => {
-                a.addEventListener('click', (e) => {
-                    const href = a.getAttribute('href');
-                    if (href !== '#' && document.querySelector(href)) {
-                        e.preventDefault();
-                        document.querySelector(href).scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-
-            /* Video carousel functionality (keeps the fixed behavior) */
-            const track = document.querySelector('.video-track');
-            const cards = document.querySelectorAll('.video-card');
-            const prev = document.querySelector('.carousel-btn.prev');
-            const next = document.querySelector('.carousel-btn.next');
-            let current = 0;
-            function showSlide(i){
-                if (!cards || cards.length === 0) return;
-                cards.forEach(c=>c.classList.remove('active'));
-                if (i >= cards.length) i = 0;
-                if (i < 0) i = cards.length - 1;
-                cards[i].classList.add('active');
-                if (track) track.style.transform = `translateX(-${i*100}%)`;
-                current = i;
-            }
-            if (prev && next && cards.length>0) {
-                prev.addEventListener('click',()=>showSlide(current-1));
-                next.addEventListener('click',()=>showSlide(current+1));
-                showSlide(current);
-            }
-        });
-    </script>
-
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Mama Said This",
-        "url": "https://mamasaidthis.pages.dev",
-        "description": "Free tools for parents: pay stub generator, budget tracker, worksheets, and crisis resources.",
-        "publisher": { "@type": "Person", "name": "Heather" }
-    }
-    </script>
 </body>
 </html>
