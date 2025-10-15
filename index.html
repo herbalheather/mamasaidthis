@@ -509,170 +509,202 @@
             <div id="waitlistSuccess" class="success">You're in! Check email.</div>
             <div id="waitlistError" class="error"></div>
         </section>
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mama Said This | Free Tools for Parents & Working Folks</title>
+  <meta name="description" content="Free tools built by a mom who believes in sharing, not selling. Pay stub generator, budget tracker, worksheets, crisis help, and more. No paywalls, just love.">
+  <meta name="keywords" content="free tools, pay stub generator, budget tracker, homeschool worksheets, crisis resources, parent tools, working folks, #MamaSaidTools">
+  <meta name="author" content="Heather, Mama Said This">
+  <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js" defer></script>
+  <script async src="https://www.googletagmanager.com/gtag/js?id=G-TEKT43VC4J"></script>
+  <script>
+    window.dataLayer = window.dataLayer || [];
+    function gtag(){dataLayer.push(arguments);}
+    gtag('js', new Date());
+    gtag('config', 'G-TEKT43VC4J');
+  </script>
+  <style>
+    :root {
+      --primary: #ff69b4;
+      --primary-dark: #e85d75;
+      --secondary: #9cc69b;
+      --accent: #ffd54f;
+      --neon-blue: #00ffff;
+      --dark: #5c5f77;
+      --light: #f7ede2;
+      --bg: linear-gradient(135deg, #f7ede2 0%, #9cc69b 20%, #ff69b4 100%);
+      --card-bg: rgba(255, 255, 255, 0.95);
+      --text-primary: #5c5f77;
+      --text-secondary: #6b7280;
+      --border: #e5e7eb;
+      --shadow-light: 0 4px 20px rgba(0,0,0,0.1);
+      --shadow-hover: 0 10px 30px rgba(0,0,0,0.15);
+    }
+    [data-theme="dark"] {
+      --bg: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
+      --card-bg: #1e1e2e;
+      --text-primary: #f8f8f8;
+      --text-secondary: #b8b8b8;
+      --border: #333344;
+    }
+    body {
+      font-family: 'Inter', sans-serif;
+      color: var(--text-primary);
+      background: var(--bg);
+      line-height: 1.6;
+      overflow-x: hidden;
+      transition: all 0.3s ease;
+    }
+    h1,h2,h3{font-family:'Poppins',sans-serif}
+    nav{background:var(--card-bg);position:sticky;top:0;z-index:1000;box-shadow:var(--shadow-light);padding:1rem 1.5rem}
+    .nav-container{max-width:1200px;margin:0 auto;display:flex;justify-content:space-between;align-items:center}
+    .nav-logo img{height:2rem}
+    .nav-links{display:flex;align-items:center;flex-wrap:wrap;gap:1rem}
+    .nav-links a,.nav-links button{color:var(--text-primary);text-decoration:none;font-weight:600;background:none;border:none;cursor:pointer}
+    .nav-links a:hover{color:var(--primary)}
+    .theme-toggle{background:none;border:none;font-size:1.5rem;cursor:pointer}
+    .hero{display:grid;grid-template-columns:1.2fr 1fr;align-items:center;padding:4rem 2rem;min-height:80vh;background:linear-gradient(135deg,rgba(247,237,226,.8)0%,rgba(156,198,155,.8)20%,rgba(255,105,180,.8)100%)}
+    .hero-card{background:var(--card-bg);padding:2rem;border-radius:12px;box-shadow:var(--shadow-light)}
+    .hero-card h1{font-size:2.8rem;color:var(--primary);margin-bottom:1rem;font-family:'Dancing Script',cursive}
+    .btn{background:var(--primary);color:white;padding:.8rem 1.5rem;border-radius:25px;text-decoration:none;font-weight:600;transition:.3s;border:none;cursor:pointer}
+    .btn:hover{background:var(--primary-dark);transform:translateY(-2px)}
+    .tool-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(300px,1fr));gap:2rem;padding:2rem;max-width:1200px;margin:0 auto}
+    .tool-card{background:var(--card-bg);padding:1.5rem;border-radius:12px;box-shadow:var(--shadow-light);text-align:center;transition:.3s}
+    .tool-card:hover{transform:scale(1.05);box-shadow:var(--shadow-hover)}
+    footer{background:var(--card-bg);padding:2rem;text-align:center;box-shadow:var(--shadow-light);margin-top:2rem}
+    footer a{color:var(--primary);text-decoration:none}
+    footer a:hover{text-decoration:underline}
+    .section-title{text-align:center;font-size:2rem;color:var(--primary);margin:2rem 0 1rem}
+    /* --- VIDEO CAROUSEL FIX --- */
+    .video-section{background:var(--card-bg);border-radius:12px;padding:2rem;margin:2rem auto;max-width:900px;box-shadow:var(--shadow-light);text-align:center}
+    .videos-carousel{position:relative;overflow:hidden}
+    .video-track{display:flex;transition:transform .5s ease}
+    .video-card{flex:0 0 100%;max-width:100%;opacity:0;transition:opacity .4s ease-in-out;position:relative}
+    .video-card.active{opacity:1}
+    .video-card img{width:100%;border-radius:10px;box-shadow:var(--shadow-light)}
+    .play-button{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:3rem;color:white;text-shadow:0 2px 8px rgba(0,0,0,.7);pointer-events:none}
+    .carousel-btn{background:var(--primary);border:none;color:white;font-size:2rem;cursor:pointer;position:absolute;top:50%;transform:translateY(-50%);padding:.3rem .8rem;border-radius:50%;box-shadow:var(--shadow-light);transition:background .3s;z-index:10}
+    .carousel-btn:hover{background:var(--primary-dark)}
+    .carousel-btn.prev{left:10px}
+    .carousel-btn.next{right:10px}
+    .video-card p{margin-top:.5rem;color:var(--text-secondary)}
+    @media(max-width:768px){.carousel-btn{font-size:1.5rem}}
+  </style>
+</head>
 
-<section id="videos" class="video-section scroll-reveal">
-    <h2>Mama's Quick Tips 🎥</h2>
-    <div class="videos-carousel">
-        <div class="video-card active" id="videoCard1">
-            <a href="https://www.youtube.com/watch?v=heHrDAR2lXs" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/heHrDAR2lXs/mqdefault.jpg" alt="Mama Tip Video 1" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Quick tip on organizing family schedules efficiently.</p>
-        </div>
-        <div class="video-card" id="videoCard2">
-            <a href="https://www.youtube.com/watch?v=L69hLf4Bk7A" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/L69hLf4Bk7A/mqdefault.jpg" alt="Mama Tip Video 2" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Easy meal prep ideas for busy parents.</p>
-        </div>
-        <div class="video-card" id="videoCard3">
-            <a href="https://www.youtube.com/watch?v=RlwcR81qPVo" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/RlwcR81qPVo/mqdefault.jpg" alt="Mama Tip Video 3" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Fun activities to keep kids engaged at home.</p>
-        </div>
-        <div class="video-card" id="videoCard4">
-            <a href="https://www.youtube.com/watch?v=YIqSupX-d_M" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/YIqSupX-d_M/mqdefault.jpg" alt="Mama Tip Video 4" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Budgeting hacks for family finances.</p>
-        </div>
-        <div class="video-card" id="videoCard5">
-            <a href="https://www.youtube.com/watch?v=MX0ugH_Gv-8" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/MX0ugH_Gv-8/mqdefault.jpg" alt="Mama Tip Video 5" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Simple self-care routines for moms.</p>
-        </div>
-        <div class="video-card" id="videoCard6">
-            <a href="https://www.youtube.com/watch?v=1gS7uV6Bj0s" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/1gS7uV6Bj0s/mqdefault.jpg" alt="Mama Tip Video 6" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Home organization tips for cluttered spaces.</p>
-        </div>
-        <div class="video-card" id="videoCard7">
-            <a href="https://www.youtube.com/watch?v=w28HfRQWt2s" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/w28HfRQWt2s/mqdefault.jpg" alt="Mama Tip Video 7" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Healthy snack ideas for kids.</p>
-        </div>
-        <div class="video-card" id="videoCard8">
-            <a href="https://www.youtube.com/watch?v=yvo_uCfn0V8" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/yvo_uCfn0V8/mqdefault.jpg" alt="Mama Tip Video 8" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Balancing work and family life.</p>
-        </div>
-        <div class="video-card" id="videoCard9">
-            <a href="https://www.youtube.com/watch?v=VG3arGjg0Hk" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/VG3arGjg0Hk/mqdefault.jpg" alt="Mama Tip Video 9" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Educational games for learning fun.</p>
-        </div>
-        <div class="video-card" id="videoCard10">
-            <a href="https://www.youtube.com/watch?v=hGGsB-jBTlo" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/hGGsB-jBTlo/mqdefault.jpg" alt="Mama Tip Video 10" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>DIY crafts with household items.</p>
-        </div>
-        <div class="video-card" id="videoCard11">
-            <a href="https://www.youtube.com/watch?v=JPpUKw9Gkig" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/JPpUKw9Gkig/mqdefault.jpg" alt="Mama Tip Video 11" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Parenting through tough times.</p>
-        </div>
-        <div class="video-card" id="videoCard12">
-            <a href="https://www.youtube.com/watch?v=2AImrZ6cFG8" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/2AImrZ6cFG8/mqdefault.jpg" alt="Mama Tip Video 12" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Quick cleaning routines.</p>
-        </div>
-        <div class="video-card" id="videoCard13">
-            <a href="https://www.youtube.com/watch?v=_o_JUR2KZKw" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/_o_JUR2KZKw/mqdefault.jpg" alt="Mama Tip Video 13" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Managing screen time for kids.</p>
-        </div>
-        <div class="video-card" id="videoCard14">
-            <a href="https://www.youtube.com/watch?v=B2zCWJBnfuE" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/B2zCWJBnfuE/mqdefault.jpg" alt="Mama Tip Video 14" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Healthy family recipes on a budget.</p>
-        </div>
-        <div class="video-card" id="videoCard15">
-            <a href="https://www.youtube.com/watch?v=9c7zh2MkslY" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/9c7zh2MkslY/mqdefault.jpg" alt="Mama Tip Video 15" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Encouraging creativity in children.</p>
-        </div>
-        <div class="video-card" id="videoCard16">
-            <a href="https://www.youtube.com/watch?v=APRo-b6eHy8" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/APRo-b6eHy8/mqdefault.jpg" alt="Mama Tip Video 16" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Stress relief techniques for parents.</p>
-        </div>
-        <div class="video-card" id="videoCard17">
-            <a href="https://www.youtube.com/watch?v=s0FdYs8ZqmA" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/s0FdYs8ZqmA/mqdefault.jpg" alt="Mama Tip Video 17" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Outdoor activities for family bonding.</p>
-        </div>
-        <div class="video-card" id="videoCard18">
-            <a href="https://www.youtube.com/watch?v=zWjkPXogjzo" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/zWjkPXogjzo/mqdefault.jpg" alt="Mama Tip Video 18" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Teaching kids responsibility.</p>
-        </div>
-        <div class="video-card" id="videoCard19">
-            <a href="https://www.youtube.com/watch?v=G-hYH5iG5kY" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/G-hYH5iG5kY/mqdefault.jpg" alt="Mama Tip Video 19" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Quick fitness routines for busy moms.</p>
-        </div>
-        <div class="video-card" id="videoCard20">
-            <a href="https://www.youtube.com/watch?v=GD2T3fghLBc" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/GD2T3fghLBc/mqdefault.jpg" alt="Mama Tip Video 20" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Saving money on groceries.</p>
-        </div>
-        <div class="video-card" id="videoCard21">
-            <a href="https://www.youtube.com/watch?v=xyQY8a-ng6g" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/xyQY8a-ng6g/mqdefault.jpg" alt="Mama Tip Video 21" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Positive discipline strategies.</p>
-        </div>
-        <div class="video-card" id="videoCard22">
-            <a href="https://www.youtube.com/watch?v=BfzMi1EOe4I" target="_blank" rel="noopener noreferrer">
-                <img src="https://img.youtube.com/vi/BfzMi1EOe4I/mqdefault.jpg" alt="Mama Tip Video 22" loading="lazy">
-                <div class="play-button">▶</div>
-            </a>
-            <p>Fun learning games for homeschool.</p>
-        </div>
+<body data-theme="dark">
+  <!-- nav -->
+  <nav>
+    <div class="nav-container">
+      <div class="nav-logo"><img src="https://i.imgur.com/3T0Mf1R.png" alt="Mama Said This Logo"></div>
+      <div class="nav-links">
+        <a href="#tools">Tools</a>
+        <a href="#about">About</a>
+        <a href="#videos">Videos</a>
+        <a href="#suggest">Suggest</a>
+        <button class="theme-toggle" onclick="toggleTheme()">☀️</button>
+      </div>
     </div>
-    <div class="carousel-controls">
-        <button class="carousel-btn prev" onclick="moveCarousel(-1)">❮</button>
-        <button class="carousel-btn next" onclick="moveCarousel(1)">❯</button>
-    </div>
-</section>
+  </nav>
+
+  <main>
+    <section class="hero">
+      <div class="hero-card">
+        <h1>No Paywalls. No Nonsense.</h1>
+        <p>Free tools for exhausted parents, moms, and working folks juggling life.</p>
+        <a href="#tools" class="btn">Grab the Good Stuff</a>
+      </div>
+    </section>
+
+    <!-- Tools Section (unchanged) -->
+    <section id="tools">
+      <h2 class="section-title">Built with Love. Shared Free.</h2>
+      <div class="tool-grid">
+        <div class="tool-card"><h3>Texas Pay Stub Generator</h3><a href="https://calculator-ea5.pages.dev/" class="btn">Use Now</a></div>
+        <div class="tool-card"><h3>Budget Tracker</h3><a href="https://mamasaidthis.pages.dev/budget-tracker" class="btn">Track It</a></div>
+        <div class="tool-card"><h3>Worksheet Generators</h3><a href="https://edusheet-chooser.pages.dev/" class="btn">Chooser</a></div>
+        <div class="tool-card"><h3>Crisis Resources</h3><a href="https://mamasaidthis.pages.dev/resources" class="btn">Get Help</a></div>
+      </div>
+    </section>
+
+    <!-- FIXED VIDEO CAROUSEL -->
+    <section id="videos" class="video-section scroll-reveal">
+      <h2>Mama's Quick Tips 🎥</h2>
+      <div class="videos-carousel">
+        <button class="carousel-btn prev">❮</button>
+        <div class="video-track">
+          <!-- 22 videos -->
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=heHrDAR2lXs" target="_blank"><img src="https://img.youtube.com/vi/heHrDAR2lXs/mqdefault.jpg"><div class="play-button">▶</div></a><p>Quick tip on organizing family schedules efficiently.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=L69hLf4Bk7A" target="_blank"><img src="https://img.youtube.com/vi/L69hLf4Bk7A/mqdefault.jpg"><div class="play-button">▶</div></a><p>Easy meal prep ideas for busy parents.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=RlwcR81qPVo" target="_blank"><img src="https://img.youtube.com/vi/RlwcR81qPVo/mqdefault.jpg"><div class="play-button">▶</div></a><p>Fun activities to keep kids engaged at home.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=YIqSupX-d_M" target="_blank"><img src="https://img.youtube.com/vi/YIqSupX-d_M/mqdefault.jpg"><div class="play-button">▶</div></a><p>Budgeting hacks for family finances.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=MX0ugH_Gv-8" target="_blank"><img src="https://img.youtube.com/vi/MX0ugH_Gv-8/mqdefault.jpg"><div class="play-button">▶</div></a><p>Simple self-care routines for moms.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=1gS7uV6Bj0s" target="_blank"><img src="https://img.youtube.com/vi/1gS7uV6Bj0s/mqdefault.jpg"><div class="play-button">▶</div></a><p>Home organization tips for cluttered spaces.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=w28HfRQWt2s" target="_blank"><img src="https://img.youtube.com/vi/w28HfRQWt2s/mqdefault.jpg"><div class="play-button">▶</div></a><p>Healthy snack ideas for kids.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=yvo_uCfn0V8" target="_blank"><img src="https://img.youtube.com/vi/yvo_uCfn0V8/mqdefault.jpg"><div class="play-button">▶</div></a><p>Balancing work and family life.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=VG3arGjg0Hk" target="_blank"><img src="https://img.youtube.com/vi/VG3arGjg0Hk/mqdefault.jpg"><div class="play-button">▶</div></a><p>Educational games for learning fun.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=hGGsB-jBTlo" target="_blank"><img src="https://img.youtube.com/vi/hGGsB-jBTlo/mqdefault.jpg"><div class="play-button">▶</div></a><p>DIY crafts with household items.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=JPpUKw9Gkig" target="_blank"><img src="https://img.youtube.com/vi/JPpUKw9Gkig/mqdefault.jpg"><div class="play-button">▶</div></a><p>Parenting through tough times.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=2AImrZ6cFG8" target="_blank"><img src="https://img.youtube.com/vi/2AImrZ6cFG8/mqdefault.jpg"><div class="play-button">▶</div></a><p>Quick cleaning routines.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=_o_JUR2KZKw" target="_blank"><img src="https://img.youtube.com/vi/_o_JUR2KZKw/mqdefault.jpg"><div class="play-button">▶</div></a><p>Managing screen time for kids.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=B2zCWJBnfuE" target="_blank"><img src="https://img.youtube.com/vi/B2zCWJBnfuE/mqdefault.jpg"><div class="play-button">▶</div></a><p>Healthy family recipes on a budget.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=9c7zh2MkslY" target="_blank"><img src="https://img.youtube.com/vi/9c7zh2MkslY/mqdefault.jpg"><div class="play-button">▶</div></a><p>Encouraging creativity in children.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=APRo-b6eHy8" target="_blank"><img src="https://img.youtube.com/vi/APRo-b6eHy8/mqdefault.jpg"><div class="play-button">▶</div></a><p>Stress relief techniques for parents.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=s0FdYs8ZqmA" target="_blank"><img src="https://img.youtube.com/vi/s0FdYs8ZqmA/mqdefault.jpg"><div class="play-button">▶</div></a><p>Outdoor activities for family bonding.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=zWjkPXogjzo" target="_blank"><img src="https://img.youtube.com/vi/zWjkPXogjzo/mqdefault.jpg"><div class="play-button">▶</div></a><p>Teaching kids responsibility.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=G-hYH5iG5kY" target="_blank"><img src="https://img.youtube.com/vi/G-hYH5iG5kY/mqdefault.jpg"><div class="play-button">▶</div></a><p>Quick fitness routines for busy moms.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=GD2T3fghLBc" target="_blank"><img src="https://img.youtube.com/vi/GD2T3fghLBc/mqdefault.jpg"><div class="play-button">▶</div></a><p>Saving money on groceries.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=xyQY8a-ng6g" target="_blank"><img src="https://img.youtube.com/vi/xyQY8a-ng6g/mqdefault.jpg"><div class="play-button">▶</div></a><p>Positive discipline strategies.</p></div>
+          <div class="video-card"><a href="https://www.youtube.com/watch?v=BfzMi1EOe4I" target="_blank"><img src="https://img.youtube.com/vi/BfzMi1EOe4I/mqdefault.jpg"><div class="play-button">▶</div></a><p>Fun learning games for homeschool.</p></div>
+        </div>
+        <button class="carousel-btn next">❯</button>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <p>&copy; 2025 Mama Said This | <a href="https://heatherherbalhome.pages.dev/">Herbal Home</a></p>
+  </footer>
+
+  <script>
+    function toggleTheme(){
+      const b=document.body;
+      const t=b.getAttribute('data-theme')==='dark'?'light':'dark';
+      b.setAttribute('data-theme',t);
+      localStorage.setItem('theme',t);
+      document.querySelector('.theme-toggle').textContent=t==='dark'?'☀️':'🌙';
+    }
+
+    document.addEventListener('DOMContentLoaded',()=>{
+      const saved=localStorage.getItem('theme')||'dark';
+      document.body.setAttribute('data-theme',saved);
+      document.querySelector('.theme-toggle').textContent=saved==='dark'?'☀️':'🌙';
+      const track=document.querySelector('.video-track');
+      const cards=document.querySelectorAll('.video-card');
+      const prev=document.querySelector('.carousel-btn.prev');
+      const next=document.querySelector('.carousel-btn.next');
+      let current=0;
+      function showSlide(i){
+        cards.forEach(c=>c.classList.remove('active'));
+        if(i>=cards.length)i=0;
+        if(i<0)i=cards.length-1;
+        cards[i].classList.add('active');
+        track.style.transform=`translateX(-${i*100}%)`;
+        current=i;
+      }
+      prev.addEventListener('click',()=>showSlide(current-1));
+      next.addEventListener('click',()=>showSlide(current+1));
+      showSlide(current);
+    });
+  </script>
+</body>
+</html>
+
 
 <script>
     // Carousel functionality
@@ -875,4 +907,5 @@
     </script>
 </body>
 </html>
+
 
