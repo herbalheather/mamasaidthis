@@ -1,0 +1,451 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Benefits Eligibility Calculator</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script src="https://unpkg.com/react@18/umd/react.development.js"></script>
+    <script src="https://unpkg.com/react-dom@18/umd/react-dom.development.js"></script>
+    <script src="https://unpkg.com/@babel/standalone/babel.min.js"></script>
+</head>
+<body class="bg-gray-100 text-black">
+    <div id="root"></div>
+    <script type="text/babel">
+        const App = () => {
+            const [step, setStep] = React.useState(1);
+            const [formData, setFormData] = React.useState({
+                householdSize: 1,
+                monthlyIncome: 0,
+                adults: 1,
+                hasChildrenUnder18: false,
+                childrenUnder18: 0,
+                childrenUnder5: 0,
+                childrenUnder1: 0,
+                children3to5: 0,
+                pregnant: false,
+                workingStudying: false,
+                rent: 0,
+                utilities: 0,
+                childcare: 0
+            });
+            const [fplMonthly, setFplMonthly] = React.useState(0);
+            const [loading, setLoading] = React.useState(false);
+            const [error, setError] = React.useState('');
+            const [results, setResults] = React.useState([]);
+
+            const fetchFPL = async (size) => {
+                try {
+                    const res = await fetch(`https://aspe.hhs.gov/api/povertyguidelines?year=2025&state=TX&household_size=${size}`);
+                    const data = await res.json();
+                    // Assuming the API returns { povertyGuideline: annualAmount }
+                    return data.povertyGuideline / 12;
+                } catch (e) {
+                    console.error('FPL API failed:', e);
+                    return getFallbackFPL(size);
+                }
+            };
+
+            const getFallbackFPL = (size) => {
+                const baseAnnual = [0, 15650, 21150, 26650, 32150, 37650, 43150, 48650, 54150];
+                let annual = size <= 8 ? baseAnnual[size] : baseAnnual[8] + (size - 8) * 5500;
+                return annual / 12;
+            };
+
+            const handleChange = (e) => {
+                const name = e.target.name;
+                let value = e.target.type === 'checkbox' ? e.target.checked : e.target.value;
+                if (['householdSize', 'monthlyIncome', 'adults', 'childrenUnder18', 'childrenUnder5', 'childrenUnder1', 'children3to5', 'rent', 'utilities', 'childcare'].includes(name)) {
+                    value = parseFloat(value) || 0;
+                }
+                setFormData(prev => ({ ...prev, [name]: value }));
+            };
+
+            const validateStep = (currentStep) => {
+                setError('');
+                if (currentStep === 1) {
+                    if (formData.householdSize < 1 || formData.householdSize > 20) return 'Household size must be between 1 and 20.';
+                    if (formData.monthlyIncome < 0 || formData.monthlyIncome > 99999) return 'Monthly income must be between 0 and 99,999.';
+                }
+                if (currentStep === 2) {
+                    if (formData.adults < 0 || formData.adults > formData.householdSize) return 'Number of adults invalid.';
+                    if (formData.hasChildrenUnder18) {
+                        if (formData.childrenUnder18 + formData.adults !== formData.householdSize) return 'Children under 18 + adults must equal household size.';
+                        if (formData.childrenUnder5 > formData.childrenUnder18 || formData.childrenUnder1 > formData.childrenUnder5 || formData.children3to5 > formData.childrenUnder5) return 'Child counts invalid.';
+                    }
+                }
+                if (currentStep === 3) {
+                    if (formData.rent < 0 || formData.utilities < 0 || formData.childcare < 0) return 'Expenses cannot be negative.';
+                }
+                return '';
+            };
+
+            const nextStep = () => {
+                const err = validateStep(step);
+                if (err) {
+                    setError(err);
+                    return;
+                }
+                setStep(prev => prev + 1);
+            };
+
+            const prevStep = () => setStep(prev => Math.max(1, prev - 1));
+
+            const reset = () => {
+                setFormData({
+                    householdSize: 1,
+                    monthlyIncome: 0,
+                    adults: 1,
+                    hasChildrenUnder18: false,
+                    childrenUnder18: 0,
+                    childrenUnder5: 0,
+                    childrenUnder1: 0,
+                    children3to5: 0,
+                    pregnant: false,
+                    workingStudying: false,
+                    rent: 0,
+                    utilities: 0,
+                    childcare: 0
+                });
+                setStep(1);
+                setResults([]);
+                setError('');
+            };
+
+            const calculateResults = async () => {
+                setLoading(true);
+                setError('');
+                try {
+                    const size = formData.householdSize;
+                    const fpl = await fetchFPL(size);
+                    setFplMonthly(fpl);
+                    const income = formData.monthlyIncome;
+                    const percentFPL = (income / fpl) * 100;
+                    const hasKids = formData.hasChildrenUnder18;
+                    const hasUnder5 = formData.childrenUnder5 > 0;
+                    const has3to5 = formData.children3to5 > 0;
+                    const pregnant = formData.pregnant;
+                    const working = formData.workingStudying;
+                    const adults = formData.adults;
+
+                    // SNAP calculation
+                    let earnedDed = working ? 0.2 * income : 0;
+                    let standardDed = size <= 3 ? 204 : size === 4 ? 217 : size === 5 ? 254 : 291;
+                    let depCareDed = formData.childcare;
+                    let netAfter = income - earnedDed - standardDed - depCareDed;
+                    netAfter = Math.max(netAfter, 0);
+                    let shelterCost = formData.rent + formData.utilities;
+                    let shelterDed = Math.max(0, shelterCost - 0.5 * netAfter);
+                    shelterDed = Math.min(shelterDed, 712);
+                    let netIncome = netAfter - shelterDed;
+                    let grossTest = percentFPL <= 165;
+                    let netTest = (netIncome / fpl) * 100 <= 100;
+                    let snapEligible = grossTest && netTest;
+                    let maxAllotBase = [0, 292, 536, 768, 975, 1158, 1390, 1536, 1756];
+                    let maxAllot = size <= 8 ? maxAllotBase[size] : maxAllotBase[8] + 220 * (size - 8);
+                    let snapBenefit = snapEligible ? Math.max(0, Math.round(maxAllot - 0.3 * netIncome)) : 0;
+
+                    // WIC
+                    let wicEligible = percentFPL <= 185 && (pregnant || hasUnder5);
+
+                    // Children's Medicaid/CHIP
+                    let childMedEligible = percentFPL <= 201 && hasKids;
+
+                    // Pregnancy Medicaid
+                    let pregMedEligible = percentFPL <= 198 && pregnant;
+
+                    // TANF
+                    const tanf1ParentLimits = [0, 78, 163, 188, 226, 251];
+                    const tanf2ParentsLimits = [0, 0, 125, 206, 231, 268];
+                    const tanfType = adults >= 2 ? tanf2ParentsLimits : tanf1ParentLimits;
+                    let tanfLimit = size <= 5 ? (tanfType[size] || 0) : (tanfType[5] + 43 * (size - 5));
+                    let tanfEligible = income <= tanfLimit && hasKids;
+
+                    // Parent Medicaid (TX non-expansion, approx 15% FPL for parents)
+                    let parentMedEligible = percentFPL <= 15 && hasKids && adults > 0;
+
+                    // Utility Assistance
+                    let utilityEligible = percentFPL <= 150;
+
+                    // Childcare Subsidies
+                    const smiLimitsMonthly = [0, 3802, 4971, 6141, 7311, 8481, 9650, 9870, 10089, 10308, 10528, 10747, 10966, 11186, 11405, 11624];
+                    let smiLimit = size <= 15 ? smiLimitsMonthly[size] : smiLimitsMonthly[15] + 219 * (size - 15);
+                    let childcareEligible = income <= smiLimit && hasKids && working;
+
+                    // Housing Assistance (50% AMI for Dallas area)
+                    const veryLowAMIAnnual = [0, 41100, 46950, 52800, 58650, 63350, 68050, 72750, 77450];
+                    let amiAnnual = size <= 8 ? veryLowAMIAnnual[size] : veryLowAMIAnnual[8] + 4700 * (size - 8);
+                    let amiMonthly = amiAnnual / 12;
+                    let housingEligible = income <= amiMonthly;
+
+                    // Head Start
+                    let headStartEligible = percentFPL <= 130 && has3to5;
+
+                    // School Meals
+                    let schoolMealsFree = percentFPL <= 130 && hasKids;
+                    let schoolMealsReduced = percentFPL > 130 && percentFPL <= 185 && hasKids;
+                    let schoolMeals = schoolMealsFree ? 'Free' : schoolMealsReduced ? 'Reduced' : 'Not eligible';
+
+                    // Compile results
+                    const programs = [
+                        {
+                            name: 'SNAP',
+                            eligible: snapEligible,
+                            estAmount: snapBenefit,
+                            desc: 'Food assistance program to help with groceries 😊',
+                            link: 'https://www.yourtexasbenefits.com/Learn/Home',
+                            urgent: income < fpl && hasKids,
+                            documents: 'ID, proof of income, residency',
+                            steps: 'Apply online, interview, receive EBT card.'
+                        },
+                        {
+                            name: 'WIC',
+                            eligible: wicEligible,
+                            estAmount: 50,
+                            desc: 'Nutrition for pregnant moms and young kids 👶',
+                            link: 'https://www.texaswic.org/',
+                            urgent: pregnant || formData.childrenUnder1 > 0,
+                            documents: 'ID, income proof, residency',
+                            steps: 'Find clinic, apply in person, get vouchers.'
+                        },
+                        {
+                            name: 'Children\'s Medicaid/CHIP',
+                            eligible: childMedEligible,
+                            estAmount: 0,
+                            desc: 'Health coverage for kids under 19 🏥',
+                            link: 'https://www.yourtexasbenefits.com/Learn/Home',
+                            urgent: true,
+                            documents: 'Birth certificate, income proof',
+                            steps: 'Apply online or by phone.'
+                        },
+                        {
+                            name: 'Pregnancy Medicaid',
+                            eligible: pregMedEligible,
+                            estAmount: 0,
+                            desc: 'Health care for pregnant women 🤰',
+                            link: 'https://www.yourtexasbenefits.com/Learn/Home',
+                            urgent: pregnant,
+                            documents: 'Pregnancy proof, income',
+                            steps: 'Apply immediately for coverage.'
+                        },
+                        {
+                            name: 'TANF',
+                            eligible: tanfEligible,
+                            estAmount: 200,
+                            desc: 'Cash assistance for families in need 💰',
+                            link: 'https://www.yourtexasbenefits.com/Learn/Home',
+                            urgent: income < fpl / 2,
+                            documents: 'ID, income, assets',
+                            steps: 'Apply, work requirements may apply.'
+                        },
+                        {
+                            name: 'Parent Medicaid',
+                            eligible: parentMedEligible,
+                            estAmount: 0,
+                            desc: 'Limited health coverage for parents 🏥',
+                            link: 'https://www.yourtexasbenefits.com/Learn/Home',
+                            urgent: adults > 0 && hasKids,
+                            documents: 'ID, income proof',
+                            steps: 'Apply through Texas Benefits.'
+                        },
+                        {
+                            name: 'Utility Assistance',
+                            eligible: utilityEligible,
+                            estAmount: 100,
+                            desc: 'Help with energy bills ⚡',
+                            link: 'https://www.tdhca.state.tx.us/ceap/index.htm',
+                            urgent: false,
+                            documents: 'Utility bill, income proof',
+                            steps: 'Contact local agency.'
+                        },
+                        {
+                            name: 'Childcare Subsidies',
+                            eligible: childcareEligible,
+                            estAmount: 500,
+                            desc: 'Assistance for child care costs 👨‍👩‍👧',
+                            link: 'https://www.twc.texas.gov/students/child-care-program',
+                            urgent: working && hasUnder5,
+                            documents: 'Work proof, income',
+                            steps: 'Contact Workforce Solutions.'
+                        },
+                        {
+                            name: 'Housing Assistance',
+                            eligible: housingEligible,
+                            estAmount: 0,
+                            desc: 'Help with rent or housing 🏠',
+                            link: 'https://www.tdhca.state.tx.us/',
+                            urgent: formData.rent > income * 0.3,
+                            documents: 'Income, residency',
+                            steps: 'Apply for Section 8 or public housing.'
+                        },
+                        {
+                            name: 'Head Start',
+                            eligible: headStartEligible,
+                            estAmount: 0,
+                            desc: 'Early education for preschoolers 📚',
+                            link: 'https://www.dfps.texas.gov/Child_Care/Early_Learning_Programs/Head_Start/default.asp',
+                            urgent: has3to5,
+                            documents: 'Child age proof, income',
+                            steps: 'Find local program, enroll.'
+                        },
+                        {
+                            name: 'School Meals',
+                            eligible: schoolMeals !== 'Not eligible',
+                            estAmount: 0,
+                            desc: `Eligibility for ${schoolMeals} school meals 🍎`,
+                            link: 'https://www.fns.usda.gov/cn',
+                            urgent: hasKids,
+                            documents: 'School form, income',
+                            steps: 'Apply at school.'
+                        }
+                    ];
+
+                    setResults(programs.filter(p => p.eligible));
+                } catch (e) {
+                    console.error('Calculation error:', e);
+                    setError('Sorry, something went wrong with the calculation. Please try again or use default values. 😔');
+                } finally {
+                    setLoading(false);
+                }
+            };
+
+            React.useEffect(() => {
+                if (step === 4) {
+                    calculateResults();
+                }
+            }, [step]);
+
+            const formatCurrency = (value) => {
+                return value.toLocaleString('en-US', { style: 'currency', currency: 'USD' });
+            };
+
+            const ProgressBar = () => (
+                <div className="w-full bg-gray-200 rounded-full h-2.5 mb-4">
+                    <div className="bg-blue-600 h-2.5 rounded-full" style={{ width: `${(step / 4) * 100}%` }}></div>
+                </div>
+            );
+
+            const renderStep = () => {
+                switch (step) {
+                    case 1:
+                        return (
+                            <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+                                <h2 className="text-xl font-bold mb-4">Step 1: Basic Info</h2>
+                                <ProgressBar />
+                                <label className="block mb-2">Household Size (1-20)</label>
+                                <input type="number" name="householdSize" min="1" max="20" value={formData.householdSize} onChange={handleChange} className="border p-2 w-full mb-4" aria-label="Household size" />
+                                <label className="block mb-2">Monthly Income</label>
+                                <input type="number" name="monthlyIncome" value={formData.monthlyIncome} onChange={handleChange} className="border p-2 w-full mb-4" aria-label="Monthly income" />
+                                {error && <p className="text-red-500 mb-4">{error}</p>}
+                                <button onClick={nextStep} className="bg-blue-500 text-white p-2 rounded">Next ➡️</button>
+                            </div>
+                        );
+                    case 2:
+                        return (
+                            <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+                                <h2 className="text-xl font-bold mb-4">Step 2: Family Details</h2>
+                                <ProgressBar />
+                                <label className="block mb-2">Number of Adults</label>
+                                <input type="number" name="adults" min="0" value={formData.adults} onChange={handleChange} className="border p-2 w-full mb-4" aria-label="Number of adults" />
+                                <label className="block mb-2">Has Children Under 18?</label>
+                                <select name="hasChildrenUnder18" value={formData.hasChildrenUnder18} onChange={handleChange} className="border p-2 w-full mb-4">
+                                    <option value={false}>No</option>
+                                    <option value={true}>Yes</option>
+                                </select>
+                                {formData.hasChildrenUnder18 && (
+                                    <>
+                                        <label className="block mb-2">Number of Children Under 18</label>
+                                        <input type="number" name="childrenUnder18" min="0" value={formData.childrenUnder18} onChange={handleChange} className="border p-2 w-full mb-4" />
+                                        <label className="block mb-2">Number Under 5</label>
+                                        <input type="number" name="childrenUnder5" min="0" value={formData.childrenUnder5} onChange={handleChange} className="border p-2 w-full mb-4" />
+                                        <label className="block mb-2">Number Under 1</label>
+                                        <input type="number" name="childrenUnder1" min="0" value={formData.childrenUnder1} onChange={handleChange} className="border p-2 w-full mb-4" />
+                                        <label className="block mb-2">Number Ages 3-5</label>
+                                        <input type="number" name="children3to5" min="0" value={formData.children3to5} onChange={handleChange} className="border p-2 w-full mb-4" />
+                                    </>
+                                )}
+                                <label className="block mb-2">Pregnant?</label>
+                                <select name="pregnant" value={formData.pregnant} onChange={handleChange} className="border p-2 w-full mb-4">
+                                    <option value={false}>No</option>
+                                    <option value={true}>Yes</option>
+                                </select>
+                                <label className="block mb-2">Working or Studying?</label>
+                                <select name="workingStudying" value={formData.workingStudying} onChange={handleChange} className="border p-2 w-full mb-4">
+                                    <option value={false}>No</option>
+                                    <option value={true}>Yes</option>
+                                </select>
+                                {error && <p className="text-red-500 mb-4">{error}</p>}
+                                <button onClick={prevStep} className="bg-gray-500 text-white p-2 rounded mr-2">Back</button>
+                                <button onClick={nextStep} className="bg-blue-500 text-white p-2 rounded">Next ➡️</button>
+                            </div>
+                        );
+                    case 3:
+                        return (
+                            <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+                                <h2 className="text-xl font-bold mb-4">Step 3: Expenses (Optional)</h2>
+                                <ProgressBar />
+                                <label className="block mb-2">Monthly Rent</label>
+                                <input type="number" name="rent" value={formData.rent} onChange={handleChange} className="border p-2 w-full mb-4" aria-label="Monthly rent" />
+                                <label className="block mb-2">Monthly Utilities</label>
+                                <input type="number" name="utilities" value={formData.utilities} onChange={handleChange} className="border p-2 w-full mb-4" aria-label="Monthly utilities" />
+                                <label className="block mb-2">Monthly Childcare</label>
+                                <input type="number" name="childcare" value={formData.childcare} onChange={handleChange} className="border p-2 w-full mb-4" aria-label="Monthly childcare" />
+                                {error && <p className="text-red-500 mb-4">{error}</p>}
+                                <button onClick={prevStep} className="bg-gray-500 text-white p-2 rounded mr-2">Back</button>
+                                <button onClick={nextStep} className="bg-blue-500 text-white p-2 rounded">See Results! 🎉</button>
+                            </div>
+                        );
+                    case 4:
+                        if (loading) return (
+                            <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md text-center">
+                                <h2 className="text-xl font-bold mb-4">Calculating...</h2>
+                                <div className="loader ease-linear rounded-full border-4 border-t-4 border-gray-200 h-12 w-12 mx-auto animate-spin" style={{ borderTopColor: '#3498db' }}></div>
+                            </div>
+                        );
+                        if (error) return (
+                            <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+                                <h2 className="text-xl font-bold mb-4">Error</h2>
+                                <p className="text-red-500">{error}</p>
+                                <button onClick={reset} className="bg-blue-500 text-white p-2 rounded mt-4">Reset</button>
+                            </div>
+                        );
+                        return (
+                            <div className="max-w-md mx-auto bg-white p-6 rounded-lg shadow-md">
+                                <h2 className="text-xl font-bold mb-4">Results 😊</h2>
+                                <ProgressBar />
+                                {results.length === 0 ? (
+                                    <p>No eligible programs based on your info. Try adjusting inputs! 🙂</p>
+                                ) : (
+                                    <ul className="list-disc pl-5">
+                                        {results.map((p, i) => (
+                                            <li key={i} className="mb-6">
+                                                <strong>{p.name}</strong>: Eligible! Est. {formatCurrency(p.estAmount)}/month
+                                                <p>{p.desc}</p>
+                                                <a href={p.link} target="_blank" rel="noopener noreferrer" className="text-blue-500">Apply Here</a>
+                                                {p.urgent && <p className="text-red-500">Urgent: Apply soon!</p>}
+                                                <p>Documents: {p.documents}</p>
+                                                <p>Steps: {p.steps}</p>
+                                            </li>
+                                        ))}
+                                    </ul>
+                                )}
+                                <button onClick={reset} className="bg-blue-500 text-white p-2 rounded mt-4">Reset and Start Over</button>
+                            </div>
+                        );
+                    default:
+                        return null;
+                }
+            };
+
+            return (
+                <div className="container mx-auto p-4">
+                    <h1 className="text-3xl font-bold text-center mb-6">Benefits Eligibility Calculator for Families 🌟</h1>
+                    {renderStep()}
+                </div>
+            );
+        };
+
+        ReactDOM.render(<App />, document.getElementById('root'));
+    </script>
+</body>
+</html>
