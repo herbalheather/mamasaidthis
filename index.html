@@ -1,8 +1,8 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
     <title>Mama Said This | Free Tools for Parents & Working Folks</title>
     <meta name="description" content="Free tools built by a mom who believes in sharing, not selling. Pay stub generator, budget tracker, worksheets, crisis help, and more. No paywalls, just love.">
     <meta name="keywords" content="free tools, pay stub generator, budget tracker, homeschool worksheets, crisis resources, parent tools, working folks, #MamaSaidTools">
@@ -10,7 +10,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
     <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js" defer></script>
-    
+
     <!-- Google Analytics -->
     <script async src="https://www.googletagmanager.com/gtag/js?id=G-TEKT43VC4J"></script>
     <script>
@@ -21,6 +21,7 @@
     </script>
 
     <style>
+        /* (Your original CSS preserved exactly — no changes except minimal styles for the iframe & share modal) */
         :root {
             --primary: #ff69b4;
             --primary-dark: #e85d75;
@@ -137,25 +138,24 @@
             align-items: center;
             justify-content: center;
         }
-        .hero-carousel {
+        /* Removed image carousel styles - replaced with iframe responsive container */
+        .hero-embed {
             position: relative;
             width: 100%;
-            height: 400px;
+            padding-bottom: 65%;
+            height: 0;
             border-radius: 12px;
             overflow: hidden;
             box-shadow: var(--shadow-light);
+            background: #fff;
         }
-        .hero-carousel img {
+        .hero-embed iframe {
             position: absolute;
-            top: 0;
-            left: 0;
+            inset: 0;
             width: 100%;
             height: 100%;
-            object-fit: cover;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
+            border: 0;
         }
-        .hero-carousel img.active { opacity: 1; }
         .btn {
             background: var(--primary);
             color: white;
@@ -366,7 +366,7 @@
         @media (max-width: 768px) {
             .hero { grid-template-columns: 1fr; text-align: center; min-height: auto; }
             .hero-image { order: -1; padding: 1rem; }
-            .hero-carousel { height: 300px; }
+            .hero-embed { height: auto; padding-bottom: 65%; }
             .tool-grid { grid-template-columns: 1fr; }
             .nav-links { justify-content: center; }
             .hero-buttons { justify-content: center; }
@@ -375,7 +375,7 @@
             .about-grid { grid-template-columns: 1fr; }
         }
 
-        /* Video carousel styles (kept from your fixed section) */
+        /* Video carousel + other styles preserved */
         .video-section{background:var(--card-bg);border-radius:12px;padding:2rem;margin:2rem auto;max-width:900px;box-shadow:var(--shadow-light);text-align:center}
         .videos-carousel{position:relative;overflow:hidden}
         .video-track{display:flex;transition:transform .5s ease}
@@ -389,6 +389,41 @@
         .carousel-btn.next{right:10px}
         .video-card p{margin-top:.5rem;color:var(--text-secondary)}
         @media(max-width:768px){.carousel-btn{font-size:1.5rem}}
+
+        /* Share modal styles */
+        .share-modal-backdrop {
+            position: fixed;
+            inset: 0;
+            background: rgba(0,0,0,0.6);
+            display: none;
+            align-items: center;
+            justify-content: center;
+            z-index: 2000;
+        }
+        .share-modal {
+            background: var(--card-bg);
+            padding: 1.25rem;
+            border-radius: 12px;
+            width: 320px;
+            max-width: 90%;
+            text-align: center;
+            box-shadow: var(--shadow-light);
+        }
+        .share-modal a, .share-modal button {
+            display: block;
+            margin: 0.5rem 0;
+            padding: 0.6rem;
+            border-radius: 8px;
+            text-decoration: none;
+            color: var(--text-primary);
+        }
+        .share-modal .copy-btn {
+            background: var(--primary);
+            color: #fff;
+            border: none;
+            cursor: pointer;
+        }
+        .share-modal-backdrop.show { display: flex; }
     </style>
 </head>
 <body data-theme="dark">
@@ -417,14 +452,23 @@
                 <p>Tired of paying for basic stuff? Free tools for exhausted parents, moms, and working folks juggling life. Mama said sharing's better than selling.</p>
                 <div class="hero-buttons">
                     <a href="#tools" class="btn">Grab the Good Stuff</a>
-                    <a href="https://x.com/intent/tweet?text=Check%20out%20free%20tools%20at%20Mama%20Said%20This!%20%23MamaSaidTools&url=https://mamasaidthis.pages.dev" class="btn social-btn" target="_blank" rel="noopener noreferrer">Share on X</a>
+
+                    <!-- Basket & Beyond placeholder + Share with Folks button -->
+                    <a id="bb-link" href="#" class="btn social-btn" target="_blank" rel="noopener noreferrer" aria-label="Basket and Beyond">Basket &amp; Beyond</a>
+                    <button id="share-button" class="btn social-btn" aria-haspopup="dialog" aria-controls="shareModal">Share with Folks</button>
                 </div>
             </div>
+
+            <!-- REPLACED: hero-carousel ➜ Benefit Calculator iframe embed (responsive) -->
             <div class="hero-image">
-                <div class="hero-carousel">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwwUAxMTAxMTAxMTAxMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMT/2wBDAQICAgMDAwYDAwYMCAcIDAwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgID/wAARCACAAIADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWm5ybnJ2eoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWm5ydn6KjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9/KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==" alt="Baby sleeping" class="active">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwwUAxMTAxMTAxMTAxMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMT/2wBDAQICAgMDAwYDAwYMCAcIDAwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgID/wAARCACAAIADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWm5ybnJ2eoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWm5ydn6KjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9/KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==" alt="Family with newborn">
-                    <img src="data:image/jpeg;base64,/9j/4AAQSkZJRgABAQEAYABgAAD/2wBDAAIBAQIBAQICAgICAgICAwUDAwwUAxMTAxMTAxMTAxMTExMTExMTExMTExMTExMTExMTExMTExMTExMTExMT/2wBDAQICAgMDAwYDAwYMCAcIDAwICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgICAgID/wAARCACAAIADASIAAhEBAxEB/8QAHwAAAQUBAQEBAQEAAAAAAAAAAAECAwQFBgcICQoL/8QAtRAAAgEDAwIEAwUFBAQAAAF9AQIDAAQRBRIhMUEGE1FhByJxFDKBkaEII0KxwRVS0fAkM2JyggkKFhcYGRolJicoKSo0NTY3ODk6Q0RFRkdISUpTVFVWV1hZWmNkZWZnaGlqc3R1dnd4eXqDhIWGh4iJipKTlJWWm5ybnJ2eoqOkpaanqKmqsrO0tba2uLm6wsPExcbHyMnK0tPU1dbX2Nna4uPk5ebn6Onq8vP09fb3+Pn6/8QAHwEAAwEBAQEBAQAAAAAAAAECAwQFBgcICQoL/8QAtREAAgECBAQDBAcFBAQAAQJ3AAECAxEEBSExBhJBUQdhcRMiMoEIFEKRobHBCSMzUvAVYnLRChYkNOEl8RcYGRomJygpKjU2Nzg5OkNERUZHSElKU1RVVldYWWpzdHV2d3h5eoKDhIWGh4iJipKTlJWWm5ydn6KjpKWmp6ipqrKztLW2t7i5usLDxMXGx8jJytLT1NXW19jZ2uHi4+Tl5ufo6erx8vP09fb3+Pn6/9oADAMBAAIRAxEAPwD9/KKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigAooooAKKKKACiiigD/2Q==" alt="Kids playing">
+                <div class="hero-embed" aria-label="Benefit Calculator">
+                    <iframe
+                        src="https://b4ee6cd6.benefitcalculator1.pages.dev/"
+                        title="Benefits Eligibility Calculator - Mama Said This"
+                        loading="lazy"
+                        sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
+                        referrerpolicy="no-referrer"
+                    ></iframe>
                 </div>
             </div>
         </section>
@@ -525,26 +569,21 @@
             <div id="waitlistError" class="error"></div>
         </section>
 
-        <!-- START: Cleaned - AFTER WAITLIST show ONLY Mama's Quick Tips (videos), then Suggest form, then footer -->
-        <!-- Mama's Quick Tips (YouTube carousel) -->
         <section id="videos" class="video-section scroll-reveal">
           <h2>Mama's Quick Tips 🎥</h2>
           <div class="videos-carousel">
             <button class="carousel-btn prev">❮</button>
             <div class="video-track">
-              <!-- keep the list you provided (trimmed to a manageable set, originals retained) -->
               <div class="video-card"><a href="https://www.youtube.com/watch?v=heHrDAR2lXs" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/heHrDAR2lXs/mqdefault.jpg" alt="Quick tip on organizing family schedules efficiently."><div class="play-button">▶</div></a><p>Quick tip on organizing family schedules efficiently.</p></div>
               <div class="video-card"><a href="https://www.youtube.com/watch?v=L69hLf4Bk7A" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/L69hLf4Bk7A/mqdefault.jpg" alt="Easy meal prep ideas for busy parents."><div class="play-button">▶</div></a><p>Easy meal prep ideas for busy parents.</p></div>
               <div class="video-card"><a href="https://www.youtube.com/watch?v=RlwcR81qPVo" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/RlwcR81qPVo/mqdefault.jpg" alt="Fun activities to keep kids engaged at home."><div class="play-button">▶</div></a><p>Fun activities to keep kids engaged at home.</p></div>
               <div class="video-card"><a href="https://www.youtube.com/watch?v=YIqSupX-d_M" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/YIqSupX-d_M/mqdefault.jpg" alt="Budgeting hacks for family finances."><div class="play-button">▶</div></a><p>Budgeting hacks for family finances.</p></div>
               <div class="video-card"><a href="https://www.youtube.com/watch?v=MX0ugH_Gv-8" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/MX0ugH_Gv-8/mqdefault.jpg" alt="Simple self-care routines for moms."><div class="play-button">▶</div></a><p>Simple self-care routines for moms.</p></div>
-              <!-- add more entries if you want — original list kept in your backup -->
             </div>
             <button class="carousel-btn next">❯</button>
           </div>
         </section>
 
-        <!-- Suggest a Tool (keeps original form below videos) -->
         <section id="suggest" class="form-section scroll-reveal">
             <h2>Suggest a Tool</h2>
             <p>Got an idea? Share it! Smarts are free. Tag a friend who'd love this!</p>
@@ -573,7 +612,6 @@
             <div id="suggestSuccess" class="success">Idea sent! You're a co-creator.</div>
             <div id="suggestError" class="error"></div>
         </section>
-        <!-- END: Cleaned section -->
 
     </main>
 
@@ -583,6 +621,20 @@
         <p>&copy; 2025 Mama Said This. | <a href="https://heatherherbalhome.pages.dev/">Herbal Home</a> | <a href="mailto:heather@herbalhomeschool.work.gd">Contact</a> | <a href="https://github.com/herbalheather">GitHub</a></p>
         <p><a href="https://ko-fi.com/mamasaidherbalhomeschool">Buy Mama Coffee – Free Tools Don't Grow on Trees!</a></p>
     </footer>
+
+    <!-- SHARE MODAL -->
+    <div id="shareModalBackdrop" class="share-modal-backdrop" aria-hidden="true">
+        <div class="share-modal" role="dialog" aria-modal="true" id="shareModal" aria-labelledby="shareModalTitle">
+            <h3 id="shareModalTitle">Share Mama Said This</h3>
+            <a id="shareEmail" href="#" target="_blank" rel="noopener noreferrer">Share by Email</a>
+            <a id="shareFacebook" href="#" target="_blank" rel="noopener noreferrer">Share to Facebook</a>
+            <a id="shareX" href="#" target="_blank" rel="noopener noreferrer">Share to X</a>
+            <a id="shareLinkedIn" href="#" target="_blank" rel="noopener noreferrer">Share to LinkedIn</a>
+            <a id="shareWhatsapp" href="#" target="_blank" rel="noopener noreferrer">Share to WhatsApp</a>
+            <button id="copyLinkBtn" class="copy-btn" title="Copy link">Copy link</button>
+            <button id="closeShare" style="margin-top:.5rem;">Close</button>
+        </div>
+    </div>
 
     <!-- SCRIPTS (kept and consolidated) -->
     <script>
@@ -599,14 +651,6 @@
             if (tbtn) tbtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
         }
 
-        function nextHeroImg() {
-            const imgs = document.querySelectorAll('.hero-carousel img');
-            if (imgs.length === 0) return;
-            imgs[currentHeroImg].classList.remove('active');
-            currentHeroImg = (currentHeroImg + 1) % imgs.length;
-            imgs[currentHeroImg].classList.add('active');
-        }
-
         if (typeof gtag !== 'undefined') {
             gtag('event', 'page_view', {
                 page_path: window.location.pathname,
@@ -620,11 +664,7 @@
             const tbtn = document.querySelector('.theme-toggle');
             if (tbtn) tbtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
 
-            const heroCarouselImgs = document.querySelectorAll('.hero-carousel img');
-            if (heroCarouselImgs.length > 0) {
-                heroCarouselImgs[0].classList.add('active');
-                setInterval(nextHeroImg, 5000);
-            }
+            // NOTE: hero-carousel images were removed and replaced by iframe embed — no image rotation needed.
 
             const toolIdea = document.getElementById('toolIdea');
             const charCount = document.getElementById('charCount');
@@ -734,6 +774,77 @@
                 next.addEventListener('click',()=>showSlide(current+1));
                 showSlide(current);
             }
+
+            // Share button & modal logic
+            const shareBtn = document.getElementById('share-button');
+            const backdrop = document.getElementById('shareModalBackdrop');
+            const closeShare = document.getElementById('closeShare');
+            const copyBtn = document.getElementById('copyLinkBtn');
+
+            const pageUrl = window.location.href;
+            const shareText = encodeURIComponent("Check out free tools at Mama Said This! ");
+
+            // Build share links
+            const emailLink = `mailto:?subject=Mama Said This&body=${shareText}${encodeURIComponent(pageUrl)}`;
+            const fbLink = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
+            const xLink = `https://x.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(pageUrl)}`;
+            const liLink = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(pageUrl)}&title=${shareText}`;
+            const waLink = `https://api.whatsapp.com/send?text=${shareText}${encodeURIComponent(pageUrl)}`;
+
+            document.getElementById('shareEmail').href = emailLink;
+            document.getElementById('shareFacebook').href = fbLink;
+            document.getElementById('shareX').href = xLink;
+            document.getElementById('shareLinkedIn').href = liLink;
+            document.getElementById('shareWhatsapp').href = waLink;
+
+            // Show share modal or use Web Share API on mobile
+            if (shareBtn) {
+                shareBtn.addEventListener('click', async () => {
+                    const shareData = { title: document.title, text: "Check out Mama Said This — free tools for parents.", url: pageUrl };
+                    if (navigator.share) {
+                        try {
+                            await navigator.share(shareData);
+                            return;
+                        } catch (err) {
+                            // fallback to modal
+                        }
+                    }
+                    backdrop.classList.add('show');
+                    backdrop.setAttribute('aria-hidden', 'false');
+                });
+            }
+            if (closeShare) {
+                closeShare.addEventListener('click', () => {
+                    backdrop.classList.remove('show');
+                    backdrop.setAttribute('aria-hidden', 'true');
+                });
+            }
+            if (copyBtn) {
+                copyBtn.addEventListener('click', async () => {
+                    try {
+                        await navigator.clipboard.writeText(pageUrl);
+                        copyBtn.textContent = 'Copied ✓';
+                        setTimeout(()=>copyBtn.textContent='Copy link', 1800);
+                    } catch (e) {
+                        copyBtn.textContent = 'Copy failed';
+                        setTimeout(()=>copyBtn.textContent='Copy link', 1800);
+                    }
+                });
+            }
+
+            // Basket & Beyond placeholder: set href later when you provide the URL
+            const bbLink = document.getElementById('bb-link');
+            if (bbLink) {
+                bbLink.href = '#'; // placeholder — update with real URL when available
+            }
+
+            // Close modal when clicking outside modal content
+            backdrop.addEventListener('click', (e) => {
+                if (e.target === backdrop) {
+                    backdrop.classList.remove('show');
+                    backdrop.setAttribute('aria-hidden', 'true');
+                }
+            });
         });
     </script>
 
