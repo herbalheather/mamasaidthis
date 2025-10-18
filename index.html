@@ -4,262 +4,207 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Mama Said This</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="style.css">
     <style>
         body {
             font-family: Arial, sans-serif;
+            background-color: #121212;
+            color: #ffc0cb;
             margin: 0;
             padding: 0;
-            background-color: #fff8f2;
-            color: #333;
         }
-        header, footer {
-            background-color: #ff6f61;
-            color: white;
-            padding: 15px 20px;
-            text-align: center;
-        }
-        header h1 {
-            margin: 0;
-            font-size: 2em;
-        }
-        nav a {
-            color: white;
-            margin: 0 10px;
+        a {
+            color: #ff69b4;
             text-decoration: none;
-            font-weight: bold;
         }
-        nav a:hover {
+        a:hover {
             text-decoration: underline;
         }
-        .section {
+        header, section {
             padding: 20px;
-            margin: 20px auto;
-            max-width: 1000px;
-            background-color: #fff3ef;
-            border-radius: 12px;
-            box-shadow: 0 4px 8px rgba(0,0,0,0.1);
         }
-        h2 {
-            color: #ff6f61;
-            font-size: 1.8em;
+        h1, h2 {
+            color: #ff69b4;
         }
-        .missions {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
-            gap: 15px;
-        }
-        .mission {
-            background-color: #ffece6;
+        /* Carousel Styles */
+        .carousel-container {
+            position: relative;
+            max-width: 100%;
+            margin: auto;
+            overflow: hidden;
             border-radius: 10px;
-            padding: 15px;
-            cursor: pointer;
-            transition: all 0.3s ease;
+            margin-bottom: 30px;
+        }
+        .carousel-slide {
             display: flex;
-            justify-content: space-between;
-            align-items: center;
+            transition: transform 0.5s ease-in-out;
+        }
+        .carousel-slide img {
+            width: 100%;
+            flex-shrink: 0;
+            border-radius: 10px;
+        }
+        .prev, .next {
+            cursor: pointer;
+            position: absolute;
+            top: 50%;
+            width: auto;
+            padding: 16px;
+            margin-top: -22px;
+            color: #fff;
+            font-weight: bold;
+            font-size: 18px;
+            border-radius: 0 3px 3px 0;
+            user-select: none;
+            background-color: rgba(0,0,0,0.5);
+        }
+        .next {
+            right: 0;
+            border-radius: 3px 0 0 3px;
+        }
+        /* Mama Missions */
+        .mission {
+            background-color: #1e1e1e;
+            color: #fff;
+            margin: 10px 0;
+            padding: 15px;
+            border-radius: 10px;
+            cursor: pointer;
+            transition: transform 0.2s ease;
         }
         .mission.completed {
-            background-color: #d4f7d4;
+            background-color: #2ecc71;
             text-decoration: line-through;
+            transform: scale(1.05);
+            animation: bounce 0.3s;
         }
-        .badge {
-            font-size: 1.2em;
-            color: #ff6f61;
-            display: none;
+        @keyframes bounce {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.2); }
+            100% { transform: scale(1.05); }
         }
-        .mission.completed .badge {
-            display: inline-block;
-        }
-        .carousel {
-            display: flex;
-            overflow-x: auto;
-            gap: 10px;
-            padding: 10px 0;
-        }
-        .carousel img {
-            border-radius: 12px;
-            max-height: 200px;
-            flex-shrink: 0;
-        }
-        button {
-            background-color: #ff6f61;
+        /* Buttons */
+        .button {
+            background-color: #ff69b4;
+            color: #121212;
+            padding: 10px 20px;
+            margin-top: 10px;
             border: none;
-            color: white;
-            padding: 10px 15px;
-            border-radius: 6px;
+            border-radius: 5px;
             cursor: pointer;
-            margin-top: 10px;
         }
-        button:hover {
-            background-color: #ff4c3b;
+        .button:hover {
+            background-color: #ff85c1;
         }
-        .emergency-mode {
-            background-color: #ffe6e6;
+        .donation-tracker {
+            background-color: #1e1e1e;
             padding: 15px;
-            border-radius: 12px;
-        }
-        .donation-info {
+            border-radius: 10px;
             margin-top: 10px;
-            font-size: 0.9em;
-        }
-        .encouragement {
-            margin-top: 10px;
-            font-size: 0.9em;
-            color: #ff6f61;
-            font-weight: bold;
-        }
-        .hidden {
-            display: none;
-        }
-        @media (max-width: 600px) {
-            .missions {
-                grid-template-columns: 1fr;
-            }
-            .carousel img {
-                max-height: 150px;
-            }
         }
     </style>
 </head>
 <body>
     <header>
         <h1>Mama Said This</h1>
-        <nav>
-            <a href="#mama-missions">Mama Missions</a>
-            <a href="#emergency-mode">Emergency Mode</a>
-            <a href="#make-money">Make Some Money</a>
-        </nav>
+        <p>Helpful, humorous, and safe tools for moms and anyone navigating life.</p>
     </header>
 
+    <!-- About Me Section -->
+    <section id="about">
+        <h2>About Me</h2>
+        <p>Welcome! I’m Heather, the mama who gets it. I’ve built this space to help you navigate life’s challenges with humor, tools, and micro-actions that actually work.</p>
+    </section>
+
     <!-- Family Photo Carousel -->
-    <section class="section">
+    <section id="family-photos">
         <h2>Family Moments</h2>
-        <div class="carousel">
-            <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509834/5_ujxicv.jpg" alt="Family 1">
-            <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509677/image_qwartb.png" alt="Family 2">
-            <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760681617/My%20Brand/Gemini_Generated_Image_2osr732osr732osr_lqxnfv_0e6052.jpg" alt="Family 3">
-            <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760514144/IMG_7931_ultakf.jpg" alt="Family 4">
-            <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509658/image_2_ehf6uc.png" alt="Family 5">
-            <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509680/image_1_lfil6f.png" alt="Family 6">
-            <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509659/image_3_sjo6wo.png" alt="Family 7">
-            <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760675249/IMG_3172_hexvkd.jpg" alt="Family 8">
-            <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760514144/IMG_6713_x6etel.jpg" alt="Family 9">
-            <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760511594/QVZoU0loZ2RKeUlFX21hckRHVUlPVmFt_vkysti.jpg" alt="Family 10">
-            <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760514144/IMG_1856_omjhjo.jpg" alt="Family 11">
-            <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509834/7b46b45a-9c95-451b-9e43-7199613b0bf3_uwuomg.jpg" alt="Family 12">
-            <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760514109/7DA622BA-94AA-44B5-A39B-96226A652AF9_fiitvp.jpg" alt="Family 13">
+        <div class="carousel-container">
+            <div class="carousel-slide" id="photoSlide">
+                <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509834/5_ujxicv.jpg" alt="Family 1">
+                <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509677/image_qwartb.png" alt="Family 2">
+                <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760681617/My%20Brand/Gemini_Generated_Image_2osr732osr732osr_lqxnfv_0e6052.jpg" alt="Family 3">
+                <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760514144/IMG_7931_ultakf.jpg" alt="Family 4">
+                <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509658/image_2_ehf6uc.png" alt="Family 5">
+                <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509680/image_1_lfil6f.png" alt="Family 6">
+                <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509659/image_3_sjo6wo.png" alt="Family 7">
+                <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760675249/IMG_3172_hexvkd.jpg" alt="Family 8">
+                <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760514144/IMG_6713_x6etel.jpg" alt="Family 9">
+                <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760511594/QVZoU0loZ2RKeUlFX21hckRHVUlPVmFt_vkysti.jpg" alt="Family 10">
+                <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760514144/IMG_1856_omjhjo.jpg" alt="Family 11">
+                <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509834/7b46b45a-9c95-451b-9e43-7199613b0bf3_uwuomg.jpg" alt="Family 12">
+                <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760514109/7DA622BA-94AA-44B5-A39B-96226A652AF9_fiitvp.jpg" alt="Family 13">
+            </div>
+            <a class="prev" onclick="plusSlide(-1)">&#10094;</a>
+            <a class="next" onclick="plusSlide(1)">&#10095;</a>
         </div>
     </section>
 
-    <!-- Mama Missions -->
-    <section class="section" id="mama-missions">
-        <h2>Mama Missions</h2>
-        <p>Fun micro-actions to help you feel accomplished. Click to mark as done! Humor included 😉</p>
-        <div class="missions" id="missions-list">
-            <div class="mission" data-mission="Do the laundry">Do the laundry 🧺 <span class="badge">✅</span></div>
-            <div class="mission" data-mission="Declutter one corner">Declutter one corner 🧹 <span class="badge">✅</span></div>
-            <div class="mission" data-mission="Call a loved one">Call a loved one 📞 <span class="badge">✅</span></div>
-            <div class="mission" data-mission="Drink a full glass of water">Drink a full glass of water 💧 <span class="badge">✅</span></div>
-            <div class="mission" data-mission="Stretch for 2 minutes">Stretch for 2 minutes 🤸‍♀️ <span class="badge">✅</span></div>
-            <div class="mission" data-mission="Make yourself a snack">Make yourself a snack 🍎 <span class="badge">✅</span></div>
-            <div class="mission" data-mission="Send a nice message">Send a nice message 💌 <span class="badge">✅</span></div>
+    <!-- Mama Missions Section -->
+    <section id="mama-missions">
+        <h2>Mama Missions (Micro Actions Game)</h2>
+        <div id="missionsContainer">
+            <div class="mission" onclick="toggleMission(this)">Do laundry and dance to your favorite song 🎶</div>
+            <div class="mission" onclick="toggleMission(this)">Declutter one shelf or drawer 🧹</div>
+            <div class="mission" onclick="toggleMission(this)">Send a funny meme to a friend 😂</div>
+            <div class="mission" onclick="toggleMission(this)">Prep tomorrow’s breakfast 🥣</div>
+            <div class="mission" onclick="toggleMission(this)">Stretch or take a quick walk 🚶‍♀️</div>
         </div>
-        <div class="encouragement" id="encouragement-msg"></div>
-        <button id="export-missions">Export Checklist</button>
-        <button id="reset-missions">Reset Missions</button>
+        <button class="button" onclick="exportMissions()">Export Checklist</button>
+        <button class="button" onclick="resetMissions()">Reset</button>
     </section>
 
-    <!-- Emergency Mode -->
-    <section class="section emergency-mode" id="emergency-mode">
+    <!-- Emergency Mode Section -->
+    <section id="emergency-mode">
         <h2>Emergency Mode — I Need Help Now</h2>
-        <p>This one-tap mode surfaces nearest shelters and urgent hotlines. Always official numbers. <strong>Do not replace 911 in a true emergency.</strong></p>
-        <label for="zip">Enter ZIP Code:</label>
-        <input type="text" id="zip" placeholder="Your ZIP">
-        <button id="find-help">Find Nearest Resources</button>
-        <div id="emergency-results"></div>
+        <p>If you’re in crisis, press the button below. It redirects safely to verified resources and can be closed quickly.</p>
+        <button class="button" onclick="window.location.href='https://www.thehotline.org/dvbeds/'">Go to Hotline / Shelters</button>
     </section>
 
-    <!-- Make Some Money / Tiny Grants -->
-    <section class="section" id="make-money">
-        <h2>Make Some Money!</h2>
-        <p>Monthly micro-grants for small needs. Only what we have to give, no promises. Transparent + fair.</p>
-        <button id="apply-grant">Apply for Relief Ticket</button>
-        <button onclick="window.open('https://ko-fi.com/mamasaidthis', '_blank')">Donate to Cause</button>
-        <div class="donation-info">
+    <!-- Make Some Money / Tiny Grants Section -->
+    <section id="tiny-grants">
+        <h2>Make Some Money! Tiny Grants</h2>
+        <p>Apply for a tiny grant to help with urgent needs. All free, no promises beyond what’s available. Microcopy rules and selection process apply.</p>
+        <button class="button">Apply for Relief Ticket</button>
+        <button class="button" onclick="window.open('https://ko-fi.com/mamasaidthis','_blank')">Donate to the Cause</button>
+        <div class="donation-tracker">
             Donations currently as of today: $5.00<br>
             Donations given as of today: $10.00
         </div>
     </section>
 
     <footer>
-        <p>&copy; 2025 Mama Said This | <a href="#emergency-mode" style="color: white;">Emergency Exit</a></p>
+        <p>&copy; 2025 Mama Said This | Built with ❤️ for moms and everyone navigating life</p>
     </footer>
 
     <script>
-        // Mama Missions JS
-        const missions = document.querySelectorAll('.mission');
-        const completedMissions = [];
-        const encouragement = document.getElementById('encouragement-msg');
-        const encouragementMessages = [
-            "You're crushing it! 💪",
-            "Way to go, mama! 🌟",
-            "Keep it up, supermom! 🦸‍♀️",
-            "Nice! Every small step counts! 🏆",
-            "Mission accomplished! 🎯"
-        ];
+        // Photo Carousel
+        let slideIndex = 0;
+        const slides = document.getElementById('photoSlide');
+        const totalSlides = slides.children.length;
 
-        missions.forEach(mission => {
-            mission.addEventListener('click', () => {
-                mission.classList.toggle('completed');
-                const missionText = mission.dataset.mission;
-                if (mission.classList.contains('completed')) {
-                    if (!completedMissions.includes(missionText)) completedMissions.push(missionText);
-                    encouragement.textContent = encouragementMessages[Math.floor(Math.random()*encouragementMessages.length)];
-                } else {
-                    const index = completedMissions.indexOf(missionText);
-                    if (index > -1) completedMissions.splice(index, 1);
-                    encouragement.textContent = "";
-                }
-            });
-        });
+        function showSlide(index) {
+            if(index >= totalSlides) slideIndex = 0;
+            else if(index < 0) slideIndex = totalSlides - 1;
+            else slideIndex = index;
+            slides.style.transform = 'translateX(' + (-slideIndex * 100) + '%)';
+        }
+        function plusSlide(n) { showSlide(slideIndex + n); }
+        showSlide(slideIndex);
 
-        document.getElementById('export-missions').addEventListener('click', () => {
-            if(completedMissions.length === 0){
-                alert("No missions completed yet! 😅");
-                return;
-            }
-            const text = completedMissions.join("\n");
-            const blob = new Blob([text], { type: "text/plain" });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = "MamaMissionsChecklist.txt";
-            a.click();
-            URL.revokeObjectURL(url);
-        });
-
-        document.getElementById('reset-missions').addEventListener('click', () => {
-            missions.forEach(mission => mission.classList.remove('completed'));
-            completedMissions.length = 0;
-            encouragement.textContent = "";
-        });
-
-        // Emergency Mode JS
-        document.getElementById('find-help').addEventListener('click', () => {
-            const zip = document.getElementById('zip').value.trim();
-            if(!zip){
-                alert("Please enter a ZIP code!");
-                return;
-            }
-            const resultsDiv = document.getElementById('emergency-results');
-            resultsDiv.innerHTML = `<p>Nearest shelters and resources for ZIP: ${zip}</p>
-            <ul>
-                <li><a href="https://www.thehotline.org/dvbeds/" target="_blank">Domestic Violence Shelter</a></li>
-                <li>Local Food Bank (Check Google Maps)</li>
-                <li>Local Urgent Hotline (Check Google Maps)</li>
-            </ul>`;
-        });
+        // Mama Missions toggle with fun animation
+        function toggleMission(el) {
+            el.classList.toggle('completed');
+        }
+        function exportMissions() {
+            let completed = [];
+            document.querySelectorAll('.mission.completed').forEach(m => completed.push(m.textContent));
+            if(completed.length) alert('Completed Missions:\n' + completed.join('\n'));
+            else alert('No missions completed yet.');
+        }
+        function resetMissions() {
+            document.querySelectorAll('.mission').forEach(m => m.classList.remove('completed'));
+        }
     </script>
 </body>
 </html>
