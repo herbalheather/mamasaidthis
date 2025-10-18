@@ -1,862 +1,343 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-    <title>Mama Said This | Free Tools for Parents & Working Folks</title>
-    <meta name="description" content="Free tools built by a mom who believes in sharing, not selling. Pay stub generator, budget tracker, worksheets, crisis help, and more. No paywalls, just love.">
-    <meta name="keywords" content="free tools, pay stub generator, budget tracker, homeschool worksheets, crisis resources, parent tools, working folks, #MamaSaidTools">
-    <meta name="author" content="Heather, Mama Said This">
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@700;800;900&family=Inter:wght@400;500;600;700&family=Dancing+Script:wght@700&display=swap" rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css" integrity="sha512-iecdLmaskl7CVkqkXNQ/ZH/XLlvWZOJyj7Yy7tcenmpD1ypASozpmT/E0iPtmFIB46ZmdtAc9eNBvH0H/ZpiBw==" crossorigin="anonymous" referrerpolicy="no-referrer">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/canvas-confetti/1.6.0/confetti.browser.min.js" defer></script>
-
-    <!-- Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=G-TEKT43VC4J"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
-        gtag('config', 'G-TEKT43VC4J');
-    </script>
-
-    <style>
-        /* (Your original CSS preserved exactly — no changes except minimal styles for the iframe & share modal) */
-        :root {
-            --primary: #ff69b4;
-            --primary-dark: #e85d75;
-            --secondary: #9cc69b;
-            --accent: #ffd54f;
-            --neon-blue: #00ffff;
-            --dark: #5c5f77;
-            --light: #f7ede2;
-            --bg: linear-gradient(135deg, #f7ede2 0%, #9cc69b 20%, #ff69b4 100%);
-            --card-bg: rgba(255, 255, 255, 0.95);
-            --text-primary: #5c5f77;
-            --text-secondary: #6b7280;
-            --border: #e5e7eb;
-            --shadow-light: 0 4px 20px rgba(0,0,0,0.1);
-            --shadow-hover: 0 10px 30px rgba(0,0,0,0.15);
-        }
-        [data-theme="dark"] {
-            --bg: linear-gradient(135deg, #0a0a0f 0%, #1a1a2e 100%);
-            --card-bg: #1e1e2e;
-            --text-primary: #f8f8f8;
-            --text-secondary: #b8b8b8;
-            --border: #333344;
-        }
-        [data-theme="dark"] .hero {
-            background: linear-gradient(135deg, rgba(10,10,15,0.9) 0%, rgba(26,26,46,0.9) 20%, rgba(255,105,180,0.2) 100%);
-        }
-        [data-theme="dark"] .tool-card:hover {
-            background: linear-gradient(135deg, rgba(255,255,255,0.05) 0%, rgba(156,198,155,0.1) 100%);
-        }
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        body {
-            font-family: 'Inter', sans-serif;
-            color: var(--text-primary);
-            background: var(--bg);
-            line-height: 1.6;
-            overflow-x: hidden;
-            transition: all 0.3s ease;
-        }
-        h1, h2, h3 { font-family: 'Poppins', sans-serif; }
-        main { flex: 1; }
-        nav {
-            background: var(--card-bg);
-            position: sticky;
-            top: 0;
-            z-index: 1000;
-            box-shadow: var(--shadow-light);
-            padding: 1rem 1.5rem;
-        }
-        .nav-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-        .nav-logo img { height: 2rem; width: auto; }
-        .nav-links {
-            display: flex;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .nav-links a, .nav-links button {
-            color: var(--text-primary);
-            text-decoration: none;
-            font-weight: 600;
-            background: none;
-            border: none;
-            cursor: pointer;
-            padding: 0;
-            font-size: 1rem;
-        }
-        .nav-links a:hover, .nav-links button:hover { color: var(--primary); }
-        .theme-toggle {
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-        .hero {
-            display: grid;
-            grid-template-columns: 1.2fr 1fr;
-            align-items: center;
-            padding: 4rem 2rem;
-            min-height: 80vh;
-            background: linear-gradient(135deg, rgba(247, 237, 226, 0.8) 0%, rgba(156, 198, 155, 0.8) 20%, rgba(255, 105, 180, 0.8) 100%);
-        }
-        .hero-card {
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-            animation: fadeInUp 0.8s ease-out;
-        }
-        .hero-card h1 {
-            font-size: 2.8rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            font-family: 'Dancing Script', cursive;
-        }
-        .hero-card p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-            font-size: 1.1rem;
-        }
-        .hero-buttons {
-            display: flex;
-            flex-wrap: wrap;
-            gap: 1rem;
-        }
-        .hero-image {
-            padding: 2rem;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        /* Removed image carousel styles - replaced with iframe responsive container */
-        .hero-embed {
-            position: relative;
-            width: 100%;
-            padding-bottom: 65%;
-            height: 0;
-            border-radius: 12px;
-            overflow: hidden;
-            box-shadow: var(--shadow-light);
-            background: #fff;
-        }
-        .hero-embed iframe {
-            position: absolute;
-            inset: 0;
-            width: 100%;
-            height: 100%;
-            border: 0;
-        }
-        .btn {
-            background: var(--primary);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 25px;
-            text-decoration: none;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-        }
-        .btn:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-        .support-btn {
-            background: var(--accent);
-            color: var(--dark);
-            position: fixed;
-            top: 20px;
-            right: 20px;
-            z-index: 900;
-        }
-        .support-btn:hover { background: #d4a017; }
-        .social-btn {
-            background: var(--secondary);
-            color: var(--dark);
-        }
-        .social-btn:hover { background: #82c6c0; }
-        .tool-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-            padding: 2rem;
-            max-width: 1200px;
-            margin: 0 auto;
-        }
-        .tool-card {
-            background: var(--card-bg);
-            padding: 1.5rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-            transition: all 0.3s ease;
-            animation: bounceIn 0.6s ease-out;
-            text-align: center;
-        }
-        .tool-card:hover {
-            transform: scale(1.05);
-            box-shadow: var(--shadow-hover);
-            background: linear-gradient(135deg, var(--light) 0%, #9cc69b 100%);
-        }
-        .tool-card i {
-            font-size: 3rem;
-            color: var(--primary);
-            margin-bottom: 1rem;
-            display: block;
-        }
-        .tool-card h3 {
-            color: var(--primary);
-            margin-bottom: 0.5rem;
-        }
-        .tool-card p { color: var(--text-secondary); margin-bottom: 1rem; }
-        .tool-card .btn {
-            width: auto;
-            margin-top: 0.5rem;
-            margin-right: 0.3rem;
-        }
-        .about-section {
-            max-width: 900px;
-            margin: 2rem auto;
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-        }
-        .about-section h2 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-            text-align: center;
-        }
-        .about-grid {
-            display: grid;
-            grid-template-columns: 1fr 1fr;
-            gap: 1.5rem;
-            margin-bottom: 1.5rem;
-        }
-        .about-grid p {
-            color: var(--text-secondary);
-            font-size: 0.95rem;
-            line-height: 1.5;
-        }
-        .about-section .dedication {
-            font-size: 0.9rem;
-            font-style: italic;
-            color: var(--text-secondary);
-            margin-top: 1rem;
-            padding-top: 1rem;
-            border-top: 1px solid var(--border);
-            text-align: center;
-        }
-        .form-section {
-            max-width: 600px;
-            margin: 0 auto 2rem;
-            background: var(--card-bg);
-            padding: 2rem;
-            border-radius: 12px;
-            box-shadow: var(--shadow-light);
-        }
-        .form-section h2 {
-            color: var(--primary);
-            margin-bottom: 1rem;
-        }
-        .form-section > p {
-            color: var(--text-secondary);
-            margin-bottom: 1.5rem;
-        }
-        .form-group {
-            margin-bottom: 1rem;
-        }
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-            color: var(--text-primary);
-        }
-        .form-group input, .form-group textarea, .form-group select {
-            width: 100%;
-            padding: 0.8rem;
-            border: 1px solid var(--border);
-            border-radius: 8px;
-            font-family: 'Inter', sans-serif;
-            background: var(--card-bg);
-            color: var(--text-primary);
-        }
-        .form-group textarea { resize: vertical; }
-        .char-count {
-            font-size: 0.85rem;
-            color: var(--text-secondary);
-            margin-top: 0.25rem;
-        }
-        .submit-btn {
-            background: var(--primary);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 25px;
-            cursor: pointer;
-            font-weight: 600;
-            transition: all 0.3s ease;
-            width: 100%;
-        }
-        .submit-btn:hover:not(:disabled) {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-        .submit-btn:disabled { 
-            background: #ccc; 
-            cursor: not-allowed; 
-            opacity: 0.6;
-        }
-        .success, .error {
-            display: none;
-            margin-top: 1rem;
-            padding: 1rem;
-            border-radius: 8px;
-            animation: slideIn 0.3s ease-out;
-        }
-        .success { 
-            background: #d1fae5; 
-            color: #065f46; 
-        }
-        .error { 
-            background: #fee2e2; 
-            color: #991b1b; 
-        }
-        .success.show, .error.show { display: block; }
-        footer {
-            background: var(--card-bg);
-            padding: 2rem;
-            text-align: center;
-            box-shadow: var(--shadow-light);
-            margin-top: 2rem;
-        }
-        footer a { color: var(--primary); text-decoration: none; }
-        footer a:hover { text-decoration: underline; }
-        .section-title {
-            text-align: center;
-            font-size: 2rem;
-            color: var(--primary);
-            margin: 2rem 0 1rem 0;
-            font-family: 'Poppins', sans-serif;
-        }
-        .scroll-reveal { animation: fadeInUp 0.8s ease-out; }
-        @keyframes fadeInUp {
-            0% { transform: translateY(20px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-        @keyframes bounceIn {
-            0% { transform: scale(0.8); opacity: 0; }
-            60% { transform: scale(1.1); opacity: 1; }
-            100% { transform: scale(1); }
-        }
-        @keyframes slideIn {
-            0% { transform: translateY(-10px); opacity: 0; }
-            100% { transform: translateY(0); opacity: 1; }
-        }
-        @media (max-width: 768px) {
-            .hero { grid-template-columns: 1fr; text-align: center; min-height: auto; }
-            .hero-image { order: -1; padding: 1rem; }
-            .hero-embed { height: auto; padding-bottom: 65%; }
-            .tool-grid { grid-template-columns: 1fr; }
-            .nav-links { justify-content: center; }
-            .hero-buttons { justify-content: center; }
-            .support-btn { position: static; width: 100%; margin-top: 1rem; }
-            .hero-card h1 { font-size: 2rem; }
-            .about-grid { grid-template-columns: 1fr; }
-        }
-
-        /* Video carousel + other styles preserved */
-        .video-section{background:var(--card-bg);border-radius:12px;padding:2rem;margin:2rem auto;max-width:900px;box-shadow:var(--shadow-light);text-align:center}
-        .videos-carousel{position:relative;overflow:hidden}
-        .video-track{display:flex;transition:transform .5s ease}
-        .video-card{flex:0 0 100%;max-width:100%;opacity:0;transition:opacity .4s ease-in-out;position:relative}
-        .video-card.active{opacity:1}
-        .video-card img{width:100%;border-radius:10px;box-shadow:var(--shadow-light)}
-        .play-button{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);font-size:3rem;color:white;text-shadow:0 2px 8px rgba(0,0,0,.7);pointer-events:none}
-        .carousel-btn{background:var(--primary);border:none;color:white;font-size:2rem;cursor:pointer;position:absolute;top:50%;transform:translateY(-50%);padding:.3rem .8rem;border-radius:50%;box-shadow:var(--shadow-light);transition:background .3s;z-index:10}
-        .carousel-btn:hover{background:var(--primary-dark)}
-        .carousel-btn.prev{left:10px}
-        .carousel-btn.next{right:10px}
-        .video-card p{margin-top:.5rem;color:var(--text-secondary)}
-        @media(max-width:768px){.carousel-btn{font-size:1.5rem}}
-
-        /* Share modal styles */
-        .share-modal-backdrop {
-            position: fixed;
-            inset: 0;
-            background: rgba(0,0,0,0.6);
-            display: none;
-            align-items: center;
-            justify-content: center;
-            z-index: 2000;
-        }
-        .share-modal {
-            background: var(--card-bg);
-            padding: 1.25rem;
-            border-radius: 12px;
-            width: 320px;
-            max-width: 90%;
-            text-align: center;
-            box-shadow: var(--shadow-light);
-        }
-        .share-modal a, .share-modal button {
-            display: block;
-            margin: 0.5rem 0;
-            padding: 0.6rem;
-            border-radius: 8px;
-            text-decoration: none;
-            color: var(--text-primary);
-        }
-        .share-modal .copy-btn {
-            background: var(--primary);
-            color: #fff;
-            border: none;
-            cursor: pointer;
-        }
-        .share-modal-backdrop.show { display: flex; }
-    </style>
-</head>
-<body data-theme="dark">
-    <nav>
-        <div class="nav-container">
-            <div class="nav-logo">
-                <img src="https://i.imgur.com/3T0Mf1R.png" alt="Mama Said This Logo">
-            </div>
-            <div class="nav-links">
-                <a href="https://mamasaidthis.pages.dev/resources" target="_blank" rel="noopener noreferrer">Crisis</a>
-                <a href="#suggest">Suggest a Tool</a>
-                <a href="#waitlist">Join Waitlist</a>
-                <a href="#tools">Tools</a>
-                <a href="#about">About</a>
-                <a href="https://heatherherbalhome.pages.dev/" target="_blank" rel="noopener noreferrer">Herbal Home</a>
-                <a href="https://ko-fi.com/mamasaidherbalhomeschool" class="btn" target="_blank" rel="noopener noreferrer">Buy Coffee</a>
-                <button class="theme-toggle" onclick="toggleTheme()" aria-label="Toggle theme">☀️</button>
-            </div>
-        </div>
-    </nav>
-
-    <main>
-        <section class="hero">
-            <div class="hero-card">
-                <h1>No Paywalls. No Nonsense.</h1>
-                <p>Tired of paying for basic stuff? Free tools for exhausted parents, moms, and working folks juggling life. Mama said sharing's better than selling.</p>
-                <div class="hero-buttons">
-                    <a href="#tools" class="btn">Grab the Good Stuff</a>
-
-                    <!-- Basket & Beyond placeholder + Share with Folks button -->
-                    <a id="bb-link" href="#" class="btn social-btn" target="_blank" rel="noopener noreferrer" aria-label="Basket and Beyond">Basket &amp; Beyond</a>
-                    <button id="share-button" class="btn social-btn" aria-haspopup="dialog" aria-controls="shareModal">Share with Folks</button>
-                </div>
-            </div>
-
-            <!-- REPLACED: hero-carousel ➜ Benefit Calculator iframe embed (responsive) -->
-            <div class="hero-image">
-                <div class="hero-embed" aria-label="Benefit Calculator">
-                    <iframe
-                        src="https://b4ee6cd6.benefitcalculator1.pages.dev/"
-                        title="Benefits Eligibility Calculator - Mama Said This"
-                        loading="lazy"
-                        sandbox="allow-forms allow-scripts allow-same-origin allow-popups"
-                        referrerpolicy="no-referrer"
-                    ></iframe>
-                </div>
-            </div>
-        </section>
-
-        <section id="donate" class="form-section scroll-reveal">
-            <h2>Support the Cause</h2>
-            <p>If these tools help you, buy me a coffee. Every bit keeps me building.</p>
-            <a href="https://ko-fi.com/mamasaidherbalhomeschool" class="btn" target="_blank" rel="noopener noreferrer">Donate</a>
-        </section>
-
-        <section id="about" class="about-section scroll-reveal">
-            <h2>Hey, I'm Heather</h2>
-            <div class="about-grid">
-                <div>
-                    <p>I make free tools because I've been the one who needed them. From coding to herbalism, these tools are things I wish I could have found when I needed them most.</p>
-                    <p>It's bad enough going through tough times without hitting paywalls for basic information. Mama said hell no to that.</p>
-                </div>
-                <div>
-                    <p>My mom died when I was 19, just as I learned I was pregnant with my first. Food banks, emergency C-sections, multiple cash cars, and a pandemic with newborn twins taught me everything.</p>
-                    <p>So I built this—pantry finders, budget help, resources that don't judge or gatekeep.</p>
-                </div>
-            </div>
-            <p class="dedication">For Carrie Hilliard, Donna Chambers, and Elva McConnell, who ran a free clothing store in Italy, Texas for years and gave without asking why.</p>
-        </section>
-
-        <section id="tools" class="scroll-reveal">
-            <h2 class="section-title">Built with Love. Shared Free.</h2>
-            <p style="text-align: center; max-width: 800px; margin: 0 auto 2rem; color: var(--text-secondary);">Free tools for real moms. No fluff. No judgment. Just honest resources.</p>
-            <div class="tool-grid">
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">💸</div>
-                    <h3>Texas Pay Stub Generator</h3>
-                    <p>Pro pay stubs for budgeting. Save as PDF for records!</p>
-                    <a href="https://calculator-ea5.pages.dev/" target="_blank" rel="noopener noreferrer" class="btn">Use Now</a>
-                </div>
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">💰</div>
-                    <h3>Budget Tracker</h3>
-                    <p>Track cash flow, no app needed. Free and simple.</p>
-                    <a href="https://mamasaidthis.pages.dev/budget-tracker" target="_blank" rel="noopener noreferrer" class="btn">Track It</a>
-                </div>
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">📚</div>
-                    <h3>Worksheet Generators</h3>
-                    <p>K-6 math & reading worksheets. Learning's free!</p>
-                    <a href="https://edusheet-chooser.pages.dev/" target="_blank" rel="noopener noreferrer" class="btn">Chooser</a>
-                    <a href="https://k6-worksheet-generator.pages.dev/" target="_blank" rel="noopener noreferrer" class="btn">K-6 Gen</a>
-                    <a href="https://edusheet-generator.pages.dev/" target="_blank" rel="noopener noreferrer" class="btn">EduSheet</a>
-                </div>
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">❤️</div>
-                    <h3>Crisis Resources</h3>
-                    <p>Food banks, shelters & emergency help. Bookmark it!</p>
-                    <a href="https://mamasaidthis.pages.dev/resources" target="_blank" rel="noopener noreferrer" class="btn">Get Help</a>
-                </div>
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">🧮</div>
-                    <h3>Debt Payoff Calculator</h3>
-                    <p>See your debt-free date in months. You're closer than you think!</p>
-                    <a href="#" class="btn">Coming Soon</a>
-                </div>
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">📈</div>
-                    <h3>Income vs. Time Tracker</h3>
-                    <p>Know if your gig is worth the hustle. No time-wasters!</p>
-                    <a href="#" class="btn">Coming Soon</a>
-                </div>
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">🔍</div>
-                    <h3>Hidden Money Audit</h3>
-                    <p>Find your money leaks and turn oops into oh yeah!</p>
-                    <a href="#" class="btn">Coming Soon</a>
-                </div>
-                <div class="tool-card">
-                    <div style="font-size: 3rem; margin-bottom: 1rem;">⏰</div>
-                    <h3>Childcare Cost Check</h3>
-                    <p>Is work worth the juggle? Get the real numbers.</p>
-                    <a href="#" class="btn">Coming Soon</a>
-                </div>
-            </div>
-        </section>
-
-        <section id="waitlist" class="form-section scroll-reveal">
-            <h2>Join the Waitlist</h2>
-            <p>Get updates on new tools. No spam. No sharing. Unsubscribe anytime.</p>
-            <form id="waitlistForm">
-                <div class="form-group">
-                    <label for="waitlist-name">Your Name (or 'Mom')</label>
-                    <input type="text" id="waitlist-name" name="name" placeholder="Cool Mom">
-                </div>
-                <div class="form-group">
-                    <label for="waitlist-email">Email</label>
-                    <input type="email" id="waitlist-email" name="email" required placeholder="you@awesome.com">
-                </div>
-                <button type="submit" class="submit-btn">Join</button>
-            </form>
-            <div id="waitlistSuccess" class="success">You're in! Check email.</div>
-            <div id="waitlistError" class="error"></div>
-        </section>
-
-        <section id="videos" class="video-section scroll-reveal">
-          <h2>Mama's Quick Tips 🎥</h2>
-          <div class="videos-carousel">
-            <button class="carousel-btn prev">❮</button>
-            <div class="video-track">
-              <div class="video-card"><a href="https://www.youtube.com/watch?v=heHrDAR2lXs" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/heHrDAR2lXs/mqdefault.jpg" alt="Quick tip on organizing family schedules efficiently."><div class="play-button">▶</div></a><p>Quick tip on organizing family schedules efficiently.</p></div>
-              <div class="video-card"><a href="https://www.youtube.com/watch?v=L69hLf4Bk7A" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/L69hLf4Bk7A/mqdefault.jpg" alt="Easy meal prep ideas for busy parents."><div class="play-button">▶</div></a><p>Easy meal prep ideas for busy parents.</p></div>
-              <div class="video-card"><a href="https://www.youtube.com/watch?v=RlwcR81qPVo" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/RlwcR81qPVo/mqdefault.jpg" alt="Fun activities to keep kids engaged at home."><div class="play-button">▶</div></a><p>Fun activities to keep kids engaged at home.</p></div>
-              <div class="video-card"><a href="https://www.youtube.com/watch?v=YIqSupX-d_M" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/YIqSupX-d_M/mqdefault.jpg" alt="Budgeting hacks for family finances."><div class="play-button">▶</div></a><p>Budgeting hacks for family finances.</p></div>
-              <div class="video-card"><a href="https://www.youtube.com/watch?v=MX0ugH_Gv-8" target="_blank" rel="noopener noreferrer"><img src="https://img.youtube.com/vi/MX0ugH_Gv-8/mqdefault.jpg" alt="Simple self-care routines for moms."><div class="play-button">▶</div></a><p>Simple self-care routines for moms.</p></div>
-            </div>
-            <button class="carousel-btn next">❯</button>
-          </div>
-        </section>
-
-        <section id="suggest" class="form-section scroll-reveal">
-            <h2>Suggest a Tool</h2>
-            <p>Got an idea? Share it! Smarts are free. Tag a friend who'd love this!</p>
-            <form id="suggestForm">
-                <div class="form-group">
-                    <label for="suggest-name">Your Name (optional)</label>
-                    <input type="text" id="suggest-name" name="name" placeholder="Super Mom">
-                </div>
-                <div class="form-group">
-                    <label for="toolType">Tool Type</label>
-                    <select id="toolType" name="type" required>
-                        <option value="" disabled selected>Pick one</option>
-                        <option value="Finance">Finance</option>
-                        <option value="Education">Education</option>
-                        <option value="Lifestyle">Lifestyle</option>
-                        <option value="Other">Other</option>
-                    </select>
-                </div>
-                <div class="form-group">
-                    <label for="toolIdea">Your Idea</label>
-                    <textarea id="toolIdea" name="idea" rows="4" maxlength="500" required placeholder="E.g., Meal planner for kids."></textarea>
-                    <div class="char-count"><span id="charCount">0</span>/500</div>
-                </div>
-                <button type="submit" class="submit-btn">Send</button>
-            </form>
-            <div id="suggestSuccess" class="success">Idea sent! You're a co-creator.</div>
-            <div id="suggestError" class="error"></div>
-        </section>
-
-    </main>
-
-    <a href="https://ko-fi.com/mamasaidherbalhomeschool" class="support-btn" target="_blank" rel="noopener noreferrer">Buy Me Coffee</a>
-
-    <footer>
-        <p>&copy; 2025 Mama Said This. | <a href="https://heatherherbalhome.pages.dev/">Herbal Home</a> | <a href="mailto:heather@herbalhomeschool.work.gd">Contact</a> | <a href="https://github.com/herbalheather">GitHub</a></p>
-        <p><a href="https://ko-fi.com/mamasaidherbalhomeschool">Buy Mama Coffee – Free Tools Don't Grow on Trees!</a></p>
-    </footer>
-
-    <!-- SHARE MODAL -->
-    <div id="shareModalBackdrop" class="share-modal-backdrop" aria-hidden="true">
-        <div class="share-modal" role="dialog" aria-modal="true" id="shareModal" aria-labelledby="shareModalTitle">
-            <h3 id="shareModalTitle">Share Mama Said This</h3>
-            <a id="shareEmail" href="#" target="_blank" rel="noopener noreferrer">Share by Email</a>
-            <a id="shareFacebook" href="#" target="_blank" rel="noopener noreferrer">Share to Facebook</a>
-            <a id="shareX" href="#" target="_blank" rel="noopener noreferrer">Share to X</a>
-            <a id="shareLinkedIn" href="#" target="_blank" rel="noopener noreferrer">Share to LinkedIn</a>
-            <a id="shareWhatsapp" href="#" target="_blank" rel="noopener noreferrer">Share to WhatsApp</a>
-            <button id="copyLinkBtn" class="copy-btn" title="Copy link">Copy link</button>
-            <button id="closeShare" style="margin-top:.5rem;">Close</button>
-        </div>
-    </div>
-
-    <!-- SCRIPTS (kept and consolidated) -->
-    <script>
-        const FORMSPARK_FORM_ID = 'IXDD7cliS';
-        let currentHeroImg = 0;
-
-        function toggleTheme() {
-            const body = document.body;
-            const currentTheme = body.getAttribute('data-theme');
-            const newTheme = currentTheme === 'light' ? 'dark' : 'light';
-            body.setAttribute('data-theme', newTheme);
-            localStorage.setItem('theme', newTheme);
-            const tbtn = document.querySelector('.theme-toggle');
-            if (tbtn) tbtn.textContent = newTheme === 'dark' ? '☀️' : '🌙';
-        }
-
-        if (typeof gtag !== 'undefined') {
-            gtag('event', 'page_view', {
-                page_path: window.location.pathname,
-                page_title: document.title
-            });
-        }
-
-        document.addEventListener('DOMContentLoaded', () => {
-            const savedTheme = localStorage.getItem('theme') || 'dark';
-            document.body.setAttribute('data-theme', savedTheme);
-            const tbtn = document.querySelector('.theme-toggle');
-            if (tbtn) tbtn.textContent = savedTheme === 'dark' ? '☀️' : '🌙';
-
-            // NOTE: hero-carousel images were removed and replaced by iframe embed — no image rotation needed.
-
-            const toolIdea = document.getElementById('toolIdea');
-            const charCount = document.getElementById('charCount');
-            if (toolIdea && charCount) {
-                toolIdea.addEventListener('input', () => {
-                    charCount.textContent = toolIdea.value.length;
-                });
-            }
-
-            async function submitToFormspark(formId, formData) {
-                const form = document.getElementById(formId);
-                const submitBtn = form ? form.querySelector('.submit-btn') : null;
-                const successDiv = document.getElementById(`${formId}Success`);
-                const errorDiv = document.getElementById(`${formId}Error`);
-
-                try {
-                    if (submitBtn) submitBtn.disabled = true;
-                    if (errorDiv) errorDiv.classList.remove('show');
-
-                    const response = await fetch(`https://api.formspark.io/v1/forms/${FORMSPARK_FORM_ID}/submissions`, {
-                        method: 'POST',
-                        headers: { 'Content-Type': 'application/json' },
-                        body: JSON.stringify({...formData, timestamp: new Date().toISOString()})
-                    });
-
-                    if (response.ok || response.status === 201) {
-                        if (successDiv) {
-                            successDiv.classList.add('show');
-                        }
-                        if (form) form.reset();
-                        if (charCount) charCount.textContent = '0';
-                        setTimeout(() => { if (successDiv) successDiv.classList.remove('show'); }, 4000);
-                    } else {
-                        throw new Error('Submission failed');
-                    }
-                } catch (err) {
-                    console.error('Error:', err);
-                    if (errorDiv) {
-                        errorDiv.textContent = 'Something went wrong. Try again later.';
-                        errorDiv.classList.add('show');
-                        setTimeout(() => errorDiv.classList.remove('show'), 6000);
-                    }
-                } finally {
-                    if (submitBtn) submitBtn.disabled = false;
-                }
-            }
-
-            const waitlistForm = document.getElementById('waitlistForm');
-            if (waitlistForm) {
-                waitlistForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const email = document.getElementById('waitlist-email').value.trim();
-                    const name = document.getElementById('waitlist-name').value.trim();
-                    submitToFormspark('waitlistForm', { 
-                        name: name || 'Anonymous', 
-                        email,
-                        formType: 'Waitlist Signup'
-                    });
-                });
-            }
-
-            const suggestForm = document.getElementById('suggestForm');
-            if (suggestForm) {
-                suggestForm.addEventListener('submit', (e) => {
-                    e.preventDefault();
-                    const toolType = document.getElementById('toolType').value;
-                    const idea = document.getElementById('toolIdea').value.trim();
-                    const name = document.getElementById('suggest-name').value.trim();
-                    submitToFormspark('suggestForm', { 
-                        name: name || 'Anonymous', 
-                        toolType,
-                        idea,
-                        formType: 'Tool Suggestion'
-                    });
-                });
-            }
-
-            document.querySelectorAll('a[href^="#"]').forEach(a => {
-                a.addEventListener('click', (e) => {
-                    const href = a.getAttribute('href');
-                    if (href !== '#' && document.querySelector(href)) {
-                        e.preventDefault();
-                        document.querySelector(href).scrollIntoView({
-                            behavior: 'smooth'
-                        });
-                    }
-                });
-            });
-
-            /* Video carousel functionality (keeps the fixed behavior) */
-            const track = document.querySelector('.video-track');
-            const cards = document.querySelectorAll('.video-card');
-            const prev = document.querySelector('.carousel-btn.prev');
-            const next = document.querySelector('.carousel-btn.next');
-            let current = 0;
-            function showSlide(i){
-                if (!cards || cards.length === 0) return;
-                cards.forEach(c=>c.classList.remove('active'));
-                if (i >= cards.length) i = 0;
-                if (i < 0) i = cards.length - 1;
-                cards[i].classList.add('active');
-                if (track) track.style.transform = `translateX(-${i*100}%)`;
-                current = i;
-            }
-            if (prev && next && cards.length>0) {
-                prev.addEventListener('click',()=>showSlide(current-1));
-                next.addEventListener('click',()=>showSlide(current+1));
-                showSlide(current);
-            }
-
-            // Share button & modal logic
-            const shareBtn = document.getElementById('share-button');
-            const backdrop = document.getElementById('shareModalBackdrop');
-            const closeShare = document.getElementById('closeShare');
-            const copyBtn = document.getElementById('copyLinkBtn');
-
-            const pageUrl = window.location.href;
-            const shareText = encodeURIComponent("Check out free tools at Mama Said This! ");
-
-            // Build share links
-            const emailLink = `mailto:?subject=Mama Said This&body=${shareText}${encodeURIComponent(pageUrl)}`;
-            const fbLink = `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(pageUrl)}`;
-            const xLink = `https://x.com/intent/tweet?text=${shareText}&url=${encodeURIComponent(pageUrl)}`;
-            const liLink = `https://www.linkedin.com/shareArticle?mini=true&url=${encodeURIComponent(pageUrl)}&title=${shareText}`;
-            const waLink = `https://api.whatsapp.com/send?text=${shareText}${encodeURIComponent(pageUrl)}`;
-
-            document.getElementById('shareEmail').href = emailLink;
-            document.getElementById('shareFacebook').href = fbLink;
-            document.getElementById('shareX').href = xLink;
-            document.getElementById('shareLinkedIn').href = liLink;
-            document.getElementById('shareWhatsapp').href = waLink;
-
-            // Show share modal or use Web Share API on mobile
-            if (shareBtn) {
-                shareBtn.addEventListener('click', async () => {
-                    const shareData = { title: document.title, text: "Check out Mama Said This — free tools for parents.", url: pageUrl };
-                    if (navigator.share) {
-                        try {
-                            await navigator.share(shareData);
-                            return;
-                        } catch (err) {
-                            // fallback to modal
-                        }
-                    }
-                    backdrop.classList.add('show');
-                    backdrop.setAttribute('aria-hidden', 'false');
-                });
-            }
-            if (closeShare) {
-                closeShare.addEventListener('click', () => {
-                    backdrop.classList.remove('show');
-                    backdrop.setAttribute('aria-hidden', 'true');
-                });
-            }
-            if (copyBtn) {
-                copyBtn.addEventListener('click', async () => {
-                    try {
-                        await navigator.clipboard.writeText(pageUrl);
-                        copyBtn.textContent = 'Copied ✓';
-                        setTimeout(()=>copyBtn.textContent='Copy link', 1800);
-                    } catch (e) {
-                        copyBtn.textContent = 'Copy failed';
-                        setTimeout(()=>copyBtn.textContent='Copy link', 1800);
-                    }
-                });
-            }
-
-            // Basket & Beyond placeholder: set href later when you provide the URL
-            const bbLink = document.getElementById('bb-link');
-            if (bbLink) {
-                bbLink.href = '#'; // placeholder — update with real URL when available
-            }
-
-            // Close modal when clicking outside modal content
-            backdrop.addEventListener('click', (e) => {
-                if (e.target === backdrop) {
-                    backdrop.classList.remove('show');
-                    backdrop.setAttribute('aria-hidden', 'true');
-                }
-            });
-        });
-    </script>
-
-    <script type="application/ld+json">
-    {
-        "@context": "https://schema.org",
-        "@type": "WebSite",
-        "name": "Mama Said This",
-        "url": "https://mamasaidthis.pages.dev",
-        "description": "Free tools for parents: pay stub generator, budget tracker, worksheets, and crisis resources.",
-        "publisher": { "@type": "Person", "name": "Heather" }
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Mama Said This</title>
+  <link rel="stylesheet" href="styles.css">
+  <style>
+    /* Core theme colors */
+    :root {
+      --bg-dark: #1B1B2F;
+      --bg-light: #FFE4E1;
+      --text-dark: #FFFFFF;
+      --text-light: #333333;
+      --accent-dark: #E0AFA0;
+      --accent-light: #C08081;
+      --hover-accent: #FF6F61;
     }
-    </script>
+
+    body {
+      margin: 0;
+      font-family: 'Arial', sans-serif;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+      transition: background 0.3s, color 0.3s;
+    }
+
+    body.light-mode {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
+
+    header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 1rem 2rem;
+      background-color: var(--bg-dark);
+      transition: background 0.3s;
+    }
+
+    body.light-mode header {
+      background-color: var(--bg-light);
+    }
+
+    nav a {
+      margin: 0 1rem;
+      color: inherit;
+      text-decoration: none;
+      font-weight: bold;
+    }
+
+    nav a:hover {
+      color: var(--hover-accent);
+    }
+
+    .theme-toggle {
+      cursor: pointer;
+      font-size: 1.2rem;
+      background: none;
+      border: 2px solid var(--accent-dark);
+      color: var(--accent-dark);
+      padding: 0.3rem 0.8rem;
+      border-radius: 5px;
+      transition: all 0.3s;
+    }
+
+    body.light-mode .theme-toggle {
+      border-color: var(--accent-light);
+      color: var(--accent-light);
+    }
+
+    /* Carousel */
+    .carousel {
+      position: relative;
+      max-width: 90%;
+      margin: 2rem auto;
+      overflow: hidden;
+      border-radius: 15px;
+    }
+
+    .carousel img {
+      width: 100%;
+      display: none;
+      border-radius: 15px;
+      transition: opacity 1s ease-in-out;
+    }
+
+    .carousel img.active {
+      display: block;
+    }
+
+    .carousel button {
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+      background-color: rgba(0,0,0,0.5);
+      border: none;
+      color: white;
+      font-size: 2rem;
+      padding: 0 10px;
+      cursor: pointer;
+    }
+
+    .carousel button.prev { left: 10px; }
+    .carousel button.next { right: 10px; }
+
+    /* Mama Missions */
+    .mama-missions {
+      margin: 3rem auto;
+      max-width: 800px;
+      padding: 1rem;
+      border: 2px solid var(--accent-dark);
+      border-radius: 15px;
+      background-color: rgba(255, 255, 255, 0.05);
+    }
+
+    body.light-mode .mama-missions {
+      border-color: var(--accent-light);
+      background-color: rgba(0,0,0,0.05);
+    }
+
+    .mission {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin: 0.5rem 0;
+      padding: 0.5rem 1rem;
+      border-radius: 10px;
+      background-color: rgba(0,0,0,0.1);
+      cursor: pointer;
+      transition: all 0.3s;
+    }
+
+    .mission.completed {
+      text-decoration: line-through;
+      opacity: 0.6;
+      background-color: rgba(0,0,0,0.2);
+    }
+
+    body.light-mode .mission {
+      background-color: rgba(255,255,255,0.3);
+    }
+
+    .mission:hover {
+      background-color: var(--hover-accent);
+      color: white;
+    }
+
+    .mission-controls {
+      margin-top: 1rem;
+      display: flex;
+      justify-content: space-between;
+    }
+
+    .mission-controls button {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background-color: var(--accent-dark);
+      color: white;
+      font-weight: bold;
+    }
+
+    body.light-mode .mission-controls button {
+      background-color: var(--accent-light);
+    }
+
+    /* Emergency Mode */
+    .emergency-mode {
+      margin: 3rem auto;
+      max-width: 800px;
+      padding: 1rem;
+      border: 2px solid #FF6F61;
+      border-radius: 15px;
+      background-color: rgba(255, 0, 0, 0.05);
+    }
+
+    .emergency-mode button {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background-color: #FF6F61;
+      color: white;
+      font-weight: bold;
+    }
+
+    /* Tiny Grants / Donations */
+    .grants {
+      margin: 3rem auto;
+      max-width: 800px;
+      padding: 1rem;
+      border: 2px solid var(--accent-dark);
+      border-radius: 15px;
+      background-color: rgba(0,0,0,0.05);
+    }
+
+    body.light-mode .grants {
+      border-color: var(--accent-light);
+      background-color: rgba(0,0,0,0.05);
+    }
+
+    .grants button {
+      padding: 0.5rem 1rem;
+      border-radius: 8px;
+      border: none;
+      cursor: pointer;
+      background-color: var(--accent-dark);
+      color: white;
+      font-weight: bold;
+    }
+
+    body.light-mode .grants button {
+      background-color: var(--accent-light);
+    }
+
+    /* Footer */
+    footer {
+      text-align: center;
+      padding: 1rem;
+      margin-top: 3rem;
+      font-size: 0.9rem;
+      background-color: var(--bg-dark);
+      color: var(--text-dark);
+    }
+
+    body.light-mode footer {
+      background-color: var(--bg-light);
+      color: var(--text-light);
+    }
+
+  </style>
+</head>
+<body>
+  <header>
+    <h1>Mama Said This</h1>
+    <nav>
+      <a href="#about">About</a>
+      <a href="#missions">Mama Missions</a>
+      <a href="#emergency">Emergency Mode</a>
+      <a href="#grants">Make Some Money!</a>
+    </nav>
+    <button class="theme-toggle" id="themeToggle">🌞</button>
+  </header>
+
+  <section id="carousel" class="carousel">
+    <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509634/Chibi_Mamas_Chocolates_e0sphx.jpg" class="active">
+    <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509834/5_ujxicv.jpg">
+    <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760509677/image_qwartb.png">
+    <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760681617/My%20Brand/Gemini_Generated_Image_2osr732osr732osr_lqxnfv_0e6052.jpg">
+    <img src="https://res.cloudinary.com/mamasaidthis/image/upload/v1760514144/IMG_7931_ultakf.jpg">
+    <button class="prev">&#10094;</button>
+    <button class="next">&#10095;</button>
+  </section>
+
+  <section id="missions" class="mama-missions">
+    <h2>Mama Missions</h2>
+    <div class="mission" data-id="1">Do one load of laundry 🧺</div>
+    <div class="mission" data-id="2">Declutter one drawer 🗄️</div>
+    <div class="mission" data-id="3">Call 211 and ask about resources 📞</div>
+    <div class="mission" data-id="4">Take 5 deep breaths 🌬️</div>
+    <div class="mission" data-id="5">Send a positive text to a friend 💌</div>
+
+    <div class="mission-controls">
+      <button id="resetMissions">Reset</button>
+      <button id="exportMissions">Export Checklist</button>
+    </div>
+  </section>
+
+  <section id="emergency" class="emergency-mode">
+    <h2>Emergency Mode</h2>
+    <p>If you need help now, click below to access verified resources quickly.</p>
+    <button onclick="window.location.href='https://www.thehotline.org/dvbeds/'">I Need Help Now</button>
+  </section>
+
+  <section id="grants" class="grants">
+    <h2>Make Some Money!</h2>
+    <p>Apply for a tiny grant / relief ticket:</p>
+    <button onclick="window.open('https://ko-fi.com/YOUR_KOFI_LINK_HERE', '_blank')">Donate to Cause</button>
+    <p>Donations currently: $5.00 | Donations given: $10</p>
+  </section>
+
+  <footer>
+    &copy; 2025 Mama Said This | All rights reserved
+  </footer>
+
+  <script>
+    // Theme Toggle
+    const themeToggle = document.getElementById('themeToggle');
+    themeToggle.addEventListener('click', () => {
+      document.body.classList.toggle('light-mode');
+    });
+
+    // Carousel
+    const carouselImages = document.querySelectorAll('.carousel img');
+    const prevBtn = document.querySelector('.carousel .prev');
+    const nextBtn = document.querySelector('.carousel .next');
+    let currentIndex = 0;
+
+    function showImage(index) {
+      carouselImages.forEach(img => img.classList.remove('active'));
+      carouselImages[index].classList.add('active');
+    }
+
+    prevBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex - 1 + carouselImages.length) % carouselImages.length;
+      showImage(currentIndex);
+    });
+
+    nextBtn.addEventListener('click', () => {
+      currentIndex = (currentIndex + 1) % carouselImages.length;
+      showImage(currentIndex);
+    });
+
+    setInterval(() => {
+      currentIndex = (currentIndex + 1) % carouselImages.length;
+      showImage(currentIndex);
+    }, 5000);
+
+    // Mama Missions
+    const missions = document.querySelectorAll('.mission');
+    missions.forEach(mission => {
+      mission.addEventListener('click', () => {
+        mission.classList.toggle('completed');
+      });
+    });
+
+    document.getElementById('resetMissions').addEventListener('click', () => {
+      missions.forEach(m => m.classList.remove('completed'));
+    });
+
+    document.getElementById('exportMissions').addEventListener('click', () => {
+      const completed = [];
+      missions.forEach(m => {
+        completed.push(`${m.textContent} - ${m.classList.contains('completed') ? 'Done' : 'Pending'}`);
+      });
+      alert("Mission Checklist:\n\n" + completed.join('\n'));
+    });
+  </script>
 </body>
 </html>
