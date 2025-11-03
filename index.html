@@ -3,8 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mama Said This - Free Tools & Resources</title>
-    <meta name="description" content="Free tools built by a mom who codes at 2am. No paywalls, no BS.">
+    <title>Mama Said This - Free Tools for Mamas</title>
     <style>
         * {
             margin: 0;
@@ -13,20 +12,18 @@
         }
 
         :root {
-            --bg-dark: #1a1a2e;
-            --bg-darker: #16213e;
-            --bg-card: #0f3460;
-            --accent-soft: #e94560;
-            --accent-light: #ff6b9d;
-            --text-bright: #f1f1f1;
-            --text-soft: #c4c4d4;
+            --bg-dark: #0a0a0f;
+            --bg-darker: #05050a;
+            --text-dark: #e8e8f0;
+            --accent-primary: #e94560;
+            --accent-soft: #ff6b9d;
+            --card-bg: rgba(26, 26, 46, 0.6);
         }
 
         body {
             font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
             background: linear-gradient(135deg, var(--bg-dark) 0%, var(--bg-darker) 100%);
-            background-attachment: fixed;
-            color: var(--text-bright);
+            color: var(--text-dark);
             line-height: 1.6;
         }
 
@@ -36,29 +33,28 @@
             padding: 0 20px;
         }
 
-        /* Header with nav buttons */
         header {
-            background: rgba(26, 26, 46, 0.95);
+            background: rgba(10, 10, 15, 0.95);
             backdrop-filter: blur(10px);
             padding: 1rem 0;
             position: sticky;
             top: 0;
             z-index: 100;
-            border-bottom: 2px solid var(--accent-soft);
-            box-shadow: 0 4px 15px rgba(0,0,0,0.3);
+            border-bottom: 2px solid var(--accent-primary);
         }
 
         nav {
             display: flex;
             justify-content: space-between;
             align-items: center;
+            flex-wrap: wrap;
             gap: 1rem;
         }
 
         .logo {
             font-size: 1.5rem;
             font-weight: 800;
-            color: var(--accent-soft);
+            color: var(--accent-primary);
         }
 
         .nav-links {
@@ -69,65 +65,78 @@
         }
 
         .nav-links a {
-            color: var(--text-bright);
+            color: var(--text-dark);
             text-decoration: none;
-            font-weight: 600;
             padding: 0.6rem 1rem;
             border-radius: 8px;
+            font-weight: 600;
             transition: all 0.3s;
-            background: rgba(233, 69, 96, 0.1);
         }
 
         .nav-links a:hover {
-            background: var(--accent-soft);
+            background: var(--accent-primary);
             color: white;
         }
 
-        .menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            color: var(--text-bright);
-            font-size: 1.5rem;
-            cursor: pointer;
-        }
-
-        /* Hero */
-        .hero {
-            padding: 3rem 0;
+        .emergency-bar {
+            background: linear-gradient(135deg, #d32f2f, #b71c1c);
+            padding: 2rem 1rem;
             text-align: center;
         }
 
-        .hero h1 {
-            font-size: clamp(2rem, 5vw, 3.2rem);
-            font-weight: 900;
+        .emergency-bar h2 {
+            font-size: 1.5rem;
             margin-bottom: 1rem;
-            color: var(--accent-light);
-            line-height: 1.2;
+            color: white;
         }
 
-        .hero-subtitle {
-            font-size: clamp(1.1rem, 3vw, 1.5rem);
-            color: var(--text-soft);
-            margin-bottom: 0.8rem;
+        .emergency-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            flex-wrap: wrap;
         }
 
-        /* Carousel */
-        .carousel-section {
-            max-width: 800px;
-            margin: 2rem auto;
+        .emergency-btn {
+            background: white;
+            color: #b71c1c;
+            padding: 0.9rem 1.5rem;
+            border-radius: 10px;
+            text-decoration: none;
+            font-weight: 700;
+            transition: all 0.3s;
+        }
+
+        .emergency-btn:hover {
+            transform: translateY(-2px);
+        }
+
+        main {
+            padding: 3rem 0;
+        }
+
+        section {
+            margin-bottom: 4rem;
+        }
+
+        h2 {
+            color: var(--accent-primary);
+            margin-bottom: 1.5rem;
+            text-align: center;
         }
 
         .carousel-container {
+            max-width: 500px;
+            margin: 0 auto;
             position: relative;
-            border-radius: 15px;
+            border-radius: 20px;
             overflow: hidden;
-            box-shadow: 0 15px 40px rgba(0,0,0,0.4);
+            box-shadow: 0 10px 30px rgba(0,0,0,0.5);
         }
 
         .carousel {
             position: relative;
-            height: clamp(280px, 45vw, 450px);
+            height: 320px;
             background: var(--bg-darker);
         }
 
@@ -136,7 +145,7 @@
             width: 100%;
             height: 100%;
             opacity: 0;
-            transition: opacity 1s ease;
+            transition: opacity 1s ease-in-out;
         }
 
         .carousel-slide.active {
@@ -152,213 +161,126 @@
 
         .carousel-controls {
             position: absolute;
-            bottom: 15px;
+            bottom: 20px;
             left: 50%;
             transform: translateX(-50%);
             display: flex;
-            gap: 12px;
+            gap: 15px;
             z-index: 10;
         }
 
         .carousel-btn {
+            background: rgba(233, 69, 96, 0.9);
+            border: none;
             width: 45px;
             height: 45px;
             border-radius: 50%;
-            border: none;
-            background: var(--accent-soft);
-            color: white;
-            font-size: 1.2rem;
             cursor: pointer;
+            font-size: 20px;
+            color: white;
             transition: all 0.3s;
-            box-shadow: 0 4px 12px rgba(0,0,0,0.3);
         }
 
         .carousel-btn:hover {
-            background: var(--accent-light);
-            transform: scale(1.05);
+            background: var(--accent-soft);
+            transform: scale(1.1);
         }
 
-        .carousel-caption {
-            text-align: center;
-            margin-top: 1rem;
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            color: var(--text-soft);
-            font-style: italic;
-        }
-
-        /* Sections */
-        .section {
-            padding: 3rem 0;
-        }
-
-        .section-title {
-            font-size: clamp(1.8rem, 4vw, 2.4rem);
-            text-align: center;
-            margin-bottom: 0.8rem;
-            font-weight: 800;
-            color: var(--accent-light);
-        }
-
-        .section-subtitle {
-            text-align: center;
-            color: var(--text-soft);
-            margin-bottom: 2rem;
-            font-size: clamp(0.95rem, 2vw, 1.1rem);
-        }
-
-        /* Emergency */
-        .emergency {
-            background: linear-gradient(135deg, #d32f2f, #b71c1c);
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-            box-shadow: 0 10px 30px rgba(211, 47, 47, 0.3);
-        }
-
-        .emergency h2 {
-            font-size: clamp(1.5rem, 3vw, 2rem);
-            margin-bottom: 1rem;
-            font-weight: 800;
-        }
-
-        .emergency-btns {
-            display: flex;
-            gap: 1rem;
-            flex-wrap: wrap;
-            justify-content: center;
-            margin-top: 1.5rem;
-        }
-
-        /* Buttons */
-        .btn {
-            padding: 0.9rem 1.8rem;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s;
-            display: inline-block;
-            border: none;
-            cursor: pointer;
-            font-size: clamp(0.9rem, 2vw, 1rem);
-            text-align: center;
-            min-height: 44px;
-        }
-
-        .btn-white {
-            background: white;
-            color: #b71c1c;
-        }
-
-        .btn-white:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(0,0,0,0.3);
-        }
-
-        .btn-gradient {
-            background: linear-gradient(135deg, var(--accent-soft), var(--accent-light));
-            color: white;
-        }
-
-        .btn-gradient:hover {
-            transform: translateY(-2px);
-            box-shadow: 0 6px 15px rgba(233, 69, 96, 0.4);
-        }
-
-        /* Missions */
         .missions-box {
-            background: rgba(15, 52, 96, 0.4);
+            background: var(--card-bg);
             backdrop-filter: blur(10px);
             padding: 2rem;
             border-radius: 15px;
             border: 2px solid rgba(233, 69, 96, 0.3);
         }
 
-        .progress-container {
-            background: rgba(0,0,0,0.3);
-            padding: 1.2rem;
-            border-radius: 12px;
-            margin-bottom: 1.5rem;
-        }
-
-        .progress-label {
-            color: var(--accent-light);
-            font-weight: 700;
-            margin-bottom: 0.5rem;
-        }
-
         .progress-bar {
             width: 100%;
-            height: 28px;
+            height: 30px;
             background: rgba(0,0,0,0.4);
-            border-radius: 14px;
+            border-radius: 15px;
             overflow: hidden;
+            margin-bottom: 2rem;
+            border: 2px solid var(--accent-primary);
         }
 
         .progress-fill {
             height: 100%;
-            background: linear-gradient(90deg, var(--accent-soft), var(--accent-light));
+            background: linear-gradient(90deg, #10b981, #059669);
             width: 0%;
             transition: width 0.5s;
+        }
+
+        .missions-list {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .mission-item {
+            background: rgba(255,255,255,0.05);
+            padding: 1.1rem;
+            margin-bottom: 0.8rem;
+            border-radius: 10px;
+            border: 2px solid transparent;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .mission-item:hover {
+            border-color: var(--accent-primary);
+        }
+
+        .mission-item.completed {
+            background: rgba(76, 175, 80, 0.2);
+            border-color: #4caf50;
+        }
+
+        .mission-checkbox {
+            width: 24px;
+            height: 24px;
+            border: 2px solid var(--accent-primary);
+            border-radius: 6px;
+            flex-shrink: 0;
             display: flex;
             align-items: center;
             justify-content: center;
-            font-weight: 700;
         }
 
-        .mission {
-            background: rgba(255,255,255,0.05);
-            padding: 1.1rem;
+        .mission-item.completed .mission-checkbox {
+            background: #4caf50;
+        }
+
+        .mission-item.completed .mission-checkbox::after {
+            content: '✓';
+            color: white;
+            font-weight: bold;
+        }
+
+        .btn {
+            background: linear-gradient(135deg, var(--accent-primary), var(--accent-soft));
+            color: white;
+            border: none;
+            padding: 0.9rem 1.8rem;
             border-radius: 10px;
-            margin-bottom: 0.8rem;
-            border: 2px solid transparent;
+            font-weight: 700;
             cursor: pointer;
             transition: all 0.3s;
         }
 
-        .mission:hover {
-            border-color: var(--accent-soft);
-            background: rgba(255,255,255,0.08);
+        .btn:hover {
+            transform: translateY(-2px);
         }
 
-        .mission.done {
-            background: rgba(76, 175, 80, 0.2);
-            border-color: #4caf50;
-            opacity: 0.7;
-        }
-
-        .mission.done .mission-title {
-            text-decoration: line-through;
-        }
-
-        .mission-title {
-            font-weight: 700;
-            margin-bottom: 0.3rem;
-            font-size: 1.05rem;
-        }
-
-        .mission-desc {
-            color: var(--text-soft);
-            font-size: 0.9rem;
-            font-style: italic;
-        }
-
-        .mission-actions {
-            display: flex;
-            gap: 1rem;
-            margin-top: 1.5rem;
-            flex-wrap: wrap;
-        }
-
-        /* Tools Grid */
         .tools-grid {
             display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
             gap: 1.5rem;
         }
 
         .tool-card {
-            background: rgba(15, 52, 96, 0.4);
-            backdrop-filter: blur(10px);
+            background: var(--card-bg);
             padding: 1.8rem;
             border-radius: 12px;
             border: 2px solid rgba(233, 69, 96, 0.2);
@@ -367,251 +289,62 @@
 
         .tool-card:hover {
             transform: translateY(-5px);
-            border-color: var(--accent-soft);
-            box-shadow: 0 12px 30px rgba(233, 69, 96, 0.3);
+            border-color: var(--accent-primary);
         }
 
         .tool-card h3 {
-            color: var(--accent-light);
-            margin-bottom: 0.8rem;
-            font-size: 1.25rem;
-        }
-
-        .tool-card p {
-            color: var(--text-soft);
-            margin-bottom: 1.2rem;
-            line-height: 1.5;
-        }
-
-        .tool-card .btn {
-            width: 100%;
-        }
-
-        .badge {
-            display: inline-block;
-            background: var(--accent-soft);
-            color: white;
-            padding: 0.3rem 0.8rem;
-            border-radius: 20px;
-            font-size: 0.7rem;
-            font-weight: 700;
-            text-transform: uppercase;
-            margin-bottom: 0.6rem;
-        }
-
-        /* Relief */
-        .relief {
-            background: linear-gradient(135deg, var(--accent-soft), var(--accent-light));
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
-        }
-
-        /* Forms */
-        .form-group {
-            margin-bottom: 1.2rem;
-        }
-
-        .form-group label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: 0.5rem;
-        }
-
-        .form-group input,
-        .form-group textarea {
-            width: 100%;
-            padding: 0.9rem;
-            border-radius: 8px;
-            border: 2px solid rgba(255,255,255,0.2);
-            background: rgba(255,255,255,0.1);
-            color: white;
-            font-family: inherit;
-            font-size: 1rem;
-        }
-
-        .form-group input::placeholder,
-        .form-group textarea::placeholder {
-            color: rgba(255,255,255,0.6);
-        }
-
-        .form-group textarea {
-            min-height: 100px;
-            resize: vertical;
-        }
-
-        /* Stories */
-        .stories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: 1.5rem;
-        }
-
-        .story-card {
-            background: rgba(15, 52, 96, 0.4);
-            padding: 1.5rem;
-            border-radius: 12px;
-            border-left: 4px solid var(--accent-soft);
-        }
-
-        .story-card h3 {
-            color: var(--accent-light);
+            color: var(--accent-primary);
             margin-bottom: 0.8rem;
         }
 
-        .story-card p {
-            color: var(--text-soft);
-            font-style: italic;
-        }
-
-        /* About */
-        .about {
-            background: rgba(15, 52, 96, 0.4);
-            padding: 2rem;
-            border-radius: 15px;
-            margin: 2rem 0;
-        }
-
-        .about h3 {
-            color: var(--accent-light);
-            margin: 1.8rem 0 1rem;
-            font-size: 1.5rem;
-        }
-
-        .about p {
-            color: var(--text-soft);
-            margin-bottom: 1rem;
-        }
-
-        .about ul {
-            list-style: none;
-            margin: 1rem 0;
-        }
-
-        .about ul li {
-            padding: 0.5rem 0;
-            padding-left: 1.5rem;
-            position: relative;
-        }
-
-        .about ul li:before {
-            content: "✓";
-            position: absolute;
-            left: 0;
-            color: var(--accent-soft);
-            font-weight: 900;
-        }
-
-        /* Contact */
-        .contact-box {
-            background: rgba(15, 52, 96, 0.4);
-            padding: 2rem;
-            border-radius: 15px;
-            text-align: center;
-            border: 2px solid rgba(233, 69, 96, 0.3);
-        }
-
-        .contact-box a {
-            color: var(--accent-light);
-            font-weight: 600;
-        }
-
-        /* Footer */
         footer {
-            background: rgba(26, 26, 46, 0.95);
+            background: rgba(10, 10, 15, 0.95);
             padding: 2rem 1rem;
             text-align: center;
-            border-top: 2px solid var(--accent-soft);
-            margin-top: 3rem;
-        }
-
-        footer p {
-            color: var(--text-soft);
-            margin: 0.5rem 0;
-        }
-
-        footer a {
-            color: var(--accent-light);
-            text-decoration: none;
-            font-weight: 600;
-        }
-
-        footer a:hover {
-            color: var(--accent-soft);
-        }
-
-        /* Mobile */
-        @media (max-width: 768px) {
-            .nav-links {
-                display: none;
-                position: fixed;
-                top: 60px;
-                left: 0;
-                right: 0;
-                background: rgba(26, 26, 46, 0.98);
-                backdrop-filter: blur(10px);
-                flex-direction: column;
-                padding: 1.5rem;
-                gap: 0.5rem;
-                border-bottom: 2px solid var(--accent-soft);
-            }
-
-            .nav-links.active {
-                display: flex;
-            }
-
-            .menu-btn {
-                display: block;
-            }
-
-            .tools-grid,
-            .stories-grid {
-                grid-template-columns: 1fr;
-            }
-
-            .mission-actions {
-                flex-direction: column;
-            }
-
-            .btn {
-                width: 100%;
-            }
+            border-top: 2px solid var(--accent-primary);
         }
     </style>
 </head>
 <body>
     <header>
         <nav class="container">
-            <div class="logo">Mama Said This</div>
-            <button class="menu-btn" onclick="toggleMenu()">☰</button>
-            <ul class="nav-links" id="nav">
+            <div class="logo">💖 Mama Said This</div>
+            <ul class="nav-links">
                 <li><a href="#missions">Missions</a></li>
                 <li><a href="#tools">Tools</a></li>
-                <li><a href="#relief">Relief</a></li>
-                <li><a href="#emergency">Emergency</a></li>
-                <li><a href="https://heatherherbalhome.pages.dev">Heather's Portfolio</a></li>
+                <li><a href="#about">About</a></li>
             </ul>
         </nav>
     </header>
 
-    <section class="hero container">
-        <h1>I Got Tired of Paying for Basic Shit</h1>
-        <p class="hero-subtitle">So I taught myself to code and built it. Now it's yours. Free. Forever.</p>
-        <p style="font-weight: 600; margin-bottom: 0.5rem;">Mom of 4 • Master's Degree • Self-Taught Developer</p>
-        <p style="font-style: italic; color: var(--text-soft);">"I couldn't find free tools that actually worked. So I learned to code at 2am and built them myself."</p>
+    <section class="emergency-bar">
+        <h2>🚨 In Crisis? Get Help Now</h2>
+        <div class="emergency-buttons">
+            <a href="https://www.thehotline.org/" target="_blank" class="emergency-btn">🚨 The Hotline</a>
+            <a href="tel:211" class="emergency-btn">📞 Call 211</a>
+            <a href="tel:911" class="emergency-btn">🔴 Call 911</a>
+        </div>
+    </section>
 
-        <div class="carousel-section">
+    <main class="container">
+        <section>
+            <h2>✨ Heather's Journey</h2>
             <div class="carousel-container">
                 <div class="carousel">
                     <div class="carousel-slide active">
-                        <img src="https://via.placeholder.com/800x450/16213e/e94560?text=Replace+With+Your+Image+1" alt="Slide 1" loading="lazy">
+                        <img src="https://raw.githubusercontent.com/herbalheather/picturefile/main/picsforweb/IMG_1171.jpg" alt="Family moments">
                     </div>
                     <div class="carousel-slide">
-                        <img src="https://via.placeholder.com/800x450/16213e/ff6b9d?text=Replace+With+Your+Image+2" alt="Slide 2" loading="lazy">
+                        <img src="https://raw.githubusercontent.com/herbalheather/picturefile/main/picsforweb/IMG_1856.JPG" alt="Family love">
                     </div>
                     <div class="carousel-slide">
-                        <img src="https://via.placeholder.com/800x450/16213e/e94560?text=Replace+With+Your+Image+3" alt="Slide 3" loading="lazy">
+                        <img src="https://raw.githubusercontent.com/herbalheather/picturefile/main/picsforweb/IMG_1925.JPG" alt="Together">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://raw.githubusercontent.com/herbalheather/picturefile/main/picsforweb/IMG_2232.JPG" alt="Building">
+                    </div>
+                    <div class="carousel-slide">
+                        <img src="https://raw.githubusercontent.com/herbalheather/picturefile/main/picsforweb/IMG_6713.JPG" alt="Love">
                     </div>
                     <div class="carousel-controls">
                         <button class="carousel-btn" onclick="prevSlide()">❮</button>
@@ -619,451 +352,124 @@
                     </div>
                 </div>
             </div>
-            <p class="carousel-caption">Building tools at 2am while the kids sleep</p>
-        </div>
-    </section>
+        </section>
 
-    <section id="emergency" class="container">
-        <div class="emergency">
-            <h2>🚨 Emergency Mode</h2>
-            <p>If you're in crisis and need help right now, these resources are here for you.</p>
-            <div class="emergency-btns">
-                <a href="https://www.thehotline.org/dvbeds/" class="btn btn-white" target="_blank">The Hotline - Get Help Now</a>
-                <a href="tel:211" class="btn btn-white">📞 Call 211 for Local Resources</a>
-                <a href="tel:911" class="btn btn-white">🚨 Call 911 (Emergency)</a>
-            </div>
-            <p style="margin-top: 1rem; font-size: 0.9rem;">For immediate danger, call 911. These resources are confidential and available 24/7.</p>
-        </div>
-    </section>
-
-    <section id="relief" class="container">
-        <div class="relief">
-            <h2 style="margin-bottom: 1rem;">Apply for a Relief Ticket</h2>
-            <p style="margin-bottom: 1.5rem;">We run a sponsored micro-grant monthly. Low-barrier, community funded. Be honest — relief is for genuine need.</p>
-            
-            <form action="https://submit-form.com/IXDD7cliS" method="POST">
-                <div class="form-group">
-                    <label>Your Name</label>
-                    <input type="text" name="name" required>
-                </div>
+        <section id="missions">
+            <div class="missions-box">
+                <h2>🎯 Mama Missions</h2>
+                <p style="text-align: center; margin-bottom: 1rem;">Tiny wins for big days. Click to complete!</p>
                 
-                <div class="form-group">
-                    <label>Email Address</label>
-                    <input type="email" name="email" required>
-                </div>
-                
-                <div class="form-group">
-                    <label>Why do you need this help? (Be honest, be real)</label>
-                    <textarea name="reason" required placeholder="Tell us what's going on..."></textarea>
-                </div>
-                
-                <button type="submit" class="btn btn-white" style="width: 100%;">Submit Application</button>
-            </form>
-
-            <p style="margin-top: 2rem; text-align: center;">
-                <strong>Want to help fund these grants?</strong><br>
-                <a href="https://ko-fi.com/mamasaidherbalhomeschool" target="_blank" style="color: white; text-decoration: underline;">☕ Donate to the Cause</a>
-            </p>
-        </div>
-    </section>
-
-    <section id="missions" class="section container">
-        <h2 class="section-title">🎯 Mama Missions</h2>
-        <p class="section-subtitle">Tiny wins for big days. Click to complete, because every little thing counts!</p>
-        
-        <div class="missions-box">
-            <div class="progress-container">
-                <div class="progress-label">Your Progress</div>
                 <div class="progress-bar">
-                    <div class="progress-fill" id="progress">0%</div>
+                    <div class="progress-fill" id="progressFill"></div>
+                </div>
+
+                <ul class="missions-list" id="missionsList"></ul>
+
+                <button class="btn" id="resetBtn">🔄 Reset All</button>
+            </div>
+        </section>
+
+        <section id="tools">
+            <h2>🛠️ All Your Tools</h2>
+            <div class="tools-grid">
+                <div class="tool-card">
+                    <h3>💝 Texas Tool Kit</h3>
+                    <p>Essential worksheets and resources for everyday parenting.</p>
+                </div>
+                <div class="tool-card">
+                    <h3>🏥 Benefit Calculator</h3>
+                    <p>Check if your family qualifies for assistance.</p>
+                </div>
+                <div class="tool-card">
+                    <h3>💰 Paystub Calculator</h3>
+                    <p>Professional pay stubs for applications.</p>
                 </div>
             </div>
+        </section>
 
-            <div class="mission" onclick="toggle(this)">
-                <div class="mission-title">Find Your Left Sock's Long-Lost Twin</div>
-                <div class="mission-desc">It's in there somewhere. Probably chilling with last year's hair ties.</div>
+        <section id="about">
+            <div class="missions-box">
+                <h2>💪 About Mama Said This</h2>
+                <p><strong>Hey, I'm Heather.</strong> Mom of 4. Master's Degree. Self-taught developer at 2am.</p>
+                <p style="margin-top: 1rem;">My mom died when I was 19, pregnant with my first. Food banks, emergency C-sections, pandemic with newborn twins taught me everything.</p>
+                <p style="margin-top: 1rem;"><strong>It's bad enough going through tough times without paywalls.</strong> So I built this.</p>
             </div>
-
-            <div class="mission" onclick="toggle(this)">
-                <div class="mission-title">Do Laundry Before It Becomes Sentient</div>
-                <div class="mission-desc">That pile is giving you side-eye. Time to show it who's boss.</div>
-            </div>
-
-            <div class="mission" onclick="toggle(this)">
-                <div class="mission-title">Five-Minute Declutter Dash</div>
-                <div class="mission-desc">Set a timer, grab a basket, throw stuff in. Not where it goes? That's tomorrow's problem.</div>
-            </div>
-
-            <div class="mission" onclick="toggle(this)">
-                <div class="mission-title">Drink Water, Queen 👑</div>
-                <div class="mission-desc">Coffee doesn't count. Hydrate like the powerful human you are.</div>
-            </div>
-
-            <div class="mission" onclick="toggle(this)">
-                <div class="mission-title">Call 211 If You Need Help</div>
-                <div class="mission-desc">Real talk: If you need resources, food, shelter, or support — call 211. No shame, just help.</div>
-            </div>
-
-            <div class="mission" onclick="toggle(this)">
-                <div class="mission-title">Text Someone Who Makes You Smile</div>
-                <div class="mission-desc">Your bestie, your mom, that one friend with the memes. Connection counts.</div>
-            </div>
-
-            <div class="mission" onclick="toggle(this)">
-                <div class="mission-title">Eat Something That's NOT Standing Up</div>
-                <div class="mission-desc">Sit down. Even for 5 minutes. You deserve it.</div>
-            </div>
-
-            <div class="mission" onclick="toggle(this)">
-                <div class="mission-title">Take Your Vitamins (If You Have Them)</div>
-                <div class="mission-desc">Or just acknowledge you thought about it. That's half the battle.</div>
-            </div>
-
-            <div class="mission" onclick="toggle(this)">
-                <div class="mission-title">Put Your Phone on Charge</div>
-                <div class="mission-desc">Because 14% battery at bedtime is a tomorrow problem you can prevent.</div>
-            </div>
-
-            <div class="mission" onclick="toggle(this)">
-                <div class="mission-title">Dance Like Nobody's Watching</div>
-                <div class="mission-desc">Even if they are. Especially if they are. Life's short, bust a move.</div>
-            </div>
-
-            <div class="mission" onclick="toggle(this)">
-                <div class="mission-title">Say One Nice Thing to Yourself</div>
-                <div class="mission-desc">Out loud. In your head. Write it down. You're doing better than you think.</div>
-            </div>
-
-            <div class="mission" onclick="toggle(this)">
-                <div class="mission-title">Make Tomorrow-You Breakfast</div>
-                <div class="mission-desc">Set out the coffee. Prep the lunch. Future you will be so grateful.</div>
-            </div>
-
-            <div class="mission-actions">
-                <button class="btn btn-gradient" onclick="exportMissions()">📥 Export Completed Missions</button>
-                <button class="btn btn-gradient" onclick="resetMissions()">🔄 Reset All Missions</button>
-            </div>
-        </div>
-    </section>
-
-    <section id="tools" class="section container">
-        <h2 class="section-title">Built with Love. Shared Free.</h2>
-        <p class="section-subtitle">Practical tools designed to make family life a little easier. All completely free to use.</p>
-        
-        <div class="tools-grid">
-            <div class="tool-card">
-                <span class="badge">Essential</span>
-                <h3>Heather's Custom Texas Tool Kit</h3>
-                <p>Essential worksheets and resources for everyday parenting challenges. Everything you need in one place.</p>
-                <a href="https://mamasaidthis.pages.dev/resources" class="btn btn-gradient" target="_blank">Get Tool Kit</a>
-            </div>
-
-            <div class="tool-card">
-                <span class="badge">Essential</span>
-                <h3>Heather's Texas Helper</h3>
-                <p>Comprehensive Texas-specific resources and tools all in one place.</p>
-                <a href="https://heatherstexashelper.pages.dev" class="btn btn-gradient" target="_blank">Visit Helper</a>
-            </div>
-
-            <div class="tool-card">
-                <h3>Resource Benefit Calculator</h3>
-                <p>Check if your family qualifies for food stamps, WIC, SNAP, and other assistance programs.</p>
-                <a href="https://benefitcalculator1.pages.dev/" class="btn btn-gradient" target="_blank">Check Eligibility</a>
-            </div>
-
-            <div class="tool-card">
-                <h3>Texas Paystub Calculator</h3>
-                <p>Professional pay stubs for rental applications, benefits, or records. Texas-specific. Export to PDF or Word.</p>
-                <a href="https://calculator-ea5.pages.dev/" class="btn btn-gradient" target="_blank">Generate Paystub</a>
-            </div>
-
-            <div class="tool-card">
-                <h3>Budget Tracker</h3>
-                <p>Simple tracker with visual charts. See where your money goes. Saves automatically.</p>
-                <a href="https://mamasaidthis.pages.dev/budget-tracker" class="btn btn-gradient" target="_blank">Track Budget</a>
-            </div>
-
-            <div class="tool-card">
-                <h3>Education Sheet Creator</h3>
-                <p>Choose between K-6 or advanced worksheet generators for custom learning materials.</p>
-                <a href="https://edusheet-chooser.pages.dev/" class="btn btn-gradient" target="_blank">Create Worksheets</a>
-            </div>
-
-            <div class="tool-card">
-                <h3>Jaggers Division Game</h3>
-                <p>Fun educational math game for practicing division skills with kids.</p>
-                <a href="https://jaggersgames.pages.dev/" class="btn btn-gradient" target="_blank">Play Game</a>
-            </div>
-
-            <div class="tool-card">
-                <h3>Mama Hub</h3>
-                <p>Connect with other mamas, find local support groups, and build your village.</p>
-                <a href="https://www.peanut-app.io/" class="btn btn-gradient" target="_blank">Join Community</a>
-            </div>
-
-            <div class="tool-card">
-                <h3>Dad Hub</h3>
-                <p>Resources and community support specifically designed for fathers and father figures.</p>
-                <a href="https://www.fatherli.com/" class="btn btn-gradient" target="_blank">Dad Resources</a>
-            </div>
-
-            <div class="tool-card">
-                <h3>Family Goal Tracker</h3>
-                <p>Goal-setting tools and resources to help kids and families achieve their dreams together.</p>
-                <a href="https://www.imom.com/11-goal-setting-tools-kids/" class="btn btn-gradient" target="_blank">Get Tools</a>
-            </div>
-
-            <div class="tool-card">
-                <h3>Family Calendar</h3>
-                <p>Organize family schedules, appointments, and activities with Google Calendar.</p>
-                <a href="https://workspace.google.com/products/calendar/" class="btn btn-gradient" target="_blank">Get Calendar</a>
-            </div>
-
-            <div class="tool-card">
-                <h3>Google Classroom</h3>
-                <p>Education platform for organizing classes, assignments, and student communication.</p>
-                <a href="https://classroom.google.com" class="btn btn-gradient" target="_blank">Access Classroom</a>
-            </div>
-        </div>
-    </section>
-
-    <section class="section container">
-        <h2 class="section-title">Mama Stories</h2>
-        <p class="section-subtitle">Real stories from real mamas. The messy, beautiful, challenging, and triumphant moments that shape our motherhood journey.</p>
-        
-        <div class="stories-grid">
-            <div class="story-card">
-                <h3>"The 3 AM Revelation"</h3>
-                <p>How a sleepless night with my colicky baby taught me that sometimes the best parenting advice is to trust your instincts...</p>
-            </div>
-
-            <div class="story-card">
-                <h3>"Letting Go of Perfect"</h3>
-                <p>The day I served cereal for dinner and realized that being a 'good enough' mom is actually perfect...</p>
-            </div>
-
-            <div class="story-card">
-                <h3>"Finding My Village"</h3>
-                <p>How a chance conversation at the playground connected me with my lifelong mom friends...</p>
-            </div>
-        </div>
-    </section>
-
-    <section id="about" class="section container">
-        <div class="about">
-            <h2 class="section-title">About Mama Said This</h2>
-            
-            <h3>Hey, I'm Heather</h3>
-            <p>I make free tools because I've been the one who needed them. From coding to herbalism, these tools are things I wish I could have found when I needed them most.</p>
-            
-            <p>It's bad enough going through tough times without hitting paywalls for basic information. Mama said hell no to that.</p>
-            
-            <p>My mom died when I was 19, just as I learned I was pregnant with my first. Food banks, emergency C-sections, multiple cash cars, and a pandemic with newborn twins taught me everything.</p>
-            
-            <p>So I built this—pantry finders, budget help, resources that don't judge or gatekeep.</p>
-            
-            <div style="background: rgba(233, 69, 96, 0.15); padding: 1.5rem; border-radius: 10px; margin: 1.5rem 0; border-left: 4px solid var(--accent-soft);">
-                <h4 style="color: var(--accent-light); margin-bottom: 1rem;">Credentials & Teaching</h4>
-                <ul style="list-style: none;">
-                    <li style="margin: 0.5rem 0;">📚 Microsoft Certified Instructor</li>
-                    <li style="margin: 0.5rem 0;">📚 Google Certified Instructor</li>
-                    <li style="margin: 0.5rem 0;">📚 Grok Academy Certified Curriculum - <a href="https://groklearning.com" target="_blank" style="color: var(--accent-light);">Learn More</a></li>
-                    <li style="margin: 0.5rem 0;">📚 AI & Coding Tutoring - <a href="https://heatherherbalhome.pages.dev" target="_blank" style="color: var(--accent-light);">Visit Site</a></li>
-                    <li style="margin: 0.5rem 0;">📚 Microsoft Learn Resources - <a href="https://learn.microsoft.com" target="_blank" style="color: var(--accent-light);">Access Materials</a></li>
-                </ul>
-            </div>
-            
-            <p style="font-style: italic; color: var(--accent-light); font-weight: 600; margin-top: 1.5rem;">
-                For Carrie Hilliard, Donna Chambers, and Elva McConnell, who ran a free clothing store in Italy, Texas for years and gave without asking why.
-            </p>
-            
-            <p style="margin-top: 1.5rem; font-weight: 500;">
-                Because sometimes, the best advice comes from another mama who's been exactly where you are.
-            </p>
-
-            <h3>Why I Built This</h3>
-            <p>I needed a pay stub generator. Every site wanted $20-40. I was broke. So I taught myself to code at 2am while my kids slept.</p>
-            
-            <p>Then I kept building. Budget trackers. Grade calculators. Crisis resources. All the tools I wish existed when I was struggling.</p>
-            
-            <p>Now I'm sharing them. Free. Forever. Because if you're like me, you're doing everything you can with what you have. You deserve tools that help, not gatekeep.</p>
-
-            <h3>MY PROMISE:</h3>
-            <ul>
-                <li><strong>NOT</strong> because I'm a tech genius.</li>
-                <li><strong>NOT</strong> because I have funding.</li>
-                <li><strong>NOT</strong> because I had time.</li>
-                <li><strong>BECAUSE</strong> I've been there.</li>
-                <li><strong>BECAUSE</strong> I know what it's like to need help.</li>
-                <li><strong>BECAUSE</strong> I refuse to let others struggle when I can help.</li>
-            </ul>
-        </div>
-    </section>
-
-    <section class="section container">
-        <div class="contact-box">
-            <h2 class="section-title">Got a Tool Idea?</h2>
-            <p style="color: var(--text-soft); margin-bottom: 2rem;">
-                Tell me what you wish existed. I might build it.<br>
-                Email: <a href="mailto:heather@herbalhomeschool.work.gd">heather@herbalhomeschool.work.gd</a>
-            </p>
-            
-            <form action="https://submit-form.com/kMchZbtBb" method="POST" style="max-width: 600px; margin: 0 auto; text-align: left;">
-                <div class="form-group">
-                    <label style="color: var(--text-bright);">Your Email</label>
-                    <input type="email" name="email" required style="background: rgba(0,0,0,0.3); border-color: rgba(233,69,96,0.3); color: var(--text-bright);">
-                </div>
-                
-                <div class="form-group">
-                    <label style="color: var(--text-bright);">Your Idea</label>
-                    <textarea name="message" required placeholder="What tool would help you?" style="background: rgba(0,0,0,0.3); border-color: rgba(233,69,96,0.3); color: var(--text-bright);"></textarea>
-                </div>
-                
-                <button type="submit" class="btn btn-gradient" style="width: 100%;">Send Idea</button>
-            </form>
-        </div>
-    </section>
+        </section>
+    </main>
 
     <footer>
-        <div class="container">
-            <p style="font-weight: 600;">&copy; 2025 Mama Said This. Built with love, shared free forever.</p>
-            <p>Made with ❤️ by a mom who codes at 2am</p>
-            <p style="margin-top: 1rem;">
-                <a href="https://ko-fi.com/mamasaidherbalhomeschool" target="_blank">Support on Ko-fi</a> • 
-                <a href="mailto:heather@herbalhomeschool.work.gd">Email Me</a> • 
-                <a href="https://dashboard.formspark.io" target="_blank">FormSpark Dashboard</a>
-            </p>
-        </div>
+        <p>&copy; 2025 Mama Said This - Built with ❤️ by a mom who codes at 2am</p>
     </footer>
 
     <script>
-        // Mobile Menu
-        function toggleMenu() {
-            document.getElementById('nav').classList.toggle('active');
-        }
-
-        // Close menu on link click
-        document.querySelectorAll('.nav-links a').forEach(a => {
-            a.addEventListener('click', () => {
-                document.getElementById('nav').classList.remove('active');
-            });
-        });
-
-        // Smooth scroll
-        document.querySelectorAll('a[href^="#"]').forEach(a => {
-            a.addEventListener('click', function(e) {
-                e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-                }
-            });
-        });
-
-        // Carousel
         let currentSlide = 0;
         const slides = document.querySelectorAll('.carousel-slide');
-        const totalSlides = slides.length;
 
         function showSlide(n) {
-            slides.forEach((s, i) => {
-                s.classList.remove('active');
-                if (i === n) s.classList.add('active');
-            });
-        }
-
-        function nextSlide() {
-            currentSlide = (currentSlide + 1) % totalSlides;
-            showSlide(currentSlide);
+            slides.forEach(s => s.classList.remove('active'));
+            currentSlide = (n + slides.length) % slides.length;
+            slides[currentSlide].classList.add('active');
         }
 
         function prevSlide() {
-            currentSlide = (currentSlide - 1 + totalSlides) % totalSlides;
-            showSlide(currentSlide);
+            showSlide(currentSlide - 1);
         }
 
-        // Auto-advance carousel
-        let autoSlide = setInterval(nextSlide, 5000);
+        function nextSlide() {
+            showSlide(currentSlide + 1);
+        }
 
-        // Reset auto-advance on manual control
-        document.querySelectorAll('.carousel-btn').forEach(btn => {
-            btn.addEventListener('click', () => {
-                clearInterval(autoSlide);
-                autoSlide = setInterval(nextSlide, 5000);
+        setInterval(() => nextSlide(), 5000);
+
+        const missions = [
+            { title: "Find Your Left Sock's Long-Lost Twin", desc: "It's in there somewhere..." },
+            { title: "Do Laundry Before It Becomes Sentient", desc: "That pile is giving you side-eye." },
+            { title: "Drink Water, Queen 👑", desc: "Coffee doesn't count." },
+            { title: "Text Someone Who Makes You Smile", desc: "Connection counts." }
+        ];
+
+        function renderMissions() {
+            const list = document.getElementById('missionsList');
+            const status = JSON.parse(localStorage.getItem('missions') || '{}');
+            
+            list.innerHTML = '';
+            missions.forEach((m, i) => {
+                const li = document.createElement('li');
+                li.className = 'mission-item' + (status[i] ? ' completed' : '');
+                li.innerHTML = `
+                    <div class="mission-checkbox"></div>
+                    <div>
+                        <div style="font-weight: 700;">${m.title}</div>
+                        <div style="color: #ff6b9d; font-size: 0.9rem;">${m.desc}</div>
+                    </div>
+                `;
+                li.onclick = () => {
+                    status[i] = !status[i];
+                    localStorage.setItem('missions', JSON.stringify(status));
+                    renderMissions();
+                    updateProgress();
+                };
+                list.appendChild(li);
             });
-        });
-
-        // Missions tracker
-        let completed = JSON.parse(localStorage.getItem('missions') || '[]');
+        }
 
         function updateProgress() {
-            const total = document.querySelectorAll('.mission').length;
-            const done = completed.length;
-            const pct = Math.round((done / total) * 100);
-            const bar = document.getElementById('progress');
-            bar.style.width = pct + '%';
-            bar.textContent = pct + '%';
+            const status = JSON.parse(localStorage.getItem('missions') || '{}');
+            const completed = Object.values(status).filter(v => v).length;
+            const percent = (completed / missions.length) * 100;
+            document.getElementById('progressFill').style.width = percent + '%';
         }
 
-        function toggle(el) {
-            const title = el.querySelector('.mission-title').textContent;
-            const idx = completed.indexOf(title);
-            
-            if (idx > -1) {
-                completed.splice(idx, 1);
-                el.classList.remove('done');
-            } else {
-                completed.push(title);
-                el.classList.add('done');
-            }
-            
-            localStorage.setItem('missions', JSON.stringify(completed));
-            updateProgress();
-        }
-
-        function exportMissions() {
-            const done = [];
-            document.querySelectorAll('.mission.done').forEach(m => {
-                done.push(m.querySelector('.mission-title').textContent);
-            });
-            
-            if (done.length === 0) {
-                alert('No missions completed yet! Get out there and crush it, mama! 💪');
-                return;
-            }
-            
-            const txt = '🎯 MY COMPLETED MAMA MISSIONS 🎯\n\n' + 
-                       done.map((m, i) => `${i + 1}. ${m}`).join('\n') + 
-                       '\n\n✨ You\'re doing amazing! Keep going! ✨';
-            
-            const blob = new Blob([txt], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'my-mama-missions.txt';
-            a.click();
-            URL.revokeObjectURL(url);
-        }
-
-        function resetMissions() {
-            if (confirm('Are you sure you want to reset all missions? This will clear your progress.')) {
-                completed = [];
-                localStorage.removeItem('missions');
-                document.querySelectorAll('.mission').forEach(m => m.classList.remove('done'));
+        document.getElementById('resetBtn').onclick = () => {
+            if (confirm('Reset all missions?')) {
+                localStorage.setItem('missions', '{}');
+                renderMissions();
                 updateProgress();
-                alert('All missions reset! Fresh start, mama! You got this! 💖');
             }
-        }
+        };
 
-        function loadMissions() {
-            document.querySelectorAll('.mission').forEach(m => {
-                const title = m.querySelector('.mission-title').textContent;
-                if (completed.includes(title)) m.classList.add('done');
-            });
-            updateProgress();
-        }
-
-        document.addEventListener('DOMContentLoaded', loadMissions);
+        renderMissions();
+        updateProgress();
     </script>
 </body>
 </html>
