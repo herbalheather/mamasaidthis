@@ -1,493 +1,550 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mama Said This - Free Tools for Mamas</title>
-    <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        
-        body {
-            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
-            background: linear-gradient(135deg, #0a0a0f 0%, #05050a 100%);
-            color: #e8e8f0;
-            line-height: 1.6;
-        }
-        
-        .container { max-width: 1200px; margin: 0 auto; padding: 0 20px; }
-        
-        header {
-            background: rgba(10, 10, 15, 0.95);
-            backdrop-filter: blur(10px);
-            padding: 1rem 0;
-            position: sticky;
-            top: 0;
-            z-index: 100;
-            border-bottom: 2px solid #e94560;
-        }
-        
-        nav { display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 1rem; }
-        .logo { font-size: 1.5rem; font-weight: 800; color: #e94560; }
-        .nav-links { display: flex; gap: 1rem; list-style: none; flex-wrap: wrap; }
-        .nav-links a {
-            color: #e8e8f0;
-            text-decoration: none;
-            padding: 0.6rem 1rem;
-            border-radius: 8px;
-            font-weight: 600;
-            transition: all 0.3s;
-        }
-        .nav-links a:hover { background: #e94560; color: white; }
-        
-        .emergency-bar {
-            background: linear-gradient(135deg, #d32f2f, #b71c1c);
-            padding: 2rem 1rem;
-            text-align: center;
-        }
-        .emergency-bar h2 { font-size: 1.5rem; margin-bottom: 1rem; color: white; }
-        .emergency-buttons { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
-        .emergency-btn {
-            background: white;
-            color: #b71c1c;
-            padding: 0.9rem 1.5rem;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s;
-        }
-        .emergency-btn:hover { transform: translateY(-2px); box-shadow: 0 4px 12px rgba(0,0,0,0.3); }
-        
-        main { padding: 3rem 0; }
-        section { margin-bottom: 4rem; }
-        h2 { color: #e94560; margin-bottom: 1.5rem; text-align: center; font-size: 2rem; }
-        
-        .carousel-container {
-            max-width: 600px;
-            margin: 0 auto;
-            position: relative;
-            border-radius: 20px;
-            overflow: hidden;
-            box-shadow: 0 10px 30px rgba(233, 69, 96, 0.3);
-            background: #1a1a2e;
-        }
-        
-        .carousel { position: relative; height: 400px; }
-        .carousel-slide {
-            position: absolute;
-            width: 100%;
-            height: 100%;
-            opacity: 0;
-            transition: opacity 1s ease-in-out;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .carousel-slide.active { opacity: 1; z-index: 1; }
-        .carousel-slide img {
-            width: 100%;
-            height: 100%;
-            object-fit: cover;
-        }
-        
-        .carousel-controls {
-            position: absolute;
-            bottom: 20px;
-            left: 50%;
-            transform: translateX(-50%);
-            display: flex;
-            gap: 15px;
-            z-index: 10;
-        }
-        
-        .carousel-btn {
-            background: rgba(233, 69, 96, 0.95);
-            border: none;
-            width: 50px;
-            height: 50px;
-            border-radius: 50%;
-            cursor: pointer;
-            font-size: 24px;
-            color: white;
-            transition: all 0.3s;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-        .carousel-btn:hover { background: #ff6b9d; transform: scale(1.1); }
-        
-        .missions-box, .info-box {
-            background: rgba(26, 26, 46, 0.8);
-            backdrop-filter: blur(10px);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 2px solid rgba(233, 69, 96, 0.3);
-        }
-        
-        .progress-bar {
-            width: 100%;
-            height: 35px;
-            background: rgba(0,0,0,0.4);
-            border-radius: 15px;
-            overflow: hidden;
-            margin-bottom: 2rem;
-            border: 2px solid #e94560;
-        }
-        .progress-fill {
-            height: 100%;
-            background: linear-gradient(90deg, #10b981, #059669);
-            width: 0%;
-            transition: width 0.5s cubic-bezier(0.34, 1.56, 0.64, 1);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 700;
-            color: white;
-        }
-        
-        .missions-list { list-style: none; margin-bottom: 2rem; }
-        .mission-item {
-            background: rgba(255,255,255,0.05);
-            padding: 1.2rem;
-            margin-bottom: 1rem;
-            border-radius: 12px;
-            border: 2px solid transparent;
-            cursor: pointer;
-            transition: all 0.3s;
-            display: flex;
-            gap: 1rem;
-        }
-        .mission-item:hover { border-color: #e94560; background: rgba(233,69,96,0.1); }
-        .mission-item.completed { background: rgba(76, 175, 80, 0.2); border-color: #4caf50; opacity: 0.7; }
-        
-        .mission-checkbox {
-            width: 28px;
-            height: 28px;
-            border: 2px solid #e94560;
-            border-radius: 6px;
-            flex-shrink: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 18px;
-        }
-        .mission-item.completed .mission-checkbox { background: #4caf50; border-color: #4caf50; }
-        .mission-item.completed .mission-checkbox::after { content: '✓'; color: white; font-weight: bold; }
-        
-        .mission-title { font-weight: 700; font-size: 1.1rem; margin-bottom: 0.3rem; }
-        .mission-desc { color: #ff6b9d; font-size: 0.95rem; font-style: italic; }
-        
-        .btn {
-            background: linear-gradient(135deg, #e94560, #ff6b9d);
-            color: white;
-            border: none;
-            padding: 1rem 2rem;
-            border-radius: 12px;
-            font-weight: 700;
-            cursor: pointer;
-            transition: all 0.3s;
-            font-size: 1rem;
-        }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 8px 20px rgba(233, 69, 96, 0.4); }
-        
-        .tools-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: 2rem;
-        }
-        
-        .tool-card {
-            background: rgba(26, 26, 46, 0.8);
-            padding: 2rem;
-            border-radius: 15px;
-            border: 2px solid rgba(233, 69, 96, 0.2);
-            transition: all 0.3s;
-        }
-        .tool-card:hover {
-            transform: translateY(-8px);
-            border-color: #e94560;
-            box-shadow: 0 15px 35px rgba(233, 69, 96, 0.3);
-        }
-        .tool-card h3 { color: #e94560; margin-bottom: 1rem; font-size: 1.3rem; }
-        .tool-card p { margin-bottom: 1.5rem; line-height: 1.7; }
-        .tool-card a {
-            display: inline-block;
-            background: linear-gradient(135deg, #e94560, #ff6b9d);
-            color: white;
-            padding: 0.8rem 1.5rem;
-            border-radius: 10px;
-            text-decoration: none;
-            font-weight: 700;
-            transition: all 0.3s;
-        }
-        .tool-card a:hover { transform: translateY(-2px); box-shadow: 0 5px 15px rgba(233, 69, 96, 0.4); }
-        
-        footer {
-            background: rgba(10, 10, 15, 0.95);
-            padding: 3rem 1rem;
-            text-align: center;
-            border-top: 2px solid #e94560;
-        }
-        footer a { color: #e94560; text-decoration: none; font-weight: 600; transition: color 0.3s; }
-        footer a:hover { color: #ff6b9d; }
-        
-        @media (max-width: 768px) {
-            .tools-grid { grid-template-columns: 1fr; }
-            .carousel { height: 300px; }
-        }
-    </style>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Mama Said This — Homeschool Tools & Resources</title>
+  <meta name="description" content="Mama Said This (MST) — free educational tools, apps, lesson ideas, and resources for homeschooling families. Built & curated by Heather." />
+  <link rel="canonical" href="https://mamasaidthis.pages.dev/" />
+  <meta name="theme-color" content="#0f111b" />
+
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+
+  <style>
+    :root {
+      --bg: #0a0e1a;
+      --card: #1a1f3a;
+      --muted: #8892a8;
+      --accent: #ff006e;
+      --accent-2: #8338ec;
+      --text: #e8ecf1;
+      --border: rgba(255,255,255,.12);
+    }
+
+    html.light-mode {
+      --bg: #fafbfd;
+      --card: #ffffff;
+      --muted: #6b7280;
+      --accent: #ec4899;
+      --accent-2: #8b5cf6;
+      --text: #1f2937;
+      --border: rgba(0,0,0,.08);
+    }
+
+    * { box-sizing: border-box; }
+    
+    body { 
+      margin: 0; 
+      font-family: 'Inter', sans-serif; 
+      background: var(--bg); 
+      color: var(--text); 
+      line-height: 1.6; 
+      transition: background 0.3s, color 0.3s; 
+    }
+
+    header { 
+      background: var(--bg); 
+      border-bottom: 1px solid var(--border); 
+      padding: 1rem 0;
+      box-shadow: 0 2px 8px rgba(0,0,0,0.1);
+    }
+
+    .site-inner { 
+      max-width: 1100px; 
+      margin: 0 auto; 
+      padding: 0 20px; 
+    }
+
+    nav { 
+      display: flex; 
+      align-items: center; 
+      justify-content: space-between; 
+      gap: 16px; 
+      flex-wrap: wrap; 
+    }
+
+    .brand { 
+      display: flex; 
+      align-items: center; 
+      gap: 12px; 
+    }
+
+    .brand h1 { 
+      font-size: 24px; 
+      margin: 0; 
+      color: var(--accent); 
+      font-weight: 700;
+    }
+
+    .brand-sub { 
+      font-size: 12px; 
+      color: var(--muted);
+      margin: 0;
+    }
+
+    .nav-links { 
+      display: flex; 
+      gap: 16px; 
+      align-items: center; 
+      flex-wrap: wrap; 
+    }
+
+    .nav-links a { 
+      color: var(--text); 
+      text-decoration: none; 
+      font-weight: 500; 
+      transition: color 0.2s; 
+      cursor: pointer;
+    }
+
+    .nav-links a:hover { 
+      color: var(--accent); 
+    }
+
+    .btn { 
+      background: linear-gradient(135deg, var(--accent) 0%, var(--accent-2) 100%); 
+      color: #fff; 
+      padding: 10px 20px; 
+      border-radius: 8px; 
+      font-weight: 600; 
+      text-decoration: none; 
+      transition: transform 0.2s, box-shadow 0.2s; 
+      cursor: pointer; 
+      border: none; 
+      font-size: 0.95rem;
+      display: inline-block;
+    }
+
+    .btn:hover { 
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(255, 0, 110, 0.3);
+    }
+
+    .btn-toggle { 
+      background: transparent; 
+      color: var(--text); 
+      border: 1px solid var(--border); 
+      padding: 8px 12px; 
+      border-radius: 6px; 
+      font-size: 16px; 
+      transition: all 0.2s; 
+      cursor: pointer;
+    }
+
+    .btn-toggle:hover { 
+      border-color: var(--accent); 
+      color: var(--accent);
+    }
+
+    .hero { 
+      display: grid; 
+      grid-template-columns: 1fr; 
+      gap: 32px; 
+      padding: 60px 0; 
+      align-items: center; 
+    }
+
+    .hero-inner { 
+      display: flex; 
+      flex-direction: column; 
+      gap: 16px; 
+    }
+
+    .hero h2 { 
+      font-size: 40px; 
+      margin: 0; 
+      color: var(--accent); 
+      line-height: 1.2; 
+      font-weight: 800;
+    }
+
+    .muted { 
+      color: var(--muted); 
+      font-weight: 500; 
+    }
+
+    .cards { 
+      display: grid; 
+      grid-template-columns: 1fr; 
+      gap: 24px; 
+      margin-top: 40px; 
+    }
+
+    .card { 
+      background: var(--card); 
+      border-radius: 12px; 
+      padding: 24px; 
+      box-shadow: 0 4px 12px rgba(0,0,0,0.1); 
+      border: 1px solid var(--border); 
+      transition: all 0.3s; 
+    }
+
+    .card:hover { 
+      transform: translateY(-4px); 
+      box-shadow: 0 8px 24px rgba(0,0,0,0.2);
+      border-color: var(--accent-2);
+    }
+
+    .card h4 { 
+      margin-top: 0; 
+      color: var(--accent-2); 
+      font-size: 18px; 
+      font-weight: 700;
+    }
+
+    .carousel { 
+      position: relative; 
+      overflow: hidden; 
+      border-radius: 12px; 
+      margin-top: 32px; 
+      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
+    }
+
+    .carousel-track { 
+      display: flex; 
+      transition: transform 0.5s ease; 
+    }
+
+    .carousel-slide { 
+      min-width: 100%; 
+      display: flex; 
+      align-items: center; 
+      justify-content: center; 
+    }
+
+    .carousel img { 
+      width: 100%; 
+      height: auto;
+      display: block;
+      object-fit: cover;
+    }
+
+    .carousel-controls { 
+      position: absolute; 
+      top: 50%; 
+      left: 0; 
+      right: 0; 
+      display: flex; 
+      justify-content: space-between; 
+      padding: 0 20px; 
+      transform: translateY(-50%); 
+    }
+
+    .control { 
+      background: rgba(255, 0, 110, 0.85); 
+      color: #fff; 
+      border-radius: 50%; 
+      padding: 10px 14px; 
+      border: none; 
+      cursor: pointer; 
+      font-size: 18px; 
+      opacity: 0.8; 
+      transition: all 0.2s; 
+      font-weight: bold;
+    }
+
+    .control:hover { 
+      opacity: 1; 
+      background: var(--accent);
+      transform: scale(1.1);
+    }
+
+    footer { 
+      padding: 40px 0; 
+      font-size: 13px; 
+      color: var(--muted); 
+      border-top: 1px solid var(--border); 
+      text-align: center; 
+      margin-top: 60px;
+    }
+
+    input, textarea { 
+      width: 100%; 
+      padding: 12px; 
+      margin: 8px 0; 
+      border-radius: 8px; 
+      border: 1px solid var(--border); 
+      background: var(--card); 
+      color: var(--text); 
+      font-size: 16px; 
+      transition: all 0.2s; 
+      font-family: inherit; 
+    }
+
+    input:focus, textarea:focus { 
+      outline: none; 
+      border-color: var(--accent); 
+      box-shadow: 0 0 0 3px rgba(255, 0, 110, 0.1);
+    }
+
+    button[type="submit"] { 
+      margin-top: 12px; 
+    }
+
+    a { 
+      color: var(--accent); 
+      text-decoration: none; 
+      transition: color 0.2s; 
+      font-weight: 500; 
+    }
+
+    a:hover { 
+      color: var(--accent-2); 
+    }
+    
+    ul { 
+      margin: 0; 
+      padding-left: 20px; 
+    }
+
+    li { 
+      margin: 8px 0; 
+    }
+
+    h5 { 
+      color: var(--text); 
+      margin-bottom: 12px;
+    }
+
+    .venmo-highlight {
+      background: linear-gradient(135deg, rgba(61, 149, 206, 0.1) 0%, rgba(131, 56, 236, 0.1) 100%);
+      border: 2px solid var(--accent);
+      padding: 20px;
+      border-radius: 10px;
+      margin: 20px 0;
+    }
+
+    .venmo-highlight .btn {
+      background: linear-gradient(135deg, #3d95ce 0%, #1e90ff 100%);
+    }
+
+    @media(min-width: 840px) { 
+      .hero { 
+        grid-template-columns: 1fr 420px; 
+        gap: 48px; 
+      }
+      .cards { 
+        grid-template-columns: repeat(2, 1fr); 
+      }
+    }
+
+    @media(min-width: 1200px) {
+      .cards { 
+        grid-template-columns: repeat(3, 1fr); 
+      }
+    }
+  </style>
 </head>
 <body>
-    <header>
-        <nav class="container">
-            <div class="logo">💖 Mama Said This</div>
-            <ul class="nav-links">
-                <li><a href="#carousel">Journey</a></li>
-                <li><a href="#missions">Missions</a></li>
-                <li><a href="#tools">Tools</a></li>
-                <li><a href="#about">About</a></li>
-                <li><a href="https://ko-fi.com/mamasaidherbalhomeschool" target="_blank">☕ Donate</a></li>
-            </ul>
-        </nav>
-    </header>
 
-    <section class="emergency-bar">
-        <h2>🚨 In Crisis? Get Help Now</h2>
-        <p style="color: white; margin-bottom: 1rem;">24/7 confidential resources</p>
-        <div class="emergency-buttons">
-            <a href="https://www.thehotline.org/" target="_blank" class="emergency-btn">🚨 The Hotline</a>
-            <a href="tel:211" class="emergency-btn">📞 Call 211</a>
-            <a href="tel:988" class="emergency-btn">💙 Call 988</a>
-            <a href="tel:911" class="emergency-btn">🔴 Call 911</a>
+<header>
+  <div class="site-inner">
+    <nav aria-label="Main navigation">
+      <div class="brand">
+        <div>
+          <h1>Mama Said This</h1>
+          <p class="brand-sub">Free tools & homeschool resources</p>
         </div>
-    </section>
+      </div>
+      <div class="nav-links">
+        <a onclick="scrollToSection('featured')">Featured</a>
+        <a onclick="scrollToSection('tools')">My Tools</a>
+        <a onclick="scrollToSection('resources')">Resources</a>
+        <a href="https://github.com/herbalheather" target="_blank" rel="noopener">GitHub</a>
+        <button class="btn-toggle" id="themeToggle" aria-label="Toggle theme">🌙</button>
+        <a onclick="scrollToSection('contact')" class="btn">Donate</a>
+      </div>
+    </nav>
+  </div>
+</header>
 
-    <main class="container">
-        <section id="carousel">
-            <h2>✨ Heather's Journey</h2>
-            <div class="carousel-container">
-                <div class="carousel">
-                    <div class="carousel-slide active">
-                        <img src="https://cdn.jsdelivr.net/gh/herbalheather/picturefile@main/picsforweb/IMG_1171.jpg" alt="Family moment 1">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="https://cdn.jsdelivr.net/gh/herbalheather/picturefile@main/picsforweb/IMG_1856.JPG" alt="Family moment 2">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="https://cdn.jsdelivr.net/gh/herbalheather/picturefile@main/picsforweb/IMG_1925.JPG" alt="Family moment 3">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="https://cdn.jsdelivr.net/gh/herbalheather/picturefile@main/picsforweb/IMG_2232.JPG" alt="Family moment 4">
-                    </div>
-                    <div class="carousel-slide">
-                        <img src="https://cdn.jsdelivr.net/gh/herbalheather/picturefile@main/picsforweb/IMG_6713.JPG" alt="Family moment 5">
-                    </div>
-                    <div class="carousel-controls">
-                        <button class="carousel-btn" onclick="prevSlide()">❮</button>
-                        <button class="carousel-btn" onclick="nextSlide()">❯</button>
-                    </div>
-                </div>
-            </div>
-        </section>
+<main class="site-inner">
+  <section class="hero">
+    <div class="hero-inner">
+      <p class="muted">Welcome to Mama Said This</p>
+      <h2>Free tools, resources & support for every family</h2>
+      <p class="muted">Custom-built educational tools. Curated free resources. No paywalls. Just help for families who need it most.</p>
+    </div>
+    <div class="carousel" aria-roledescription="carousel" aria-label="Featured images">
+      <div class="carousel-track" id="carouselTrack">
+        <div class="carousel-slide"><img src="/attached_assets/image_1764028033457.png" alt="Heather Hugzz Coaching" loading="lazy"></div>
+        <div class="carousel-slide"><img src="https://cdn.jsdelivr.net/gh/herbalheather/picturefile@main/picsforweb/IMG_1171.jpg" alt="Mama Said This - Family learning" loading="lazy"></div>
+        <div class="carousel-slide"><img src="https://cdn.jsdelivr.net/gh/herbalheather/picturefile@main/picsforweb/IMG_1856.JPG" alt="Family moments" loading="lazy"></div>
+        <div class="carousel-slide"><img src="https://cdn.jsdelivr.net/gh/herbalheather/picturefile@main/picsforweb/IMG_1925.JPG" alt="Learning together" loading="lazy"></div>
+      </div>
+      <div class="carousel-controls">
+        <button class="control" id="prevBtn" aria-label="Previous slide">◀</button>
+        <button class="control" id="nextBtn" aria-label="Next slide">▶</button>
+      </div>
+    </div>
+  </section>
 
-        <section id="missions">
-            <div class="missions-box">
-                <h2>🎯 Mama Missions</h2>
-                <p style="text-align: center; margin-bottom: 1.5rem; font-size: 1.1rem;">Tiny wins for big days. Click to complete!</p>
-                
-                <div class="progress-bar">
-                    <div class="progress-fill" id="progressFill">0%</div>
-                </div>
+  <section id="featured" class="cards">
+    <div class="card">
+      <h4>Heather's Custom Tools</h4>
+      <ul>
+        <li><a href="https://howtobecool.pages.dev/" target="_blank" rel="noopener">HowToBeCool Builder</a> — Interactive lessons</li>
+        <li><a href="https://github.com/herbalheather" target="_blank" rel="noopener">GitHub Projects</a> — All custom tools</li>
+        <li><a href="https://www.amazon.com/dp/B0FWRTF778" target="_blank" rel="noopener">My Book</a> — Available on Amazon</li>
+        <li><a href="#contact">Request Custom Tool</a> — Let's build together</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Services</h4>
+      <ul>
+        <li><a href="#contact">Coding & Tech Tutoring</a></li>
+        <li><a href="#contact">Herbal & Nature Studies</a></li>
+        <li><a href="#contact">Curriculum Consulting</a></li>
+        <li><a href="#contact">Academic Tutoring</a></li>
+        <li><a href="#contact">Healthcare Guidance</a></li>
+      </ul>
+    </div>
+  </section>
 
-                <ul class="missions-list" id="missionsList"></ul>
+  <section id="tools" class="cards">
+    <div class="card">
+      <h4>Crisis Resources (24/7)</h4>
+      <ul>
+        <li><a href="https://www.thehotline.org/" target="_blank" rel="noopener">The Hotline</a> — 1-800-799-7233</li>
+        <li><a href="tel:211">Call 211</a> — Community Resources</li>
+        <li><a href="tel:988">Call 988</a> — Mental Health Support</li>
+        <li><a href="tel:911">Call 911</a> — Emergency</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Learning & Education</h4>
+      <ul>
+        <li><a href="https://scratch.mit.edu/" target="_blank" rel="noopener">Scratch</a> — block-based coding</li>
+        <li><a href="https://code.org/" target="_blank" rel="noopener">Code.org</a> — coding curriculum</li>
+        <li><a href="https://www.groklearning.com/" target="_blank" rel="noopener">Grok Academy</a> — advanced coding</li>
+        <li><a href="https://www.starfall.com/" target="_blank" rel="noopener">Starfall</a> — early learning</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Nature & STEM</h4>
+      <ul>
+        <li><a href="https://www.motherearthnews.com/" target="_blank" rel="noopener">Mother Earth News</a> — homesteading</li>
+        <li><a href="https://www.learningherbs.com/" target="_blank" rel="noopener">LearningHerbs</a> — herbal studies</li>
+        <li><a href="https://phet.colorado.edu/" target="_blank" rel="noopener">PhET Simulations</a> — interactive science</li>
+        <li><a href="https://www.desmos.com/" target="_blank" rel="noopener">Desmos</a> — graphing</li>
+      </ul>
+    </div>
+  </section>
 
-                <div style="display: flex; gap: 1rem; flex-wrap: wrap;">
-                    <button class="btn" id="exportBtn">📥 Export Completed</button>
-                    <button class="btn" id="resetBtn">🔄 Reset All</button>
-                </div>
-            </div>
-        </section>
+  <section id="resources" class="cards">
+    <div class="card">
+      <h4>Food & Housing</h4>
+      <ul>
+        <li><a href="https://www.feedingamerica.org/" target="_blank" rel="noopener">Feeding America</a> — food banks</li>
+        <li><a href="https://211.org/" target="_blank" rel="noopener">211.org</a> — local resources</li>
+        <li>Ellis County Little Pantries — 24/7 access</li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Health & Wellness</h4>
+      <ul>
+        <li><a href="https://www.cdc.gov/mentalhealth/" target="_blank" rel="noopener">CDC Mental Health</a></li>
+        <li><a href="https://www.samhsa.gov/" target="_blank" rel="noopener">SAMHSA</a> — substance support</li>
+        <li><a href="https://www.plannedparenthood.org/" target="_blank" rel="noopener">Planned Parenthood</a></li>
+      </ul>
+    </div>
+    <div class="card">
+      <h4>Creator Tools</h4>
+      <ul>
+        <li><a href="https://www.canva.com/" target="_blank" rel="noopener">Canva</a> — design</li>
+        <li><a href="https://docs.google.com/" target="_blank" rel="noopener">Google Docs</a> — documents</li>
+        <li><a href="https://genially.com/" target="_blank" rel="noopener">Genially</a> — presentations</li>
+      </ul>
+    </div>
+  </section>
 
-        <section id="tools">
-            <h2>🛠️ Free Tools for Mamas</h2>
-            <div class="tools-grid">
-                <div class="tool-card">
-                    <h3>💰 Texas Paystub Calculator</h3>
-                    <p>Professional pay stubs for rental applications. Export to PDF or Word. Texas-specific formatting.</p>
-                    <a href="https://calculator-ea5.pages.dev/" target="_blank">Generate Paystub →</a>
-                </div>
+  <section id="contact" class="card" style="max-width: 800px; margin: 60px auto;">
+    <h4>Contact Heather & Support My Work</h4>
+    
+    <div class="venmo-highlight">
+      <h5 style="margin-top: 0;">💜 Help Keep These Tools Free</h5>
+      <p>Your support helps us provide resources to families who need them. Every contribution makes a difference!</p>
+      <div style="display: flex; gap: 10px; flex-wrap: wrap;">
+        <a href="https://venmo.com/u/heatherhugzz" target="_blank" rel="noopener" class="btn" data-testid="button-venmo-payment">💳 Pay via Venmo @heatherhugzz</a>
+        <a href="https://ko-fi.com/mamasaidherbalhomeschool" target="_blank" rel="noopener" class="btn" data-testid="button-kofi-support">Support on Ko-fi</a>
+      </div>
+      <p style="font-size: 13px; margin: 10px 0 0 0; color: var(--muted);">Direct Venmo: @heatherhugzz</p>
+    </div>
 
-                <div class="tool-card">
-                    <h3>💳 Budget Tracker</h3>
-                    <p>Simple tracker with visual charts. See where your money goes. Saves automatically in your browser.</p>
-                    <a href="https://mamasaidthis.pages.dev/budget-tracker" target="_blank">Track Budget →</a>
-                </div>
+    <h5>Send a Message</h5>
+    <form action="mailto:heather@herbalhomeschool.work.gd" method="post" enctype="text/plain">
+      <input type="text" name="name" placeholder="Your Name" required data-testid="input-contact-name" />
+      <input type="email" name="email" placeholder="Your Email" required data-testid="input-contact-email" />
+      <textarea name="message" rows="4" placeholder="Your Message" required data-testid="textarea-contact-message"></textarea>
+      <button type="submit" class="btn" data-testid="button-send-message">Send Message</button>
+    </form>
 
-                <div class="tool-card">
-                    <h3>🏥 Benefits Calculator</h3>
-                    <p>Check if your family qualifies for SNAP, WIC, food stamps, and other assistance programs.</p>
-                    <a href="https://benefitcalculator1.pages.dev/" target="_blank">Check Eligibility →</a>
-                </div>
+    <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid var(--border);">
+      <h5>Direct Contact</h5>
+      <p data-testid="text-contact-email"><strong>Email:</strong> <a href="mailto:heather@herbalhomeschool.work.gd">heather@herbalhomeschool.work.gd</a></p>
+      <p data-testid="text-contact-location"><strong>Location:</strong> Dallas/Fort Worth, Texas</p>
+      <p><strong>Homeschool Inquiry:</strong> <a href="https://submit-form.com/zeLEWA10f" target="_blank" rel="noopener">Complete Application Form</a></p>
+      <p><strong>Venmo:</strong> <a href="https://venmo.com/u/heatherhugzz" target="_blank" rel="noopener">@heatherhugzz</a></p>
+    </div>
+  </section>
 
-                <div class="tool-card">
-                    <h3>📚 Worksheet Generator</h3>
-                    <p>K-6 or advanced worksheet generators for custom learning materials. Print or save as PDF.</p>
-                    <a href="https://edusheet-chooser.pages.dev/" target="_blank">Create Worksheets →</a>
-                </div>
+</main>
 
-                <div class="tool-card">
-                    <h3>🌟 Texas Helper</h3>
-                    <p>Comprehensive Texas-specific resources and tools all in one place.</p>
-                    <a href="https://heatherstexashelper.pages.dev" target="_blank">Visit Helper →</a>
-                </div>
+<footer>
+  <p>Made with care by Heather for families everywhere</p>
+  <p><a href="https://github.com/herbalheather" target="_blank" rel="noopener">github.com/herbalheather</a> | <a href="https://venmo.com/u/heatherhugzz" target="_blank" rel="noopener">Venmo @heatherhugzz</a></p>
+</footer>
 
-                <div class="tool-card">
-                    <h3>🎮 Math Division Game</h3>
-                    <p>Fun educational game for practicing division skills. Great for kids learning math.</p>
-                    <a href="https://jaggersgames.pages.dev/" target="_blank">Play Game →</a>
-                </div>
-            </div>
-        </section>
+<script>
+function scrollToSection(id) {
+  const element = document.getElementById(id);
+  if (element) {
+    element.scrollIntoView({ behavior: 'smooth' });
+  }
+}
 
-        <section id="about">
-            <div class="info-box">
-                <h2>💪 About Mama Said This</h2>
-                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
-                    <strong>Hey, I'm Heather.</strong> Mom of 4. Master's Degree. Self-taught developer at 2am while my kids slept.
-                </p>
-                <p style="font-size: 1.1rem; line-height: 1.8; margin-bottom: 1.5rem;">
-                    My mom died when I was 19, pregnant with my first. Food banks, emergency C-sections, pandemic with newborn twins—life taught me everything the hard way.
-                </p>
-                <p style="font-size: 1.2rem; line-height: 1.8; margin-bottom: 1.5rem; color: #ff6b9d; font-weight: 600;">
-                    It's bad enough going through tough times without paywalls. So I built these tools. Free. Forever.
-                </p>
-                <p style="font-style: italic; color: #ff6b9d; text-align: center; font-size: 1rem;">
-                    For Carrie Hilliard, Donna Chambers, and Elva McConnell—who gave without asking why.
-                </p>
-            </div>
-        </section>
+(function(){
+  const track = document.getElementById('carouselTrack');
+  const slides = track.children;
+  let index = 0;
+  
+  function update() {
+    track.style.transform = `translateX(-${index * 100}%)`;
+  }
+  
+  document.getElementById('prevBtn').addEventListener('click', function() {
+    index = (index - 1 + slides.length) % slides.length;
+    update();
+  });
+  
+  document.getElementById('nextBtn').addEventListener('click', function() {
+    index = (index + 1) % slides.length;
+    update();
+  });
+  
+  setInterval(function() {
+    index = (index + 1) % slides.length;
+    update();
+  }, 6000);
+})();
 
-        <section>
-            <div class="info-box" style="text-align: center;">
-                <h2>💖 Support This Work</h2>
-                <p style="margin-bottom: 2rem; font-size: 1.1rem;">Help keep these tools free for families who need them most.</p>
-                <a href="https://ko-fi.com/mamasaidherbalhomeschool" target="_blank" 
-                   style="display: inline-block; background: linear-gradient(135deg, #e94560, #ff6b9d); color: white; padding: 1.2rem 2.5rem; border-radius: 15px; text-decoration: none; font-weight: 700; font-size: 1.1rem; transition: all 0.3s;"
-                   onmouseover="this.style.transform='translateY(-3px)'; this.style.boxShadow='0 10px 25px rgba(233,69,96,0.4)';"
-                   onmouseout="this.style.transform='translateY(0)'; this.style.boxShadow='none';">
-                    ☕ Donate on Ko-fi
-                </a>
-                <p style="margin-top: 1.5rem; color: #ff6b9d;">
-                    📧 Email me: <a href="mailto:heather@herbalhomeschool.work.gd" style="color: #e94560;">heather@herbalhomeschool.work.gd</a>
-                </p>
-            </div>
-        </section>
-    </main>
+(function(){
+  const toggle = document.getElementById('themeToggle');
+  const html = document.documentElement;
+  const saved = localStorage.getItem('theme-mode') || 'dark';
+  
+  if (saved === 'light') {
+    html.classList.add('light-mode');
+    toggle.textContent = '☀️';
+  }
+  
+  toggle.addEventListener('click', function() {
+    const isLight = html.classList.toggle('light-mode');
+    toggle.textContent = isLight ? '☀️' : '🌙';
+    localStorage.setItem('theme-mode', isLight ? 'light' : 'dark');
+  });
+})();
+</script>
 
-    <footer>
-        <div class="container">
-            <p style="font-weight: 700; font-size: 1.1rem; margin-bottom: 0.5rem;">&copy; 2025 Mama Said This</p>
-            <p style="margin-bottom: 1.5rem; font-size: 1rem;">Built with ❤️ by a mom who codes at 2am</p>
-            <p>
-                <a href="https://ko-fi.com/mamasaidherbalhomeschool" target="_blank">☕ Donate</a> • 
-                <a href="mailto:heather@herbalhomeschool.work.gd">📧 Email</a> • 
-                <a href="https://github.com/herbalheather" target="_blank">GitHub</a>
-            </p>
-        </div>
-    </footer>
-
-    <script>
-        let currentSlide = 0;
-        const slides = document.querySelectorAll('.carousel-slide');
-
-        function showSlide(n) {
-            slides.forEach(s => s.classList.remove('active'));
-            currentSlide = (n + slides.length) % slides.length;
-            slides[currentSlide].classList.add('active');
-        }
-
-        function prevSlide() { showSlide(currentSlide - 1); }
-        function nextSlide() { showSlide(currentSlide + 1); }
-
-        setInterval(() => nextSlide(), 5000);
-
-        const missions = [
-            { title: "Find Your Left Sock's Long-Lost Twin", desc: "It's in there somewhere. Probably chilling with last year's hair ties." },
-            { title: "Do Laundry Before It Becomes Sentient", desc: "That pile is giving you side-eye. Time to show it who's boss." },
-            { title: "Five-Minute Declutter Dash", desc: "Set a timer, grab a basket, throw stuff in. Not where it goes? That's tomorrow's problem." },
-            { title: "Drink Water, Queen 👑", desc: "Coffee doesn't count. Hydrate like the powerful human you are." },
-            { title: "Call 211 If You Need Help", desc: "Real talk: If you need resources, food, shelter, or support—call 211. No shame, just help." },
-            { title: "Text Someone Who Makes You Smile", desc: "Your bestie, your mom, that one friend with the memes. Connection counts." },
-            { title: "Eat Something That's NOT Standing Up", desc: "Sit down. Even for 5 minutes. You deserve it." },
-            { title: "Take Your Vitamins (If You Have Them)", desc: "Or just acknowledge you thought about it. That's half the battle." },
-            { title: "Put Your Phone on Charge", desc: "Because 14% battery at bedtime is a tomorrow problem you can prevent." },
-            { title: "Dance Like Nobody's Watching", desc: "Even if they are. Especially if they are. Life's short, bust a move." },
-            { title: "Say One Nice Thing to Yourself", desc: "Out loud. In your head. Write it down. You're doing better than you think." },
-            { title: "Make Tomorrow-You Breakfast", desc: "Set out the coffee. Prep the lunch. Future you will be so grateful." }
-        ];
-
-        function renderMissions() {
-            const list = document.getElementById('missionsList');
-            const status = JSON.parse(localStorage.getItem('missions') || '{}');
-            
-            list.innerHTML = '';
-            missions.forEach((m, i) => {
-                const li = document.createElement('li');
-                li.className = 'mission-item' + (status[i] ? ' completed' : '');
-                li.innerHTML = `
-                    <div class="mission-checkbox"></div>
-                    <div style="flex: 1;">
-                        <div class="mission-title">${m.title}</div>
-                        <div class="mission-desc">${m.desc}</div>
-                    </div>
-                `;
-                li.onclick = () => {
-                    status[i] = !status[i];
-                    localStorage.setItem('missions', JSON.stringify(status));
-                    renderMissions();
-                    updateProgress();
-                };
-                list.appendChild(li);
-            });
-        }
-
-        function updateProgress() {
-            const status = JSON.parse(localStorage.getItem('missions') || '{}');
-            const completed = Object.values(status).filter(v => v).length;
-            const percent = Math.round((completed / missions.length) * 100);
-            const fill = document.getElementById('progressFill');
-            fill.style.width = percent + '%';
-            fill.textContent = percent + '%';
-        }
-
-        document.getElementById('exportBtn').onclick = () => {
-            const status = JSON.parse(localStorage.getItem('missions') || '{}');
-            let text = '🎉 MAMA MISSIONS - COMPLETED TODAY 🎉\n\n';
-            missions.forEach((m, i) => {
-                if (status[i]) text += '✅ ' + m.title + '\n';
-            });
-            text += '\n💪 You did great today, mama! You deserve rest.\n';
-            
-            const blob = new Blob([text], { type: 'text/plain' });
-            const url = URL.createObjectURL(blob);
-            const a = document.createElement('a');
-            a.href = url;
-            a.download = 'mama-missions-' + new Date().toISOString().split('T')[0] + '.txt';
-            document.body.appendChild(a);
-            a.click();
-            document.body.removeChild(a);
-            URL.revokeObjectURL(url);
-        };
-
-        document.getElementById('resetBtn').onclick = () => {
-            if (confirm('Reset all missions? You can always start again tomorrow!')) {
-                localStorage.setItem('missions', '{}');
-                renderMissions();
-                updateProgress();
-            }
-        };
-
-        renderMissions();
-        updateProgress();
-    </script>
 </body>
 </html>
