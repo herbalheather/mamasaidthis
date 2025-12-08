@@ -144,11 +144,10 @@
       font-weight: 600;
       transition: all 0.3s;
       font-size: 14px;
-      display: inline-block;
-      min-height: 44px;
-      display: flex;
+      display: inline-flex;
       align-items: center;
       justify-content: center;
+      min-height: 44px;
       touch-action: manipulation;
     }
 
@@ -368,24 +367,26 @@
       border-radius: 12px;
       overflow: hidden;
       box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5);
-      max-height: 350px;
+      height: 350px;
     }
 
     .carousel-container {
       display: flex;
       transition: transform 0.5s ease;
-      height: 350px;
+      height: 100%;
     }
 
     .carousel-slide {
       min-width: 100%;
       height: 100%;
+      flex-shrink: 0;
     }
 
     .carousel-slide img {
       width: 100%;
       height: 100%;
       object-fit: cover;
+      display: block;
     }
 
     .carousel-controls {
@@ -689,53 +690,6 @@
       font-weight: 500;
     }
 
-    .faq-item {
-      background: rgba(255, 255, 255, 0.03);
-      border: 1px solid rgba(131, 56, 236, 0.2);
-      border-radius: 10px;
-      margin-bottom: 12px;
-      overflow: hidden;
-    }
-
-    .faq-question {
-      padding: 16px;
-      cursor: pointer;
-      font-weight: 600;
-      color: var(--text-primary);
-      display: flex;
-      justify-content: space-between;
-      align-items: center;
-      background: rgba(131, 56, 236, 0.05);
-      transition: all 0.3s;
-    }
-
-    .faq-question:active {
-      background: rgba(131, 56, 236, 0.15);
-    }
-
-    .faq-toggle {
-      font-size: 18px;
-      transition: transform 0.3s;
-    }
-
-    .faq-item.open .faq-toggle {
-      transform: rotate(180deg);
-    }
-
-    .faq-answer {
-      padding: 0 16px;
-      max-height: 0;
-      overflow: hidden;
-      transition: all 0.3s;
-      color: var(--text-secondary);
-      font-size: 13px;
-    }
-
-    .faq-item.open .faq-answer {
-      padding: 16px;
-      max-height: 500px;
-    }
-
     .newsletter {
       background: linear-gradient(135deg, rgba(131, 56, 236, 0.15) 0%, rgba(255, 0, 110, 0.15) 100%);
       border: 2px solid rgba(131, 56, 236, 0.3);
@@ -751,32 +705,30 @@
 
     .newsletter-form {
       display: flex;
+      flex-direction: column;
       gap: 10px;
-      flex-wrap: wrap;
     }
 
-    .newsletter-form input {
-      flex: 1;
+    .newsletter-form input,
+    .newsletter-form select,
+    .newsletter-form textarea {
       padding: 12px;
       border: 2px solid var(--accent-purple);
       background: rgba(255, 255, 255, 0.05);
       color: var(--text-primary);
       border-radius: 8px;
       font-size: 14px;
-      min-width: 200px;
+      font-family: 'Inter', sans-serif;
+    }
+
+    .newsletter-form textarea {
+      min-height: 100px;
+      resize: vertical;
     }
 
     .newsletter-form button {
       padding: 12px 20px;
       min-height: 44px;
-    }
-
-    .about-section {
-      background: linear-gradient(135deg, rgba(131, 56, 236, 0.1) 0%, rgba(255, 0, 110, 0.1) 100%);
-      padding: 24px;
-      border-radius: 12px;
-      border: 2px solid rgba(131, 56, 236, 0.2);
-      margin: 40px 0;
     }
 
     .support-section {
@@ -824,6 +776,47 @@
     .support-buttons a:active {
       background: #fff;
       color: var(--accent-pink);
+    }
+
+    .wishlist-section {
+      background: linear-gradient(135deg, rgba(255, 165, 0, 0.15) 0%, rgba(255, 0, 110, 0.15) 100%);
+      border: 2px solid rgba(255, 165, 0, 0.3);
+      padding: 24px;
+      border-radius: 12px;
+      margin: 30px 0;
+    }
+
+    .wishlist-section h3 {
+      color: #ffa500;
+      margin-top: 0;
+    }
+
+    .wishlist-buttons {
+      display: flex;
+      flex-direction: column;
+      gap: 10px;
+      margin-top: 16px;
+    }
+
+    .wishlist-buttons a {
+      background: rgba(255, 165, 0, 0.2);
+      color: var(--text-primary);
+      padding: 12px 16px;
+      border-radius: 8px;
+      text-decoration: none;
+      border: 2px solid rgba(255, 165, 0, 0.4);
+      font-weight: 600;
+      font-size: 13px;
+      min-height: 44px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.3s;
+    }
+
+    .wishlist-buttons a:active {
+      background: rgba(255, 165, 0, 0.4);
+      border-color: #ffa500;
     }
 
     footer {
@@ -892,8 +885,12 @@
         flex: 1;
       }
 
-      .newsletter-form {
-        flex-wrap: nowrap;
+      .wishlist-buttons {
+        flex-direction: row;
+      }
+
+      .wishlist-buttons a {
+        flex: 1;
       }
     }
 
@@ -926,9 +923,10 @@
     </div>
     <div class="nav-links">
       <a href="#tools">Tools</a>
-      <a href="#stories">Stories</a>
-      <a href="#faq">FAQ</a>
-      <a href="#support">Help</a>
+      <a href="https://mamasaidthis.pages.dev/resources" target="_blank" rel="noopener">Resources</a>
+      <a href="https://thebackgroundinfo.pages.dev/" target="_blank" rel="noopener">About Me</a>
+      <a href="https://www.thehotline.org/" target="_blank" rel="noopener">Help</a>
+      <a href="https://astrobytelab.space/" target="_blank" rel="noopener">Astro</a>
     </div>
   </div>
 </header>
@@ -963,14 +961,14 @@
   </div>
 
   <!-- Crisis Resources -->
-  <div class="crisis-banner" data-testid="section-crisis-resources">
+  <div class="crisis-banner">
     <h2>🚨 In Crisis? Get Help Now</h2>
     <p style="color: rgba(255,255,255,0.95); font-size: 13px; margin-bottom: 12px;">24/7 confidential support</p>
     <div class="crisis-buttons">
-      <a href="https://www.thehotline.org/" target="_blank" rel="noopener" data-testid="link-hotline">Hotline</a>
-      <a href="tel:211" data-testid="link-211">211</a>
-      <a href="tel:988" data-testid="link-988">988</a>
-      <a href="tel:911" data-testid="link-911">911</a>
+      <a href="https://www.thehotline.org/" target="_blank" rel="noopener">Hotline</a>
+      <a href="tel:211">211</a>
+      <a href="tel:988">988</a>
+      <a href="tel:911">911</a>
     </div>
   </div>
 
@@ -994,10 +992,15 @@
       <div class="resource-item">
         <strong>Mama Resources:</strong> <a href="https://mamasaidthis.pages.dev/resources" target="_blank" rel="noopener">Browse All Tools</a>
       </div>
+      <div class="resource-item">
+        <strong>My Story:</strong> <a href="https://thebackgroundinfo.pages.dev/" target="_blank" rel="noopener">Read Heather's Journey</a>
+      </div>
     </div>
   </div>
 
-  <!-- Heather's Journey -->
+  <!-- Heather's Journey Carousel -->
+
+
   <h2>✨ Heather's Journey</h2>
   <div class="carousel">
     <div class="carousel-container" id="carouselContainer">
@@ -1021,27 +1024,38 @@
       <div class="progress-fill" id="progressFill">0%</div>
     </div>
     <ul class="mission-list" id="missionList">
-      <li class="mission-item" data-testid="mission-1"><input type="checkbox"><span class="mission-text">Find a matching sock pair</span></li>
-      <li class="mission-item" data-testid="mission-2"><input type="checkbox"><span class="mission-text">Drink 1 glass of water</span></li>
-      <li class="mission-item" data-testid="mission-3"><input type="checkbox"><span class="mission-text">5-minute tidy</span></li>
-      <li class="mission-item" data-testid="mission-4"><input type="checkbox"><span class="mission-text">Text someone you love</span></li>
-      <li class="mission-item" data-testid="mission-5"><input type="checkbox"><span class="mission-text">Take your vitamins</span></li>
-      <li class="mission-item" data-testid="mission-6"><input type="checkbox"><span class="mission-text">Step outside for 2 min</span></li>
-      <li class="mission-item" data-testid="mission-7"><input type="checkbox"><span class="mission-text">Eat something good</span></li>
-      <li class="mission-item" data-testid="mission-8"><input type="checkbox"><span class="mission-text">Do 10 deep breaths</span></li>
-      <li class="mission-item" data-testid="mission-9"><input type="checkbox"><span class="mission-text">One nice thing to yourself</span></li>
-      <li class="mission-item" data-testid="mission-10"><input type="checkbox"><span class="mission-text">Dance like nobody's watching</span></li>
-      <li class="mission-item" data-testid="mission-11"><input type="checkbox"><span class="mission-text">Call 211 if you need help</span></li>
-      <li class="mission-item" data-testid="mission-12"><input type="checkbox"><span class="mission-text">Charge your phone</span></li>
+      <li class="mission-item"><input type="checkbox"><span class="mission-text">Find a matching sock pair</span></li>
+      <li class="mission-item"><input type="checkbox"><span class="mission-text">Drink 1 glass of water</span></li>
+      <li class="mission-item"><input type="checkbox"><span class="mission-text">5-minute tidy</span></li>
+      <li class="mission-item"><input type="checkbox"><span class="mission-text">Text someone you love</span></li>
+      <li class="mission-item"><input type="checkbox"><span class="mission-text">Take your vitamins</span></li>
+      <li class="mission-item"><input type="checkbox"><span class="mission-text">Step outside for 2 min</span></li>
+      <li class="mission-item"><input type="checkbox"><span class="mission-text">Eat something good</span></li>
+      <li class="mission-item"><input type="checkbox"><span class="mission-text">Do 10 deep breaths</span></li>
+      <li class="mission-item"><input type="checkbox"><span class="mission-text">One nice thing to yourself</span></li>
+      <li class="mission-item"><input type="checkbox"><span class="mission-text">Dance like nobody's watching</span></li>
+      <li class="mission-item"><input type="checkbox"><span class="mission-text">Call 211 if you need help</span></li>
+      <li class="mission-item"><input type="checkbox"><span class="mission-text">Charge your phone</span></li>
     </ul>
     <div class="missions-actions">
-      <button class="btn btn-small" id="shareBtn" data-testid="button-share-missions">Share</button>
-      <button class="btn btn-small" id="exportBtn" data-testid="button-export-missions">Export</button>
-      <button class="btn btn-small" id="resetBtn" data-testid="button-reset-missions">Reset</button>
+      <button class="btn btn-small" id="shareBtn">Share</button>
+      <button class="btn btn-small" id="exportBtn">Export</button>
+      <button class="btn btn-small" id="resetBtn">Reset</button>
     </div>
   </div>
 
   <div class="section-divider"></div>
+
+  <!-- Support Section - MOVED BEFORE STORIES -->
+  <h2 id="support">💖 Keep This Free</h2>
+  <div class="support-section">
+    <p style="color: rgba(255,255,255,0.95); margin-bottom: 20px;">Help me keep these tools accessible to every mom.</p>
+    <div class="support-buttons">
+      <a href="https://venmo.com/u/heatherhugzz" target="_blank" rel="noopener">💚 Venmo @heatherhugzz</a>
+      <a href="https://cash.app/$StozXr" target="_blank" rel="noopener">💵 Cash App $StozXr</a>
+      <a href="https://ko-fi.com/mamasaidherbalhomeschool" target="_blank" rel="noopener">☕ Ko-fi</a>
+    </div>
+  </div>
 
   <!-- Success Stories -->
   <h2 id="stories">💫 Real Moms. Real Wins.</h2>
@@ -1078,7 +1092,7 @@
     <input type="text" id="searchInput" placeholder="Search tools..." />
   </div>
   <div class="tools-grid" id="toolsGrid">
-    <div class="tool-card" data-testid="card-education-sheet" data-tags="learning">
+    <div class="tool-card" data-tags="learning">
       <button class="favorite-btn" data-tool="worksheets" title="Save as favorite">🤍</button>
       <div class="tool-badges">
         <span class="badge">Learning</span>
@@ -1086,56 +1100,63 @@
       </div>
       <h3>📝 Worksheets</h3>
       <p>Custom K-6 or advanced materials</p>
-      <a href="https://edusheet-chooser.pages.dev/" target="_blank" rel="noopener" data-testid="link-edusheet">Create →</a>
+      <a href="https://workingworksheet.pages.dev/" target="_blank" rel="noopener">Create →</a>
     </div>
-    <div class="tool-card" data-testid="card-benefit-calculator" data-tags="money">
+    <div class="tool-card" data-tags="money">
       <button class="favorite-btn" data-tool="benefits" title="Save as favorite">🤍</button>
       <div class="tool-badges"><span class="badge">Money Help</span></div>
-      <h3>💰 Benefits</h3>
+      <h3>💰 Benefits Eligibility</h3>
       <p>Calculate employment benefits</p>
-      <a href="https://benefitcalculator1.pages.dev/" target="_blank" rel="noopener" data-testid="link-benefit">Check →</a>
+      <a href="https://benefitcalculator1.pages.dev/" target="_blank" rel="noopener">Check →</a>
     </div>
-    <div class="tool-card" data-testid="card-paystub" data-tags="money">
+    <div class="tool-card" data-tags="money">
       <button class="favorite-btn" data-tool="paystub" title="Save as favorite">🤍</button>
       <div class="tool-badges"><span class="badge">Money Help</span></div>
       <h3>💵 Pay Stubs</h3>
       <p>Professional Texas pay stubs</p>
-      <a href="https://calculator-ea5.pages.dev/" target="_blank" rel="noopener" data-testid="link-paystub">Generate →</a>
+      <a href="https://calculator-ea5.pages.dev/" target="_blank" rel="noopener">Generate →</a>
     </div>
-    <div class="tool-card" data-testid="card-budget-tracker" data-tags="money">
+    <div class="tool-card" data-tags="money">
       <button class="favorite-btn" data-tool="budget" title="Save as favorite">🤍</button>
       <div class="tool-badges"><span class="badge">Money Help</span></div>
       <h3>📊 Budget</h3>
       <p>Track expenses & finances</p>
-      <a href="https://mamasaidthis.pages.dev/budget-tracker" data-testid="link-budget">Track →</a>
+      <a href="https://mamasaidthis.pages.dev/budget-tracker" target="_blank" rel="noopener">Track →</a>
     </div>
-    <div class="tool-card" data-testid="card-division-game" data-tags="learning">
+    <div class="tool-card" data-tags="learning">
       <button class="favorite-btn" data-tool="mathgame" title="Save as favorite">🤍</button>
       <div class="tool-badges"><span class="badge">Learning</span></div>
-      <h3>🎮 Math Game</h3>
+      <h3>🎮 Jaggers Division Game</h3>
       <p>Fun division practice for kids</p>
-      <a href="https://jaggersgames.pages.dev/" target="_blank" rel="noopener" data-testid="link-division">Play →</a>
+      <a href="https://heatherstexashelper.pages.dev/" target="_blank" rel="noopener">Play →</a>
     </div>
-    <div class="tool-card" data-testid="card-mama-toolkit" data-tags="resources">
+    <div class="tool-card" data-tags="resources">
       <button class="favorite-btn" data-tool="toolkit" title="Save as favorite">🤍</button>
       <div class="tool-badges"><span class="badge">Resources</span></div>
-      <h3>🧰 Toolkit</h3>
-      <p>Parenting worksheets & ideas</p>
-      <a href="https://mamasaidthis.pages.dev/resources" target="_blank" rel="noopener" data-testid="link-toolkit">Browse →</a>
-    </div>
-    <div class="tool-card" data-testid="card-mama-said-this" data-tags="resources">
-      <button class="favorite-btn" data-tool="helphub" title="Save as favorite">🤍</button>
-      <div class="tool-badges"><span class="badge">Resources</span></div>
-      <h3>👩‍👧 Help Hub</h3>
+      <h3>🧰 Help Hub</h3>
       <p>All tools & guidance in one place</p>
-      <a href="https://mamasaidthis.pages.dev/" target="_blank" rel="noopener" data-testid="link-mst">Visit →</a>
+      <a href="https://mamasaidthis.pages.dev/resources" target="_blank" rel="noopener">Browse →</a>
     </div>
-    <div class="tool-card" data-testid="card-build-website" data-tags="tech">
-      <button class="favorite-btn" data-tool="buildweb" title="Save as favorite">🤍</button>
-      <div class="tool-badges"><span class="badge">Tech</span></div>
-      <h3>🌾 Build Website</h3>
-      <p>Make your own site (no code)</p>
-      <a href="https://howtobecool.pages.dev/" target="_blank" rel="noopener" data-testid="link-build">Learn →</a>
+    <div class="tool-card" data-tags="resources">
+      <button class="favorite-btn" data-tool="fridgeraid" title="Save as favorite">🤍</button>
+      <div class="tool-badges"><span class="badge">Resources</span></div>
+      <h3>🍴 Fridge Raid</h3>
+      <p>Turn leftovers into meals</p>
+      <a href="https://fridgeraid.pages.dev/" target="_blank" rel="noopener">Cook →</a>
+    </div>
+    <div class="tool-card" data-tags="fun">
+      <button class="favorite-btn" data-tool="momwheel" title="Save as favorite">🤍</button>
+      <div class="tool-badges"><span class="badge">Fun</span></div>
+      <h3>🎡 Mom Wheel</h3>
+      <p>Decision-making made fun</p>
+      <a href="https://momwheel.pages.dev/" target="_blank" rel="noopener">Spin →</a>
+    </div>
+    <div class="tool-card" data-tags="fun">
+      <button class="favorite-btn" data-tool="hustlelibs" title="Save as favorite">🤍</button>
+      <div class="tool-badges"><span class="badge">Fun</span></div>
+      <h3>💼 Side Hustle Mad Libs</h3>
+      <p>Brainstorm business ideas</p>
+      <a href="https://hustlelibs.pages.dev/" target="_blank" rel="noopener">Play →</a>
     </div>
   </div>
 
@@ -1204,60 +1225,40 @@
 
   <div class="section-divider"></div>
 
-  <!-- FAQ -->
-  <h2 id="faq">❓ Real Questions. Real Answers.</h2>
-  <p style="font-size: 14px; margin-bottom: 18px; color: var(--text-secondary);">For when you're struggling and need to know you're not alone.</p>
-  <div id="faqContainer">
-    <div class="faq-item">
-      <div class="faq-question">I'm exhausted all the time. Is this normal? <span class="faq-toggle">▼</span></div>
-      <div class="faq-answer">Yes. This is SO normal. It's not weakness—it's biology + responsibility + sleep deprivation. Try: 1) 15 min uninterrupted rest, 2) Move your body, 3) Drink water, 4) Tell someone. If it persists, call 211 or 988. You deserve support.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question">I feel like I'm failing. Everything feels impossible. <span class="faq-toggle">▼</span></div>
-      <div class="faq-answer">Your brain is lying to you. Depression, overwhelm, anxiety make everything feel broken. You're not broken. Try Mama Missions—complete ONE thing. That's a win. Then call 988 or text 741741. You're worth it.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question">How do I afford everything my kids need? <span class="faq-toggle">▼</span></div>
-      <div class="faq-answer">1) Check SNAP/WIC with our Benefits Calculator, 2) Call 211 for emergency help, 3) Find local food banks, 4) Use our Budget Tracker to find hidden savings, 5) Reach out—you're not meant to do this alone.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question">I don't have time for myself. <span class="faq-toggle">▼</span></div>
-      <div class="faq-answer">This is unsustainable. Even 5 minutes matters. Try: 1) One Mama Mission just for YOU, 2) Wake 15 min early for quiet, 3) Ask for help (partner, friend, family), 4) Lower standards everywhere else. Self-care = survival.</div>
-    </div>
-    <div class="faq-item">
-      <div class="faq-question">My kids are struggling in school. What now? <span class="faq-toggle">▼</span></div>
-      <div class="faq-answer">1) Custom worksheets with our generator, 2) Try PhET or Desmos for hands-on learning, 3) Coding games build problem-solving, 4) Talk to their teacher, 5) Remember: your love matters more than grades.</div>
-    </div>
-  </div>
-
-  <div class="section-divider"></div>
-
-  <!-- Newsletter -->
+  <!-- Let's Connect Form -->
   <div class="newsletter">
-    <h3>📬 Weekly Mama Support</h3>
-    <p style="font-size: 13px; margin-bottom: 16px;">Tips, tools, and encouragement delivered to your inbox. No spam, just real help.</p>
+    <h3>📬 Let's Connect</h3>
+    <p style="font-size: 13px; margin-bottom: 16px;">Got suggestions, questions, complaints, or need prayers? Reach out—I'm here.</p>
     <form class="newsletter-form" id="newsletterForm">
-      <input type="email" placeholder="Your email" required />
-      <button type="submit" class="btn">Subscribe</button>
+      <input type="email" id="userEmail" placeholder="Your email" required />
+      <select id="contactType" required>
+        <option value="">Select reason...</option>
+        <option value="Suggestions">Suggestions</option>
+        <option value="Questions">Questions</option>
+        <option value="Complaints">Complaints</option>
+        <option value="Need Prayers">Need Prayers</option>
+      </select>
+      <textarea id="messageText" placeholder="Your message..." required></textarea>
+      <button type="submit" class="btn">Send Message</button>
     </form>
   </div>
 
-  <!-- About Section -->
-  <div class="about-section" id="about">
-    <h2>💪 About Mama Said This</h2>
-    <p><strong>I'm Heather.</strong> Mom of 4. Master's Degree. Self-taught developer.</p>
-    <p>My mom died when I was 19, pregnant with my first. Food banks. Emergency surgeries. Pandemic twins. Life taught me everything.</p>
-    <p><strong>Free. Forever. No paywalls.</strong> These tools exist because moms deserve better. No guilt. No judgment. Just help.</p>
+  <!-- Amazon Wishlists -->
+  <div class="wishlist-section">
+    <h3>🎁 Amazon Wishlists</h3>
+    <p style="font-size: 13px; margin-bottom: 12px; color: var(--text-secondary);">Help our family with everyday needs</p>
+    <div class="wishlist-buttons">
+      <a href="https://www.amazon.com/hz/wishlist/ls/3O9WF3HQQ85L2/ref=nav_wishlist_lists_2" target="_blank" rel="noopener">👶 Kids Wants/Needs</a>
+      <a href="https://www.amazon.com/hz/wishlist/ls/1UQREJJNSGV55?ref_=wl_share" target="_blank" rel="noopener">🏠 Household Needs</a>
+    </div>
   </div>
 
-  <!-- Support Section -->
-  <div class="support-section" id="support">
-    <h2>💖 Keep This Free</h2>
-    <p>Help me keep these tools accessible to every mom.</p>
+  <!-- Dylan Support -->
+  <div class="support-section" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+    <h2>🚀 Support Dylan at Astro</h2>
+    <p style="color: rgba(255,255,255,0.95); margin-bottom: 16px;">Help support Dylan's amazing work</p>
     <div class="support-buttons">
-      <a href="https://ko-fi.com/mamasaidherbalhomeschool" target="_blank" rel="noopener" class="btn" data-testid="link-kofi">Ko-fi</a>
-      <a href="https://venmo.com/u/heatherhugzz" target="_blank" rel="noopener" class="btn btn-venmo" data-testid="link-venmo">Venmo @heatherhugzz</a>
-      <a href="mailto:heather@herbalhomeschool.work.gd" class="btn" data-testid="link-email">Email</a>
+      <a href="https://astrobytelab.space/" target="_blank" rel="noopener">Visit Astro ByteLab →</a>
     </div>
   </div>
 
@@ -1265,12 +1266,19 @@
 
 <footer>
   <p>Made with care by Heather for moms everywhere</p>
-  <p><a href="https://github.com/herbalheather" target="_blank" rel="noopener">GitHub</a> | <a href="https://venmo.com/u/heatherhugzz" target="_blank" rel="noopener">Venmo</a> | <a href="tel:211">211</a> | <a href="tel:988">988</a></p>
+  <p>
+    <a href="https://github.com/herbalheather" target="_blank" rel="noopener">GitHub</a> | 
+    <a href="https://venmo.com/u/heatherhugzz" target="_blank" rel="noopener">Venmo</a> | 
+    <a href="https://thebackgroundinfo.pages.dev/" target="_blank" rel="noopener">My Story</a> | 
+    <a href="mailto:heather@herbalhomeschool.work.gd">Email</a> | 
+    <a href="tel:211">211</a> | 
+    <a href="tel:988">988</a>
+  </p>
   <p style="margin-top: 15px; color: #666;">You're doing the work. That matters. Keep going. 💙</p>
 </footer>
 
 <script>
-// Hero quotes (NO "your love is enough")
+// Hero quotes
 const heroQuotes = [
   "Progress isn't perfect. It's enough.",
   "You're doing the work. That matters.",
@@ -1327,6 +1335,7 @@ function updateStreak() {
   const today = new Date().toDateString();
   let streak = parseInt(localStorage.getItem('missionStreak')) || 0;
   if (lastDate === today) {
+    // Same day
   } else if (lastDate) {
     const lastDateObj = new Date(lastDate);
     const todayObj = new Date();
@@ -1338,11 +1347,13 @@ function updateStreak() {
       streak = 0;
     }
   }
+  localStorage.setItem('missionStreak', streak);
   document.getElementById('streakBadge').textContent = `🔥 ${streak} Day Streak`;
 }
 
 updateStreak();
 
+// Theme toggle
 const themeToggle = document.getElementById('themeToggle');
 const savedTheme = localStorage.getItem('theme') || 'dark';
 if (savedTheme === 'light') {
@@ -1357,6 +1368,7 @@ themeToggle.addEventListener('click', () => {
   themeToggle.textContent = isLight ? '☀️' : '🌙';
 });
 
+// Carousel - FIXED
 const carouselContainer = document.getElementById('carouselContainer');
 const slides = carouselContainer.querySelectorAll('.carousel-slide');
 let currentSlide = 0;
@@ -1380,6 +1392,7 @@ setInterval(() => {
   updateCarousel();
 }, 7000);
 
+// Missions
 const progressFill = document.getElementById('progressFill');
 
 function updateProgress() {
@@ -1464,6 +1477,7 @@ function loadMissions() {
 
 loadMissions();
 
+// Favorites
 document.querySelectorAll('.favorite-btn').forEach(btn => {
   btn.addEventListener('click', () => {
     btn.textContent = btn.textContent === '🤍' ? '❤️' : '🤍';
@@ -1484,6 +1498,7 @@ document.querySelectorAll('.favorite-btn').forEach(btn => {
   }
 });
 
+// Search
 document.getElementById('searchInput').addEventListener('input', (e) => {
   const query = e.target.value.toLowerCase();
   document.querySelectorAll('.tool-card').forEach(card => {
@@ -1492,18 +1507,5 @@ document.getElementById('searchInput').addEventListener('input', (e) => {
   });
 });
 
-document.querySelectorAll('.faq-question').forEach(q => {
-  q.addEventListener('click', () => {
-    q.closest('.faq-item').classList.toggle('open');
-  });
-});
-
-document.getElementById('newsletterForm').addEventListener('submit', (e) => {
-  e.preventDefault();
-  alert('Thank you! Check your email for our first mama support. 💙');
-  e.target.reset();
-});
-</script>
-
-</body>
-</html>
+// Contact form
+document.getElementById('newsletter
